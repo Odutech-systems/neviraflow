@@ -278,9 +278,12 @@ doc_events = {
 }
 
 
+#web_include_js = "/assets/batch_manager/js/work_order_timer.js"
+
 
 
 doctype_js = {
+    "Work Order":"public/js/work_order_timer.js",
     "Gate Pass": "public/js/gate_pass.js",
     "Quotation": "public/js/quotation.js",
     "Sales Order": "public/js/sales_order.js",
@@ -293,6 +296,7 @@ doctype_js = {
     "Stock Reconciliation": "public/js/stock_reconciliation.js",
     "Weighbridge Management": "neviraflow/weighbridge/doctype/weighbridge_management/weighbridge_management.js"
 }
+
 
 
 app_include_js = "/assets/neviraflow/js/bag_tonne_logic.js"
