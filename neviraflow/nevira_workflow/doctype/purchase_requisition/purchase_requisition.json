@@ -1,0 +1,215 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:NML-PR-{MM}{YY}{###} ",
+ "creation": "2025-06-30 12:38:48.361814",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "purchase_requisition_form_section",
+  "requisition_date",
+  "requisition_status",
+  "requisition_no",
+  "requisition_type",
+  "requester_type",
+  "date_required",
+  "requester_id",
+  "requester_name",
+  "requester_email",
+  "column_break_nvod",
+  "requester_location",
+  "requester_department",
+  "requester_mobile",
+  "description",
+  "comprehensive_description",
+  "purchase_items_section",
+  "set_default_warehouse",
+  "items",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "purchase_requisition_form_section",
+   "fieldtype": "Section Break",
+   "label": "Purchase Requisition Form"
+  },
+  {
+   "default": "Today",
+   "fieldname": "requisition_date",
+   "fieldtype": "Date",
+   "label": "Requisition Date"
+  },
+  {
+   "bold": 1,
+   "fieldname": "requisition_no",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Requisition No",
+   "read_only": 1
+  },
+  {
+   "description": "(Raw Materials or Non-Raw Materials)",
+   "fieldname": "requisition_type",
+   "fieldtype": "Select",
+   "label": "Requisition Type",
+   "options": "Raw Materials & Maintenance\nNon-Raw Materials"
+  },
+  {
+   "default": "Self",
+   "fieldname": "requester_type",
+   "fieldtype": "Select",
+   "label": "Requester Type",
+   "options": "Self\nOther"
+  },
+  {
+   "description": "Expected Delivery Date",
+   "fieldname": "date_required",
+   "fieldtype": "Date",
+   "label": "Date Required",
+   "reqd": 1
+  },
+  {
+   "fieldname": "requester_id",
+   "fieldtype": "Link",
+   "label": "Requester ID",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "requester_id.employee_name",
+   "fieldname": "requester_name",
+   "fieldtype": "Data",
+   "label": "Requester Name"
+  },
+  {
+   "fetch_from": "requester_id.department",
+   "fieldname": "requester_department",
+   "fieldtype": "Data",
+   "label": "Requester Department"
+  },
+  {
+   "fetch_from": "requester_id.branch",
+   "fieldname": "requester_location",
+   "fieldtype": "Data",
+   "label": "Requester Location"
+  },
+  {
+   "description": "Description or Purpose",
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description",
+   "max_height": "75px"
+  },
+  {
+   "fieldname": "column_break_nvod",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Professional Description",
+   "fieldname": "comprehensive_description",
+   "fieldtype": "Small Text",
+   "label": "Comprehensive Description",
+   "max_height": "75px"
+  },
+  {
+   "fieldname": "purchase_items_section",
+   "fieldtype": "Section Break",
+   "label": "Purchase Items"
+  },
+  {
+   "fieldname": "set_default_warehouse",
+   "fieldtype": "Link",
+   "label": "Set Default Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Purchase Requisition Item Details"
+  },
+  {
+   "fieldname": "requisition_status",
+   "fieldtype": "Select",
+   "label": "Requisition Status",
+   "options": "Pending\nSupervisor Approval\nHOD Approval\nFinance Approval"
+  },
+  {
+   "fetch_from": "requester_id.company_email",
+   "fieldname": "requester_email",
+   "fieldtype": "Data",
+   "label": "Requester Email"
+  },
+  {
+   "fetch_from": "requester_id.cell_number",
+   "fieldname": "requester_mobile",
+   "fieldtype": "Data",
+   "label": "Requester Mobile"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Purchase Requisition",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-07-09 16:49:21.647463",
+ "modified_by": "Administrator",
+ "module": "Nevira Workflow",
+ "name": "Purchase Requisition",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

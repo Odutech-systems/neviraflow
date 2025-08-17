@@ -1,0 +1,167 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:quarry_name",
+ "creation": "2025-06-29 12:05:48.243479",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "quarry_management_information_section",
+  "quarry_name",
+  "quarry_manager",
+  "quarry_location",
+  "column_break_ruuv",
+  "lease_end_date",
+  "lease_start_date",
+  "location_details_section",
+  "latitude",
+  "longitude",
+  "column_break_feba",
+  "area",
+  "area_uom",
+  "section_break_ubfc",
+  "location_map",
+  "quarry_raw_materials_section",
+  "quarry_items",
+  "quarry_assets_section",
+  "asset_list"
+ ],
+ "fields": [
+  {
+   "fieldname": "quarry_management_information_section",
+   "fieldtype": "Section Break",
+   "label": "Quarry Management Information"
+  },
+  {
+   "fieldname": "quarry_name",
+   "fieldtype": "Data",
+   "label": "Quarry Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "quarry_location",
+   "fieldtype": "Data",
+   "label": "Quarry Location"
+  },
+  {
+   "fieldname": "lease_start_date",
+   "fieldtype": "Date",
+   "label": "Lease Start Date"
+  },
+  {
+   "fieldname": "lease_end_date",
+   "fieldtype": "Date",
+   "label": "Lease End Date"
+  },
+  {
+   "fieldname": "column_break_ruuv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "quarry_manager",
+   "fieldtype": "Link",
+   "label": "Quarry Manager",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "location_details_section",
+   "fieldtype": "Section Break",
+   "label": "Location Details"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Float",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Float",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "column_break_feba",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "area",
+   "fieldtype": "Float",
+   "label": "Area"
+  },
+  {
+   "fieldname": "area_uom",
+   "fieldtype": "Link",
+   "label": "Area UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "section_break_ubfc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "location_map",
+   "fieldtype": "Geolocation",
+   "label": "Location Map"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "quarry_raw_materials_section",
+   "fieldtype": "Section Break",
+   "label": "Quarry Raw Materials"
+  },
+  {
+   "fieldname": "quarry_items",
+   "fieldtype": "Table",
+   "label": "Quarry Items",
+   "options": "Quarry Item Details"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "quarry_assets_section",
+   "fieldtype": "Section Break",
+   "label": "Quarry Assets"
+  },
+  {
+   "fieldname": "asset_list",
+   "fieldtype": "Table",
+   "label": "Asset List",
+   "options": "Quarry Asset Details"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-01 17:12:44.037170",
+ "modified_by": "Administrator",
+ "module": "Quarry",
+ "name": "Quarry Management",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Weighbridge User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

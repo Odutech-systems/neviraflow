@@ -1,0 +1,249 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:PDC-PAY-{MM}{YY}{####}",
+ "creation": "2025-06-15 20:16:46.007642",
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "post_dated_cheques_payments_section",
+  "pdc_type",
+  "booking_date",
+  "cheque_reference_no",
+  "cheque_reference_date",
+  "company",
+  "column_break_ywpq",
+  "clearance_date",
+  "clearance_status",
+  "reference_payment_entry",
+  "payment_refrence_date",
+  "cheque_payment_from_to_section",
+  "party_type",
+  "party_code",
+  "party_name",
+  "column_break_vjph",
+  "company_bank_account",
+  "party_bank_account",
+  "accounts_section",
+  "account_paid_from",
+  "account_paid_to",
+  "column_break_spsw",
+  "paid_amount",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "post_dated_cheques_payments_section",
+   "fieldtype": "Section Break",
+   "label": "Post Dated Cheques Payments"
+  },
+  {
+   "fieldname": "pdc_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "PDC Type",
+   "options": "Customer PDC\nSupplier PDC",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "booking_date",
+   "fieldtype": "Date",
+   "label": "Booking Date"
+  },
+  {
+   "description": "Cheque Number",
+   "fieldname": "cheque_reference_no",
+   "fieldtype": "Data",
+   "label": "Cheque Reference No",
+   "reqd": 1
+  },
+  {
+   "description": "Date on the Physical Cheque",
+   "fieldname": "cheque_reference_date",
+   "fieldtype": "Date",
+   "label": "Cheque Reference Date"
+  },
+  {
+   "fieldname": "column_break_ywpq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "description": "Cheque Posting Date (Bank Clearance Date)",
+   "fieldname": "clearance_date",
+   "fieldtype": "Date",
+   "label": "Clearance Date",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Pending",
+   "fieldname": "clearance_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Clearance Status",
+   "options": "Pending\nCleared\nBounced\nCancelled"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "reference_payment_entry",
+   "fieldtype": "Link",
+   "label": "Reference Payment Entry",
+   "options": "Payment Entry",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "payment_refrence_date",
+   "fieldtype": "Date",
+   "label": "Payment Refrence Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cheque_payment_from_to_section",
+   "fieldtype": "Section Break",
+   "label": "Cheque Payment From / To"
+  },
+  {
+   "fieldname": "party_type",
+   "fieldtype": "Select",
+   "label": "Party Type",
+   "options": "Customer\nSupplier",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "party_code",
+   "fieldtype": "Dynamic Link",
+   "label": "Party Code",
+   "options": "party_type"
+  },
+  {
+   "fieldname": "party_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Party Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vjph",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company_bank_account",
+   "fieldtype": "Link",
+   "label": "Company Bank Account",
+   "options": "Bank Account"
+  },
+  {
+   "fieldname": "party_bank_account",
+   "fieldtype": "Link",
+   "label": "Party Bank Account",
+   "options": "Bank Account"
+  },
+  {
+   "fieldname": "accounts_section",
+   "fieldtype": "Section Break",
+   "label": "Accounts"
+  },
+  {
+   "fieldname": "account_paid_from",
+   "fieldtype": "Link",
+   "label": "Account Paid From",
+   "options": "Bank Account"
+  },
+  {
+   "fieldname": "account_paid_to",
+   "fieldtype": "Link",
+   "label": "Account Paid To",
+   "options": "Bank Account"
+  },
+  {
+   "fieldname": "column_break_spsw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "paid_amount",
+   "fieldtype": "Currency",
+   "label": "Paid Amount",
+   "non_negative": 1,
+   "options": "paid_from_account_currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "PDC Booking and Clearance",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-07-13 20:00:31.965326",
+ "modified_by": "Administrator",
+ "module": "Nevira Workflow App",
+ "name": "PDC Booking and Clearance",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

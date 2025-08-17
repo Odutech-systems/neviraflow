@@ -1,0 +1,54 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-08-01 18:37:39.686957",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "partner_description",
+  "item_description",
+  "quantity",
+  "first_weight",
+  "second_weight"
+ ],
+ "fields": [
+  {
+   "fieldname": "partner_description",
+   "fieldtype": "Data",
+   "label": "Partner Description"
+  },
+  {
+   "fieldname": "item_description",
+   "fieldtype": "Data",
+   "label": "Item Description"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "first_weight",
+   "fieldtype": "Float",
+   "label": "First Weight"
+  },
+  {
+   "fieldname": "second_weight",
+   "fieldtype": "Float",
+   "label": "Second Weight"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-08-01 18:42:47.349491",
+ "modified_by": "Administrator",
+ "module": "Weighbridge",
+ "name": "Partner Supplied Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

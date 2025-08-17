@@ -1,0 +1,348 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:WBWM-{DD}{MM}{YY}{###}",
+ "creation": "2025-06-29 10:49:26.320227",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "item_type",
+  "weight_verification_date",
+  "weight_verification_time",
+  "has_multiple_weights",
+  "total_weighings_expected",
+  "current_weighing_no",
+  "is_final_weighing",
+  "stock_entry_reference",
+  "column_break_atfb",
+  "vehicle_registration_number",
+  "driver_name",
+  "quarry_from",
+  "delivery_to",
+  "weighing_status",
+  "milling_machine",
+  "work_order",
+  "first_weight",
+  "second_weight",
+  "final_weight",
+  "weighbridge_items_management_section",
+  "item_details",
+  "inter_company_transfer_section",
+  "company_transfer",
+  "customer_information_section",
+  "customer_item_description",
+  "partner_supplied_items_section",
+  "partner_item_list",
+  "weight_information_section",
+  "gross_weight",
+  "tare_weight",
+  "net_weight",
+  "column_break_sdbk",
+  "ticket_number",
+  "section_break_eups",
+  "weighbridge_clerk",
+  "accounts_officer",
+  "column_break_rkvl",
+  "remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "weight_verification_date",
+   "fieldtype": "Date",
+   "label": "Weight Verification Date"
+  },
+  {
+   "default": "Now",
+   "fieldname": "weight_verification_time",
+   "fieldtype": "Time",
+   "label": "Weight Verification Time"
+  },
+  {
+   "fieldname": "vehicle_registration_number",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Vehicle Registration Number",
+   "options": "Vehicle"
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Driver's Name"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Raw Materials",
+   "fieldname": "item_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transaction Type",
+   "options": "Raw Materials\nRaw Materials - Production\nInter-Company Transfer\nFinished Goods\nPartner Production\nWaste Materials"
+  },
+  {
+   "fieldname": "weighbridge_items_management_section",
+   "fieldtype": "Section Break",
+   "label": "Weighbridge Items Management"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "item_details",
+   "fieldtype": "Table",
+   "label": "Item Details",
+   "options": "Weighbridge Item Details"
+  },
+  {
+   "fieldname": "column_break_atfb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "quarry_from",
+   "fieldtype": "Link",
+   "label": "Quarry From ",
+   "options": "Quarry Management"
+  },
+  {
+   "bold": 1,
+   "fieldname": "first_weight",
+   "fieldtype": "Float",
+   "label": "First Weight",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "second_weight",
+   "fieldtype": "Float",
+   "label": "Second Weight"
+  },
+  {
+   "allow_on_submit": 1,
+   "bold": 1,
+   "fieldname": "final_weight",
+   "fieldtype": "Float",
+   "label": "Final Weight"
+  },
+  {
+   "fieldname": "delivery_to",
+   "fieldtype": "Data",
+   "label": "Delivery To"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks",
+   "max_height": "70px"
+  },
+  {
+   "fieldname": "section_break_eups",
+   "fieldtype": "Section Break",
+   "label": "More Information"
+  },
+  {
+   "fieldname": "weighbridge_clerk",
+   "fieldtype": "Link",
+   "label": "Weighbridge Clerk",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "accounts_officer",
+   "fieldtype": "Link",
+   "label": "Accounts Officer",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_rkvl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Weighbridge Management",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Pending First Weight",
+   "fieldname": "weighing_status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Weighing Status",
+   "options": "Pending First Weight\nAwaiting Second Weight\nReady for Capture\nCompleted"
+  },
+  {
+   "fieldname": "milling_machine",
+   "fieldtype": "Link",
+   "label": "Milling Machine",
+   "options": "Workstation"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "work_order",
+   "fieldtype": "Link",
+   "label": "Work Order",
+   "options": "Work Order"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "stock_entry_reference",
+   "fieldtype": "Link",
+   "label": "Stock Entry Reference",
+   "options": "Stock Entry"
+  },
+  {
+   "fieldname": "customer_information_section",
+   "fieldtype": "Section Break",
+   "label": "Customer Information"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "customer_item_description",
+   "fieldtype": "Table",
+   "label": "Customer Item Description",
+   "options": "Weighbridge Customer Detail"
+  },
+  {
+   "fieldname": "partner_supplied_items_section",
+   "fieldtype": "Section Break",
+   "label": "Partner Supplied Items"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "partner_item_list",
+   "fieldtype": "Table",
+   "label": "Partner Item List",
+   "options": "Partner Supplied Item"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_multiple_weights",
+   "fieldtype": "Check",
+   "label": "Has Multiple Weights"
+  },
+  {
+   "fieldname": "total_weighings_expected",
+   "fieldtype": "Int",
+   "label": "Total Weighings Expected"
+  },
+  {
+   "fieldname": "current_weighing_no",
+   "fieldtype": "Int",
+   "label": "Current Weighing No"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_final_weighing",
+   "fieldtype": "Check",
+   "label": "Is Final Weighing"
+  },
+  {
+   "fieldname": "inter_company_transfer_section",
+   "fieldtype": "Section Break",
+   "label": "Inter-Company Transfer"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "company_transfer",
+   "fieldtype": "Table",
+   "label": "Company Transfer",
+   "options": "Weighbridge Transfer Item"
+  },
+  {
+   "fieldname": "weight_information_section",
+   "fieldtype": "Section Break",
+   "label": "Weight Information"
+  },
+  {
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "label": "Gross Weight"
+  },
+  {
+   "fieldname": "tare_weight",
+   "fieldtype": "Float",
+   "label": "Tare Weight"
+  },
+  {
+   "bold": 1,
+   "fieldname": "net_weight",
+   "fieldtype": "Float",
+   "label": "Net Weight"
+  },
+  {
+   "fieldname": "column_break_sdbk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ticket_number",
+   "fieldtype": "Barcode",
+   "label": "Ticket Number",
+   "max_height": "60 px"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-08-10 09:59:04.083133",
+ "modified_by": "Administrator",
+ "module": "Weighbridge",
+ "name": "Weighbridge Management",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Weighbridge User",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Logistics Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

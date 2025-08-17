@@ -242,3 +242,64 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+doc_events = {
+    "Quotation": {
+        "before_save": "neviraflow.api.assign_export_metadata"
+    },
+    "Sales Order": {
+        "before_validate": "neviraflow.procurement.custom_material_request.before_validate_sales_order",
+        "before_submit": "neviraflow.procurement.custom_material_request.before_submit_sales_order",
+        "before_save": "neviraflow.api.assign_export_metadata"
+    },
+    "Sales Invoice": {
+        "before_validate": "neviraflow.procurement.custom_material_request.before_validate_sales_invoice",
+        "before_save": [
+            "neviraflow.procurement.custom_material_request.before_save_sales_invoice",
+            "neviraflow.api.assign_export_metadata",
+        ]
+    },
+    "Delivery Note": {
+        "before_save": [
+            "neviraflow.api.assign_export_metadata",
+            "neviraflow.api.handle_pick_list_and_qty_patch"
+        ]
+    },
+    "Pick List": {
+        "before_save": "neviraflow.api.handle_pick_list_and_qty_patch"
+    },
+    "Fuel Request And Issue": {
+        "validate": "neviraflow.fuel_request.validate",
+        "on_submit": "neviraflow.fuel_request.on_submit"
+    },
+    "Weighbridge Management": {
+        "after_insert": "neviraflow.weighbridge.doctype.weighbridge_management.weighbridge_management.auto_submit_if_ready",
+        "on_update": "neviraflow.weighbridge.doctype.weighbridge_management.weighbridge_management.auto_submit_if_ready",
+    }
+}
+
+
+
+
+doctype_js = {
+    "Gate Pass": "public/js/gate_pass.js",
+    "Quotation": "public/js/quotation.js",
+    "Sales Order": "public/js/sales_order.js",
+    "Sales Invoice": "public/js/sales_invoice.js",
+    "Delivery Note": "public/js/delivery_note.js",
+    "Purchase Invoice": "public/js/purchase_invoice.js",
+    "Stock Entry": "public/js/stock_entry.js",
+    "Material Request": "public/js/material_request.js",
+    "Pick List": "public/js/pick_list.js",
+    "Stock Reconciliation": "public/js/stock_reconciliation.js",
+    "Weighbridge Management": "neviraflow/weighbridge/doctype/weighbridge_management/weighbridge_management.js"
+}
+
+
+app_include_js = "/assets/neviraflow/js/bag_tonne_logic.js"
+
+
+scheduler_events = {
+    "cron": {
+        "*/5 * * * *": ["frappe.email.queue.flush"]
+    }
+}

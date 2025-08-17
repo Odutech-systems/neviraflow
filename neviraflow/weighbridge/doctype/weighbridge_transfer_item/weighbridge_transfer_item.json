@@ -1,0 +1,49 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-08-08 11:17:23.764111",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "tonnage",
+  "bag",
+  "weighing_batch"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "fieldname": "tonnage",
+   "fieldtype": "Float",
+   "label": "Tonnage"
+  },
+  {
+   "fieldname": "bag",
+   "fieldtype": "Int",
+   "label": "Bag"
+  },
+  {
+   "fieldname": "weighing_batch",
+   "fieldtype": "Data",
+   "label": "Weighing Batch"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-08-08 12:03:35.529153",
+ "modified_by": "Administrator",
+ "module": "Weighbridge",
+ "name": "Weighbridge Transfer Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

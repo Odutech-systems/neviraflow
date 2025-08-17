@@ -1,0 +1,213 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:gate_pass_id",
+ "creation": "2025-05-08 16:27:15.499412",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_vp8w",
+  "amended_from",
+  "gate_pass_id",
+  "gate_pass_type",
+  "date",
+  "time",
+  "gate_pass_status",
+  "security_officer_name",
+  "dispatch_representative",
+  "employee_id",
+  "employee_name",
+  "department",
+  "driver_name",
+  "co_driver_name",
+  "vehicle_registration_number",
+  "column_break_slck",
+  "delivery_remarks",
+  "supplier_delivery_note",
+  "supplier_invoice_number",
+  "customer_delivery_note",
+  "stores_representative",
+  "supplier_name",
+  "purchase_order_reference",
+  "customer_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_vp8w",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Gate Pass",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "gate_pass_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Gate Pass ID",
+   "unique": 1
+  },
+  {
+   "default": "Outgoing",
+   "fieldname": "gate_pass_type",
+   "fieldtype": "Select",
+   "label": "Gate Pass Type",
+   "options": "Incoming\nOutgoing"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "Now",
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "label": "Time"
+  },
+  {
+   "fieldname": "gate_pass_status",
+   "fieldtype": "Select",
+   "label": "Gate Pass Status",
+   "options": "Completed\nCheck and Receive\nCheck and Dispatch"
+  },
+  {
+   "fieldname": "security_officer_name",
+   "fieldtype": "Data",
+   "label": "Security Officer Name"
+  },
+  {
+   "fieldname": "dispatch_representative",
+   "fieldtype": "Link",
+   "label": "Dispatch Representative",
+   "options": "User"
+  },
+  {
+   "fieldname": "employee_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department"
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name"
+  },
+  {
+   "fieldname": "co_driver_name",
+   "fieldtype": "Data",
+   "label": "Co Driver Name"
+  },
+  {
+   "fieldname": "column_break_slck",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "delivery_remarks",
+   "fieldtype": "Small Text",
+   "label": "Delivery Remarks"
+  },
+  {
+   "fieldname": "supplier_delivery_note",
+   "fieldtype": "Data",
+   "label": "Supplier Delivery Note"
+  },
+  {
+   "fieldname": "supplier_invoice_number",
+   "fieldtype": "Data",
+   "label": "Supplier Invoice Number"
+  },
+  {
+   "fieldname": "customer_delivery_note",
+   "fieldtype": "Link",
+   "label": "Customer Delivery Note",
+   "options": "Delivery Note"
+  },
+  {
+   "fieldname": "stores_representative",
+   "fieldtype": "Link",
+   "label": "Stores Representative",
+   "options": "User"
+  },
+  {
+   "fieldname": "supplier_name",
+   "fieldtype": "Link",
+   "label": "Supplier Name",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "purchase_order_reference",
+   "fieldtype": "Link",
+   "label": "Purchase Order Reference ",
+   "options": "Purchase Order"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Link",
+   "label": "Customer Name",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "vehicle_registration_number",
+   "fieldtype": "Link",
+   "label": "Vehicle Registration Number",
+   "options": "Vehicle"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-08-15 14:51:55.932535",
+ "modified_by": "Administrator",
+ "module": "Nevira Gate Pass",
+ "name": "Gate Pass",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
