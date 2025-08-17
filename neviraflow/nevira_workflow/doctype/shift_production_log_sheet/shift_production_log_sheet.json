@@ -16,6 +16,8 @@
   "store_keeper",
   "operator",
   "coordinator",
+  "store_keeper_remarks",
+  "coordinator_remarks",
   "amended_from"
  ],
  "fields": [
@@ -91,13 +93,23 @@
    "in_list_view": 1,
    "label": "Coordinator",
    "reqd": 1
+  },
+  {
+   "fieldname": "store_keeper_remarks",
+   "fieldtype": "Text",
+   "label": "Store Keeper Remarks"
+  },
+  {
+   "fieldname": "coordinator_remarks",
+   "fieldtype": "Text",
+   "label": "Coordinator Remarks"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-18 01:54:41.690973",
+ "modified": "2025-08-18 02:03:28.539349",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Shift Production Log Sheet",
