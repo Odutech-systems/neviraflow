@@ -1,0 +1,111 @@
+{
+ "actions": [],
+ "creation": "2025-08-18 01:40:17.658895",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "time",
+  "end_time",
+  "product",
+  "customer",
+  "feed_rate",
+  "classifier_frequency",
+  "mill_current",
+  "blower_current",
+  "no_of_bags",
+  "tonnage",
+  "kwh_start",
+  "kwh_finish",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Start Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "End Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Product",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "feed_rate",
+   "fieldtype": "Float",
+   "label": "Feed Rate"
+  },
+  {
+   "fieldname": "classifier_frequency",
+   "fieldtype": "Float",
+   "label": "Classifier Frequency"
+  },
+  {
+   "fieldname": "mill_current",
+   "fieldtype": "Float",
+   "label": "Mill Current"
+  },
+  {
+   "fieldname": "blower_current",
+   "fieldtype": "Float",
+   "label": "Blower Current"
+  },
+  {
+   "fieldname": "no_of_bags",
+   "fieldtype": "Int",
+   "label": "No of bags"
+  },
+  {
+   "fieldname": "tonnage",
+   "fieldtype": "Float",
+   "label": "Tonnage"
+  },
+  {
+   "fieldname": "kwh_start",
+   "fieldtype": "Float",
+   "label": "Kwh Start"
+  },
+  {
+   "fieldname": "kwh_finish",
+   "fieldtype": "Float",
+   "label": "Kwh Finish"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-08-18 01:44:36.801704",
+ "modified_by": "Administrator",
+ "module": "Nevira Workflow",
+ "name": "Shift Log Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

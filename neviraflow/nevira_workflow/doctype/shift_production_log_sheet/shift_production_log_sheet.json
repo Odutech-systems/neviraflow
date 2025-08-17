@@ -1,0 +1,175 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "SPLC-.YYYY.-.MM.-.#####",
+ "creation": "2025-08-18 01:48:03.984540",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "station_section",
+  "shift",
+  "work_station",
+  "shift_start_time",
+  "shift_stop_time",
+  "shift_log_details",
+  "production_summary",
+  "store_keeper",
+  "operator",
+  "coordinator",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Shift Production Log Sheet",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "station_section",
+   "fieldtype": "Section Break",
+   "label": "Station Details"
+  },
+  {
+   "fieldname": "work_station",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Milling Station",
+   "options": "Workstation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shift",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Shift",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shift_start_time",
+   "fieldtype": "Data",
+   "label": "Shift Start Time"
+  },
+  {
+   "fieldname": "shift_stop_time",
+   "fieldtype": "Data",
+   "label": "Shift Stop Time"
+  },
+  {
+   "fieldname": "shift_log_details",
+   "fieldtype": "Table",
+   "label": "Shift Log Details",
+   "options": "Shift Log Details",
+   "reqd": 1
+  },
+  {
+   "fieldname": "production_summary",
+   "fieldtype": "Table",
+   "label": "Production Summary",
+   "options": "Shift Production Summary",
+   "reqd": 1
+  },
+  {
+   "fieldname": "store_keeper",
+   "fieldtype": "Data",
+   "label": "Store Keeper"
+  },
+  {
+   "fieldname": "operator",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Operator",
+   "reqd": 1
+  },
+  {
+   "fieldname": "coordinator",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Coordinator",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-08-18 01:54:41.690973",
+ "modified_by": "Administrator",
+ "module": "Nevira Workflow",
+ "name": "Shift Production Log Sheet",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Manufacturing Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Manufacturing User",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
