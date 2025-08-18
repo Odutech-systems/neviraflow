@@ -26,7 +26,7 @@ function ensureTimerUI() {
   wrap.style.position = 'absolute';
   wrap.style.left = '50%';
   //wrap.style.right = '50%';
-  wrap.style.top = '-1px';
+  wrap.style.top = '10px';
   //wrap.style.top = '16px';
   //wrap.style.right = '16px';
   wrap.style.zIndex = 100;
