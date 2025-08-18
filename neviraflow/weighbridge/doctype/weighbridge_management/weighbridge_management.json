@@ -31,6 +31,8 @@
   "company_transfer",
   "customer_information_section",
   "customer_item_description",
+  "purchased_items_information_section",
+  "purchased_item_list",
   "partner_supplied_items_section",
   "partner_item_list",
   "weight_information_section",
@@ -83,7 +85,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Transaction Type",
-   "options": "Raw Materials\nRaw Materials - Production\nInter-Company Transfer\nFinished Goods\nPartner Production\nWaste Materials"
+   "options": "Raw Materials\nInter-Company Transfer\nFinished Goods\nPartner Production\nPurchased Materials\nRaw Materials - Production"
   },
   {
    "fieldname": "weighbridge_items_management_section",
@@ -290,12 +292,23 @@
    "fieldtype": "Barcode",
    "label": "Ticket Number",
    "max_height": "60 px"
+  },
+  {
+   "fieldname": "purchased_items_information_section",
+   "fieldtype": "Section Break",
+   "label": "Purchased Items Information"
+  },
+  {
+   "fieldname": "purchased_item_list",
+   "fieldtype": "Table",
+   "label": "Purchased Item List",
+   "options": "Weighbridge Purchased Items Detail"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-10 09:59:04.083133",
+ "modified": "2025-08-18 06:04:50.462274",
  "modified_by": "Administrator",
  "module": "Weighbridge",
  "name": "Weighbridge Management",
