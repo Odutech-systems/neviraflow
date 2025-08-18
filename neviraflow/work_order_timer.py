@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 import frappe
 from frappe.utils import now_datetime
+import math
 
 EVENT_START = "Start"
 EVENT_PAUSE = "Pause"
@@ -24,7 +25,7 @@ def _append_log(doc, action, ts):
     _save_log(doc, log)
 
 def _add_run_seconds(doc, seconds):
-    doc.custom_timer_total_seconds = (doc.custom_timer_total_seconds or 0) + int(seconds)
+    doc.custom_timer_total_seconds = ((doc.custom_timer_total_seconds or 0) + int(seconds))
 
 def _diff_seconds(a: datetime, b: datetime) -> int:
     return int((b - a).total_seconds())
@@ -100,6 +101,8 @@ def on_submit(doc, method=None):
     """
     Safety: ensure totals are finalized on submit (Completed).
     """
+
+
     if getattr(doc, "status", None) in ("Completed", "Finished") or getattr(doc, "workflow_state", None) in ("Completed", "Finished"):
         now = now_datetime()
         if doc.custom_timer_last_resume_at:
@@ -107,8 +110,9 @@ def on_submit(doc, method=None):
             doc.custom_timer_last_resume_at = None
         if not doc.custom_timer_finish:
             doc.custom_timer_finish = now
-            doc.save()
+            #doc.save()
         # Append FINISH if it wasn't logged yet
         log = _load_log(doc)
         if not any(e.get("action") == EVENT_FINISH for e in log):
             _append_log(doc, EVENT_FINISH, now)
+
