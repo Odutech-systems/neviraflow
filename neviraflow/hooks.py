@@ -274,6 +274,11 @@ doc_events = {
     "Weighbridge Management": {
         "after_insert": "neviraflow.weighbridge.doctype.weighbridge_management.weighbridge_management.auto_submit_if_ready",
         "on_update": "neviraflow.weighbridge.doctype.weighbridge_management.weighbridge_management.auto_submit_if_ready",
+    },
+    "Work Order": {
+        #"on_update": "batch_manager.update_work_order_completion.create_todo_on_completion",
+        "before_save": "batch_manager.work_order_timer.on_before_save",
+        "on_submit": "batch_manager.work_order_timer.on_submit",
     }
 }
 
