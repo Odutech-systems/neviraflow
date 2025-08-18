@@ -24,7 +24,7 @@ function ensureTimerUI() {
   wrap.style.pointerEvents = 'auto';
   wrap.id = 'wo-floating-timer';
   wrap.style.position = 'absolute';
-  wrap.style.left = '50%';
+  wrap.style.left = '40%';
   //wrap.style.right = '50%';
   wrap.style.top = '40px';
   //wrap.style.top = '16px';
