@@ -47,8 +47,8 @@ def _sync_gross_tare_net(doc: Document) -> None:
         doc.gross_weight = doc.second_weight or 0
     if hasattr(doc, "tare_weight"):
         doc.tare_weight = doc.first_weight or 0
-    if hasattr(doc, "nett_weight"):
-        doc.nett_weight = doc.final_weight or 0
+    if hasattr(doc, "net_weight"):
+        doc.net_weight = doc.final_weight or 0
     # Ticket number mirrors the document ID/name
     if hasattr(doc, "ticket_number") and doc.name:
         doc.ticket_number = doc.name
