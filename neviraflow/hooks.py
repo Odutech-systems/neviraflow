@@ -277,8 +277,8 @@ doc_events = {
     },
     "Work Order": {
         #"on_update": "batch_manager.update_work_order_completion.create_todo_on_completion",
-        "before_save": "batch_manager.work_order_timer.on_before_save",
-        "on_submit": "batch_manager.work_order_timer.on_submit",
+        "before_save": "neviraflow.work_order_timer.on_before_save",
+        "on_submit": "neviraflow.work_order_timer.on_submit",
     }
 }
 
