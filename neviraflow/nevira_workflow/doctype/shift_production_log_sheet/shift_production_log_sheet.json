@@ -53,12 +53,12 @@
   },
   {
    "fieldname": "shift_start_time",
-   "fieldtype": "Data",
+   "fieldtype": "Datetime",
    "label": "Shift Start Time"
   },
   {
    "fieldname": "shift_stop_time",
-   "fieldtype": "Data",
+   "fieldtype": "Datetime",
    "label": "Shift Stop Time"
   },
   {
@@ -109,7 +109,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-18 02:03:28.539349",
+ "modified": "2025-08-18 08:15:05.842312",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Shift Production Log Sheet",
