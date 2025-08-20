@@ -43,6 +43,8 @@ def after_insert_action(doc, method = None):
                 att = make_attendance(employee_id, attendance_dt, shift_code, status="Present")
                 #att.late_entry = bool(ts > shift_start_dt)
                 #att.submit()
+
+        ### If the log_in_type is OUT, do not try to make an attendance        
         elif log_in_type == "OUT":
             att = get_attendance(employee_name, attendance_dt)
             if not att:
@@ -123,6 +125,3 @@ def make_attendance(employee_id: str, attendance_date: date, shift_code: str, st
     attendance_doc.insert(ignore_permissions=True, ignore_if_duplicate=True)
     attendance_doc.submit()
     frappe.db.commit()
-    
-
-

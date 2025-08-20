@@ -6,14 +6,22 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "product",
+  "customer",
+  "analysis_date",
+  "production_date",
+  "expiry_date",
+  "invoice_number",
+  "params_table",
   "description",
-  "params_table"
+  "analysed_by",
+  "amended_from"
  ],
  "fields": [
   {
    "fieldname": "description",
-   "fieldtype": "Data",
-   "label": "Description"
+   "fieldtype": "Text",
+   "label": "Test Results"
   },
   {
    "fieldname": "params_table",
@@ -21,11 +29,67 @@
    "label": "Parameters",
    "options": "COA Items",
    "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Certificate of analysis",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Product",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "analysis_date",
+   "fieldtype": "Date",
+   "label": "Analysis Date"
+  },
+  {
+   "fieldname": "production_date",
+   "fieldtype": "Date",
+   "label": "Production Date"
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry Date"
+  },
+  {
+   "fieldname": "invoice_number",
+   "fieldtype": "Data",
+   "label": "Invoice Number"
+  },
+  {
+   "fieldname": "analysed_by",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Analysed By",
+   "options": "User",
+   "reqd": 1
   }
  ],
+ "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2025-08-16 09:28:03.298867",
+ "modified": "2025-08-20 10:58:50.173729",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Certificate of analysis",
@@ -45,6 +109,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
