@@ -282,7 +282,7 @@ doc_events = {
     },
     "Employee Checkin": {
         "after_insert": "neviraflow.attendance_handlers.after_insert_action"
-    }
+    },
 }
 
 
