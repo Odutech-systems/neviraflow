@@ -41,14 +41,14 @@ def after_insert_action(doc, method = None):
             att = get_attendance(employee_name, attendance_dt)
             if not att:
                 att = make_attendance(employee_id, attendance_dt, shift_code, status="Present")
-                att.late_entry = bool(ts > shift_start_dt)
-                att.submit()
+                #att.late_entry = bool(ts > shift_start_dt)
+                #att.submit()
         elif log_in_type == "OUT":
             att = get_attendance(employee_name, attendance_dt)
             if not att:
                 att = make_attendance(employee_id, attendance_dt, shift_code, status="Present")
-                att.early_exit = bool(ts < shift_end_dt)
-                att.submit()
+                #att.early_exit = bool(ts < shift_end_dt)
+                #att.submit()
     except Exception as e:
         frappe.log_error(e.with_traceback())
 
