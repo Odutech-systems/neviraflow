@@ -49,12 +49,8 @@ def after_insert_action(doc, method = None):
                 att = make_attendance(employee_id, employee_name, attendance_dt, shift_code, status = "Present")
                 att.early_exit = bool(ts < shift_end_dt)
                 att.submit()
-            else:
-                pass
     except Exception as e:
         frappe.log_error(e.with_traceback())
-        
-
 
 def get_shift_for_employee(employee: str, when_dt: datetime) -> str | None:
     """
