@@ -36,20 +36,25 @@ def after_insert_action(doc, method = None):
     shift_start_dt, shift_end_dt, attendance_dt = compute_shift_window(ts, shift_code)
 
     ### Fetch or create attendance per log type
-    if log_in_type == "IN":
-        att = get_attendance(employee_name, attendance_dt)
-        if not att:
-            att = make_attendance(employee_id, employee_name, attendance_dt, shift_code, status = "Present")
-            att.late_entry = bool(ts > shift_start_dt)
-            att.submit()
-    elif log_in_type == "OUT":
-        att = get_attendance(employee_name, attendance_dt)
-        if not att:
-            att = make_attendance(employee_id, employee_name, attendance_dt, shift_code, status = "Present")
-            att.early_exit = bool(ts < shift_end_dt)
-            att.submit()
-        else:
-            pass
+    try:
+        if log_in_type == "IN":
+            att = get_attendance(employee_name, attendance_dt)
+            if not att:
+                att = make_attendance(employee_id, employee_name, attendance_dt, shift_code, status = "Present")
+                att.late_entry = bool(ts > shift_start_dt)
+                att.submit()
+        elif log_in_type == "OUT":
+            att = get_attendance(employee_name, attendance_dt)
+            if not att:
+                att = make_attendance(employee_id, employee_name, attendance_dt, shift_code, status = "Present")
+                att.early_exit = bool(ts < shift_end_dt)
+                att.submit()
+            else:
+                pass
+    except Exception as e:
+        frappe.log_error(e.with_traceback())
+        
+
 
 def get_shift_for_employee(employee: str, when_dt: datetime) -> str | None:
     """
