@@ -51,9 +51,6 @@ def after_insert_action(doc, method = None):
         else:
             pass
 
-
-
-
 def get_shift_for_employee(employee: str, when_dt: datetime) -> str | None:
     """
     Find the most recent shift that the employee has neem assigned to, if no
@@ -114,26 +111,17 @@ def get_attendance(employee: str, attendance_date: date):
     name = frappe.db.exists("Attendance", {"employee":employee, "attendance_date": attendance_date, "docstatus":("!=",2)})
     return frappe.get_doc("Attendance", name) if name else None
 
-def make_attendance(employee: str, employee_name: str, attendance_date: date, shift_code: str, status: str):
-    emp = frappe.db.get_value("Employee", employee, ["name","company","department"], as_dict=True) or {}
-    att = frappe.get_doc({
-        "doctype": "Attendance",
-        "employee": employee,
-        "employee_name": employee_name,
-        "company": emp.get("company"),
-        "department": emp.get("department"),
-        "attendance_date": attendance_date,
+def make_attendance(employee_id: str, attendance_date: date, shift_code: str, status: str):
+    attendance_doc = frappe.new_doc("Attendance")
+    attendance_doc.update({
+        "employee": employee_id,
         "status": status,
-        "late_entry": 0,
-        "early_entry": 0,
+        "attendance_date": attendance_date,
         "shift": shift_code
     })
-
-    att.insert(ignore_permissions=True)
-    
-    ##att.commit()
-
-
+    attendance_doc.insert(ignore_permissions=True, ignore_if_duplicate=True)
+    attendance_doc.submit()
+    frappe.db.commit()
     
 
 
