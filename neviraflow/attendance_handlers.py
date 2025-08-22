@@ -28,11 +28,7 @@ def after_insert_action(doc, method = None):
     log_in_type = doc.log_type
     ts = get_datetime(doc.time)
 
-    ##shift = doc.shift
-    ##shift_start = doc.shift_start
-    ##shift_end = doc.shift_end
-
-    shift_code = get_shift_for_employee(employee_id, ts)
+    shift_code = doc.shift
     shift_start_dt, shift_end_dt, attendance_dt = compute_shift_window(ts, shift_code)
 
     ### Fetch or create attendance per log type
@@ -41,16 +37,19 @@ def after_insert_action(doc, method = None):
             att = get_attendance(employee_name, attendance_dt)
             if not att:
                 att = make_attendance(employee_id, attendance_dt, shift_code, status="Present")
-                #att.late_entry = bool(ts > shift_start_dt)
-                #att.submit()
+                att.late_entry = bool(ts > shift_start_dt)
+                att.submit()
+                frappe.db.commit()
 
         ### If the log_in_type is OUT, do not try to make an attendance        
         elif log_in_type == "OUT":
             att = get_attendance(employee_name, attendance_dt)
             if not att:
                 att = make_attendance(employee_id, attendance_dt, shift_code, status="Present")
-                #att.early_exit = bool(ts < shift_end_dt)
-                #att.submit()
+                att.early_exit = bool(ts < shift_end_dt)
+                att.submit()
+                frappe.db.commit()
+
     except Exception as e:
         frappe.log_error(e.with_traceback())
 
@@ -79,36 +78,52 @@ def get_shift_for_employee(employee: str, when_dt: datetime) -> str | None:
         return "General Shift"
 
 
-def compute_shift_window(ts:datetime, shift_code: str):
+def compute_shift_window(ts:datetime, shift_code=None):
     """
     Return the shift_start_dt, shift_end_dt, attendance_date for the checkin timestamp and shift.
     Shift C spans 23:00 -> 07:00 next day and is assigned to the previous day if time is between 00:00 - 06:59
     """
-    s_start, s_end = SHIFT_CONFIG[shift_code]
-    if shift_code != "C": 
-        start_dt = datetime.combine(ts.date(), s_start)
-        end_dt = datetime.combine(ts.date(), s_end)
-        ### The general shift allows logging of time even after 23:00
-        if shift_code == "GENERAL" and ts.time() <= time(23,0): ## ts.time() > time(23,0)
-            pass
-        return start_dt, end_dt, ts.date()
-    
-    ## Review this section of the code accordingly
-    if ts.time() >= time(23,0):
-        start_dt = datetime.combine(ts.date(), time(23,0))
-        end_dt = datetime.combine(ts.date() + timedelta(days=1), time(7,0))
-        attendance_dt = ts.date()
+    from datetime import datetime, time, timedelta, date
+    SHIFT_CONFIG = {
+    "General Shift": (time(8, 0),  time(17, 0)),  # in-window for logs is 08:00–23:00 but attendance end is 17:00
+    "SHIFT A":       (time(6, 0),  time(15, 0)),
+    "SHIFT B":       (time(14, 0), time(23, 0)),
+    "SHIFT C":       (time(23, 0), time(7, 0)),   # crosses midnight
+    }
 
-    elif ts.time() < time(7,0):
-        start_dt = datetime.combine(ts.date() - timedelta(days=1), time(23,0))
-        end_dt = datetime.combine(ts.date(), time(7,0))
-        attendance_dt = ts.date() - timedelta(days=1)
+    start_dt, end_dt, attendance_dt = None, None, None
     
+    if shift_code:
+        s_start, s_end = SHIFT_CONFIG[shift_code]
+        if shift_code == "SHIFT C":
+            if ts.time() >= time(22,0):
+                start_dt = datetime.combine(ts.date(), time(23,0))
+                end_dt = datetime.combine(ts.date()+ timedelta(days=1), time(7,0))
+                attendance_dt = ts.date()
+            elif ts.time() < time(8,0):
+                start_dt = datetime.combine(ts.date() - timedelta(days=1), time(23,0))
+                end_dt = datetime.combine(ts.date(), time(7,0))
+                attendance_dt = ts.date() - timedelta(days=1)
+        elif shift_code == "General Shift":
+            start_dt = datetime.combine(ts.date(), s_start)
+            end_dt = datetime.combine(ts.date(), s_end)
+            attendance_dt = ts.date()
+        else:
+            start_dt = datetime.combine(ts.date(), s_start)
+            end_dt = datetime.combine(ts.date(), s_end)
+            attendance_dt = ts.date()
+        
+        return start_dt, end_dt, attendance_dt
     else:
-        start_dt = datetime.combine(ts.date(), time(23,0)) - timedelta(days =1)
-        end_dt = datetime.combine(ts.date(), time(7,0))
-        attendance_dt = ts.date()
-    return start_dt, end_dt, attendance_dt
+        if ts.time() >= time(6,0) and ts.time() <= time(21,0):
+            start_dt = datetime.combine(ts.date(), time(8,0))
+            end_dt = datetime.combine(ts.date(), time(17,0))
+            attendance_dt = ts.date()
+        else:
+            start_dt = datetime.combine(ts.date() - timedelta(days=1), time(23,0))
+            end_dt = datetime.combine(ts.date(), time(6,0))
+            attendance_dt = ts.date() - timedelta(days=1)
+        return start_dt, end_dt, attendance_dt
 
 def get_attendance(employee: str, attendance_date: date):
     name = frappe.db.exists("Attendance", {"employee":employee, "attendance_date": attendance_date, "docstatus":("!=",2)})
@@ -123,5 +138,5 @@ def make_attendance(employee_id: str, attendance_date: date, shift_code: str, st
         "shift": shift_code
     })
     attendance_doc.insert(ignore_permissions=True, ignore_if_duplicate=True)
-    attendance_doc.submit()
-    frappe.db.commit()
+    #attendance_doc.submit()
+    #frappe.db.commit()
