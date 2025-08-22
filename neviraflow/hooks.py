@@ -280,9 +280,9 @@ doc_events = {
         "before_save": "neviraflow.work_order_timer.on_before_save",
         "on_submit": "neviraflow.work_order_timer.on_submit",
     },
-    "Employee Checkin": {
-        "after_insert": "neviraflow.attendance_handlers.after_insert_action"
-    },
+   # "Employee Checkin": {
+   #     "after_insert": "neviraflow.attendance_handlers.after_insert_action"
+   # },
 }
 
 
