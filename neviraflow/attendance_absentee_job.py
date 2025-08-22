@@ -12,6 +12,9 @@ def mark_absentees():
     """
     try:
         previous_day = add_to_date(getdate(), days=-1)
+        #previous_day_str = '18-08-2025'
+        #previous_day = datetime.strptime(previous_day_str,"%d-%m-%Y")
+        #previous_day = previous_day.date()
 
         ## Get the list of active employees, the idea is that I want to move to sets eventually but for now I will just start with a list object
         active_employees = get_active_employees()
@@ -96,7 +99,6 @@ def get_employee_shift(employee):
                                 "status": "Active"
                             },
                             fields = ["shift_type"],
-                            order_by="creation_desc",
                             limit =1
                             )
     return shift_assignment[0].shift_type if shift_assignment else None
