@@ -131,7 +131,7 @@ def compute_shift_window(ts:datetime, shift_code=None):
         
         return start_dt, end_dt, attendance_dt
     else:
-        if ts.time() >= time(7,0) and ts.time() <= time(21,0):
+        if ts.time() >= time(7,0) and ts.time() <= time(23,59):
             start_dt = datetime.combine(ts.date(), time(8,0))
             end_dt = datetime.combine(ts.date(), time(17,0))
             attendance_dt = ts.date()
