@@ -9,12 +9,6 @@ SHIFT_CONFIG = {
     "SHIFT B":       (time(14, 0), time(23, 0)),
     "SHIFT C":       (time(23, 0), time(7, 0)),   # crosses midnight
 }
-def normalize_shift_code(name: str) -> str:
-    n = (name or "").strip().upper()
-    for code in ("GENERAL","A","B","C"):
-        if code == n or n.endswith(f"{code}") or n.startswith(f"SHIFT {code}"):
-            return code
-    return "GENERAL"
 
 
 def after_insert_action(doc, method = None):
