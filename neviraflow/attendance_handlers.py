@@ -30,8 +30,9 @@ def after_insert_action(doc, method = None):
         if log_in_type == "IN":
             att = get_attendance(employee_id, attendance_dt)
             late_entry = bool(ts > shift_start_dt)
+            in_time = ts
             if not att:
-                make_attendance(employee_id, attendance_dt, shift_code, status="Present", late_entry=late_entry)
+                make_attendance(employee_id, attendance_dt, shift_code, status="Present", late_entry=late_entry, in_time=in_time)
             if att:
                 frappe.msgprint("Check in & attendance for today already exists!")
                 pass
@@ -40,7 +41,7 @@ def after_insert_action(doc, method = None):
         elif log_in_type == "OUT":
             att = get_attendance(employee_id, attendance_dt)
             early_exit = bool(ts < shift_end_dt)
-
+            
             if att:
                 att_doc = frappe.get_doc("Attendance",att.name)
                 att_doc.early_exit = early_exit
@@ -144,7 +145,7 @@ def get_attendance(employee: str, attendance_date: date):
     name = frappe.db.exists("Attendance", {"employee":employee, "attendance_date": attendance_date, "docstatus":("!=",2)})
     return frappe.get_doc("Attendance", name) if name else None
 
-def make_attendance(employee_id: str, attendance_date: date, shift_code: str, status: str,late_entry = 0,early_exit = 0):
+def make_attendance(employee_id: str, attendance_date: date, shift_code: str, status: str,late_entry = 0,early_exit = 0, in_time = None):
     attendance_doc = frappe.new_doc("Attendance")
     attendance_doc.update({
         "employee": employee_id,
@@ -152,7 +153,8 @@ def make_attendance(employee_id: str, attendance_date: date, shift_code: str, st
         "attendance_date": attendance_date,
         "shift": shift_code,
         "late_entry": late_entry,
-        "early_exit": early_exit
+        "early_exit": early_exit,
+        "in_time": in_time
     })
     attendance_doc.insert(ignore_permissions=True, ignore_if_duplicate=True)
     attendance_doc.submit()
