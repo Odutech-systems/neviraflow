@@ -276,13 +276,12 @@ doc_events = {
         "on_update": "neviraflow.weighbridge.doctype.weighbridge_management.weighbridge_management.auto_submit_if_ready",
     },
     "Work Order": {
-        #"on_update": "batch_manager.update_work_order_completion.create_todo_on_completion",
         "before_save": "neviraflow.work_order_timer.on_before_save",
         "on_submit": "neviraflow.work_order_timer.on_submit",
     },
-   # "Employee Checkin": {
-   #     "after_insert": "neviraflow.attendance_handlers.after_insert_action"
-   # },
+    "Employee Checkin": {
+        "after_insert": "neviraflow.attendance_handlers.after_insert_action"
+    },
 }
 
 
