@@ -41,6 +41,7 @@ def after_insert_action(doc, method = None):
             if att:
                 frappe.msgprint("Check in & attendance for today already exists!")
                 pass
+            
         ### If the log_in_type is OUT, do not try to make an attendance        
         elif log_in_type == "OUT":
             att = get_attendance(employee_id, attendance_dt)
