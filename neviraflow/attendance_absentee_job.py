@@ -12,7 +12,7 @@ def mark_absentees():
     """
     try:
         previous_day = add_to_date(getdate(), days=-1)
-        #previous_day_str = '18-08-2025'
+        #previous_day_str = '22-08-2025'
         #previous_day = datetime.strptime(previous_day_str,"%d-%m-%Y")
         #previous_day = previous_day.date()
 
