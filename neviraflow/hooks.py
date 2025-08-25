@@ -312,6 +312,6 @@ app_include_js = "/assets/neviraflow/js/bag_tonne_logic.js"
 scheduler_events = {
     "cron": {
         "*/5 * * * *": ["frappe.email.queue.flush"],
-        "0 10 * * *" : ["neviraflow.attendance_absentee_job.mark_absentees"]
+        #"0 10 * * *" : ["neviraflow.attendance_absentee_job.mark_absentees"]
     },
 }
