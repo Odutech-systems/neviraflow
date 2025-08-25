@@ -29,7 +29,12 @@
   "stores_representative",
   "supplier_name",
   "purchase_order_reference",
-  "customer_name"
+  "customer_name",
+  "weighbridge_reference",
+  "discrepancy_remarks",
+  "discrepancy_flag",
+  "gate_pass_item_details_section",
+  "item_list"
  ],
  "fields": [
   {
@@ -169,12 +174,40 @@
    "fieldtype": "Link",
    "label": "Vehicle Registration Number",
    "options": "Vehicle"
+  },
+  {
+   "fieldname": "weighbridge_reference",
+   "fieldtype": "Link",
+   "label": "Weighbridge Reference",
+   "options": "Weighbridge Management"
+  },
+  {
+   "fieldname": "discrepancy_remarks",
+   "fieldtype": "Small Text",
+   "label": "Discrepancy Remarks"
+  },
+  {
+   "default": "0",
+   "fieldname": "discrepancy_flag",
+   "fieldtype": "Check",
+   "label": "Discrepancy Flag"
+  },
+  {
+   "fieldname": "gate_pass_item_details_section",
+   "fieldtype": "Section Break",
+   "label": "Gate Pass Item Details"
+  },
+  {
+   "fieldname": "item_list",
+   "fieldtype": "Table",
+   "label": "Item List",
+   "options": "Gatepass Item Details"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-15 14:51:55.932535",
+ "modified": "2025-08-23 13:37:36.098352",
  "modified_by": "Administrator",
  "module": "Nevira Gate Pass",
  "name": "Gate Pass",
@@ -207,6 +240,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

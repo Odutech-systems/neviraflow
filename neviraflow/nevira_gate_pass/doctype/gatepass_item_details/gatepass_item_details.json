@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-08-18 05:54:59.107951",
+ "creation": "2025-08-23 13:34:01.726036",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -33,16 +33,17 @@
   {
    "fieldname": "quantity",
    "fieldtype": "Float",
-   "label": "Quantity (Kgs)"
+   "label": "Quantity"
   }
  ],
+ "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-08-22 12:44:59.565112",
+ "modified": "2025-08-23 13:36:06.869965",
  "modified_by": "Administrator",
- "module": "Weighbridge",
- "name": "Weighbridge Purchased Items Detail",
+ "module": "Nevira Gate Pass",
+ "name": "Gatepass Item Details",
  "owner": "Administrator",
  "permissions": [],
  "row_format": "Dynamic",

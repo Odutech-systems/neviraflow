@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class Gatepass(Document):
+class GatepassItemDetails(Document):
 	pass

@@ -182,7 +182,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Weighing Status",
-   "options": "Pending First Weight\nAwaiting Second Weight\nReady for Capture\nCompleted"
+   "options": "Pending First Weight\nAwaiting Second Weight\nReady for Capture\nPending Confirmation\nCompleted"
   },
   {
    "fieldname": "milling_machine",
@@ -299,6 +299,7 @@
    "label": "Purchased Items Information"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "purchased_item_list",
    "fieldtype": "Table",
    "label": "Purchased Item List",
@@ -308,7 +309,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-18 06:04:50.462274",
+ "modified": "2025-08-22 11:47:38.840798",
  "modified_by": "Administrator",
  "module": "Weighbridge",
  "name": "Weighbridge Management",
@@ -355,6 +356,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

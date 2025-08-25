@@ -1,24 +1,13 @@
 // Copyright (c) 2025, Victor Mandela and contributors
 // For license information, please see license.txt
 
-// Copyright (c) 2025, Frappe Technologies and contributors
-// For license information, please see license.txt
-
 frappe.ui.form.on('PDC Booking and Clearance', {
   onload(frm) {
-    toggle_account_fields(frm);
-    toggle_bank_fields(frm);
-    lock_clearance_controls(frm);
-    toggle_payment_reference_info(frm);
+    update_ui(frm);
   },
 
   refresh(frm) {
-    toggle_account_fields(frm);
-    toggle_bank_fields(frm);
-    lock_clearance_controls(frm);
-    toggle_payment_reference_info(frm);
-    show_settle_cheque_buttons(frm);
-    show_update_clearance_date_button(frm);
+    update_ui(frm);
   },
 
   pdc_type(frm) {
@@ -27,9 +16,7 @@ frappe.ui.form.on('PDC Booking and Clearance', {
     } else if (frm.doc.pdc_type === 'Supplier PDC') {
       frm.set_value('party_type', 'Supplier');
     }
-    toggle_account_fields(frm);
-    toggle_bank_fields(frm);
-    toggle_payment_reference_info(frm);
+    update_ui(frm);
   },
 
   party_type(frm) {
@@ -48,39 +35,37 @@ frappe.ui.form.on('PDC Booking and Clearance', {
   },
 
   clearance_status(frm) {
-    lock_clearance_controls(frm);
-    toggle_payment_reference_info(frm);
+    update_ui(frm);
   },
 
   reference_payment_entry(frm) {
-    toggle_payment_reference_info(frm);
+    update_ui(frm);
   }
 });
 
+function update_ui(frm) {
+  toggle_account_fields(frm);
+  toggle_bank_fields(frm);
+  lock_clearance_controls(frm);
+  toggle_payment_reference_info(frm);
+  show_settle_cheque_buttons(frm);
+  show_update_clearance_date_button(frm);
+}
+
 function toggle_bank_fields(frm) {
-  if (frm.doc.pdc_type === 'Customer PDC') {
-    frm.set_df_property('company_bank_account', 'hidden', 0);
-    frm.set_df_property('party_bank_account', 'hidden', 1);
-  } else if (frm.doc.pdc_type === 'Supplier PDC') {
-    frm.set_df_property('company_bank_account', 'hidden', 1);
-    frm.set_df_property('party_bank_account', 'hidden', 0);
-  } else {
-    frm.set_df_property('company_bank_account', 'hidden', 1);
-    frm.set_df_property('party_bank_account', 'hidden', 1);
-  }
+  const isCustomer = frm.doc.pdc_type === 'Customer PDC';
+  const isSupplier = frm.doc.pdc_type === 'Supplier PDC';
+
+  frm.set_df_property('company_bank_account', 'hidden', !isCustomer);
+  frm.set_df_property('party_bank_account', 'hidden', !isSupplier);
 }
 
 function toggle_account_fields(frm) {
-  if (frm.doc.pdc_type === 'Customer PDC') {
-    frm.set_df_property('account_paid_to', 'hidden', 0);
-    frm.set_df_property('account_paid_from', 'hidden', 1);
-  } else if (frm.doc.pdc_type === 'Supplier PDC') {
-    frm.set_df_property('account_paid_to', 'hidden', 1);
-    frm.set_df_property('account_paid_from', 'hidden', 0);
-  } else {
-    frm.set_df_property('account_paid_to', 'hidden', 0);
-    frm.set_df_property('account_paid_from', 'hidden', 0);
-  }
+  const isCustomer = frm.doc.pdc_type === 'Customer PDC';
+  const isSupplier = frm.doc.pdc_type === 'Supplier PDC';
+
+  frm.set_df_property('account_paid_to', 'hidden', !isCustomer);
+  frm.set_df_property('account_paid_from', 'hidden', !isSupplier);
 }
 
 function lock_clearance_controls(frm) {
@@ -90,12 +75,11 @@ function lock_clearance_controls(frm) {
 }
 
 function toggle_payment_reference_info(frm) {
-  const has_payment = frm.doc.clearance_status === 'Cleared' && frm.doc.reference_payment_entry;
+  const show = frm.doc.clearance_status === 'Cleared' && frm.doc.reference_payment_entry;
+  frm.set_df_property('reference_payment_entry', 'hidden', !show);
+  frm.set_df_property('payment_reference_date', 'hidden', !show);
 
-  frm.set_df_property('reference_payment_entry', 'hidden', !has_payment);
-  frm.set_df_property('payment_reference_date', 'hidden', !has_payment);
-
-  if (has_payment) {
+  if (show) {
     frappe.call({
       method: 'frappe.client.get_value',
       args: {
@@ -155,11 +139,23 @@ function show_settle_cheque_buttons(frm) {
   }, __('Settle Cheque'), 'primary');
 
   frm.add_custom_button(__('Cancelled'), () => {
-    frappe.call({
-      method: 'neviraflow.api.mark_pdc_cancelled',
-      args: { docname: frm.doc.name },
-      callback: () => frm.reload_doc()
-    });
+    frappe.prompt([
+      {
+        fieldname: 'cancel_comment',
+        label: 'Cancellation Reason',
+        fieldtype: 'Small Text',
+        reqd: 1
+      }
+    ], (values) => {
+      frappe.call({
+        method: 'neviraflow.api.mark_pdc_cancelled',
+        args: {
+          docname: frm.doc.name,
+          comment: values.cancel_comment
+        },
+        callback: () => frm.reload_doc()
+      });
+    }, __('Cancel Cheque'));
   }, __('Settle Cheque'), 'primary');
 }
 

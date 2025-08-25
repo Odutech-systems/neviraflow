@@ -17,7 +17,8 @@
   "clearance_date",
   "clearance_status",
   "reference_payment_entry",
-  "payment_refrence_date",
+  "payment_reference_date",
+  "cancel_comment",
   "cheque_payment_from_to_section",
   "party_type",
   "party_code",
@@ -83,6 +84,7 @@
    "default": "Pending",
    "fieldname": "clearance_status",
    "fieldtype": "Select",
+   "hidden": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Clearance Status",
@@ -94,13 +96,6 @@
    "fieldtype": "Link",
    "label": "Reference Payment Entry",
    "options": "Payment Entry",
-   "read_only": 1
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "payment_refrence_date",
-   "fieldtype": "Date",
-   "label": "Payment Refrence Date",
    "read_only": 1
   },
   {
@@ -191,12 +186,27 @@
    "fieldtype": "Link",
    "label": "Company",
    "options": "Company"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "payment_reference_date",
+   "fieldtype": "Date",
+   "label": "Payment Refrence Date",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "cancel_comment",
+   "fieldtype": "Small Text",
+   "label": "Cancel Comment",
+   "max_height": "70px",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-07-13 20:00:31.965326",
+ "modified": "2025-08-25 09:18:23.640739",
  "modified_by": "Administrator",
  "module": "Nevira Workflow App",
  "name": "PDC Booking and Clearance",
@@ -242,6 +252,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
