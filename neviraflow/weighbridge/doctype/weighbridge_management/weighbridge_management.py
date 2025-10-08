@@ -478,6 +478,7 @@ def confirm_rm_receipt(docname: str):
         se.append("items", {
             "item_code": row.item_code,
             "qty": row.quantity,
+	    "expense_account":"1420 - Mining WIP - NML",
             "uom": row.uom or frappe.db.get_value("Item", row.item_code, "stock_uom"),
             "conversion_factor": 1,
             "t_warehouse": default_wh,
@@ -540,19 +541,41 @@ def confirm_production_transfer(docname: str, work_order: str):
 # -------------------------------------------------------------------
 @frappe.whitelist()
 def auto_submit_if_ready(doc: Document, method: Optional[str] = None):
-    """Auto-submit when both weights present; mark as Ready for Capture.
-    This is for cases where the Doc is created via REST inserts.
+    """
+    Hybrid auto-submit:
+    - Works when doc is created via REST API (e.g., via .insert())
+    - Skips auto-submit when used via UI or when already submitted
     """
     try:
+        # Don't proceed if already submitted
+        if doc.docstatus != 0:
+            return
+
         fw = _to_float(doc.first_weight)
         sw = _to_float(doc.second_weight)
-        if doc.docstatus == 0 and fw > 0 and sw > 0:
+
+        # Both weights must be present and greater than 0
+        if fw > 0 and sw > 0:
+            # Prevent re-submission if already exists
             if not doc.final_weight:
                 doc.final_weight = abs(sw - fw)
+
             doc.weighing_status = "Ready for Capture"
             _sync_gross_tare_net(doc)
             _set_multi_weighing_flags(doc)
+
+            # Avoid errors on manual UI save
             doc.flags.ignore_permissions = True
-            doc.submit()
+
+            # Ensure we don't submit again if already exists
+            if not frappe.db.exists("Weighbridge Management", doc.name):
+                frappe.log_error(f"{doc.name} does not exist in DB; skipping submit.", "Hybrid Auto Submit")
+                return
+
+            # Double-check status before submission
+            existing = frappe.get_doc("Weighbridge Management", doc.name)
+            if existing.docstatus == 0:
+                doc.submit()
+                frappe.log_error(f"{doc.name} auto-submitted successfully.", "Hybrid Auto Submit")
     except Exception:
-        frappe.log_error(frappe.get_traceback(), "WM Auto Submit Failed")
+        frappe.log_error(frappe.get_traceback(), "Hybrid Auto Submit Failed")

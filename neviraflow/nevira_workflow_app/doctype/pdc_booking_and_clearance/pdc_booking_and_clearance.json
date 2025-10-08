@@ -147,12 +147,14 @@
    "label": "Accounts"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "account_paid_from",
    "fieldtype": "Link",
    "label": "Account Paid From",
    "options": "Bank Account"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "account_paid_to",
    "fieldtype": "Link",
    "label": "Account Paid To",
@@ -206,7 +208,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-25 09:18:23.640739",
+ "modified": "2025-09-01 09:56:13.846361",
  "modified_by": "Administrator",
  "module": "Nevira Workflow App",
  "name": "PDC Booking and Clearance",
@@ -222,37 +224,38 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
    "create": 1,
-   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "Accounts User",
+   "select": 1,
    "share": 1,
    "submit": 1,
    "write": 1
   },
   {
    "create": 1,
-   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "Accounts Manager",
+   "select": 1,
    "share": 1,
    "submit": 1,
    "write": 1
   }
  ],
- "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

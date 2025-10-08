@@ -96,21 +96,29 @@ def _validate_cod_backlog(doc):
         frappe.throw(f"Customer has previous Cash On Delivery orders not fully billed or paid: {orders}. Please settle them before submitting a new one.")
 
 def _validate_advance_payment(doc):
-    paid_amount = frappe.db.sql("""
-        SELECT
-            SUM(pe.paid_amount) - IFNULL(SUM(per.allocated_amount), 0) AS unallocated
-        FROM `tabPayment Entry` pe
-        LEFT JOIN `tabPayment Entry Reference` per
-            ON pe.name = per.parent
-        WHERE pe.party_type = 'Customer'
-          AND pe.party = %s
-          AND pe.payment_type = 'Receive'
-          AND pe.docstatus = 1
-    """, (doc.customer,), as_dict=True)[0].get("unallocated") or 0
+    ## Get advance payments from the General Ledger entries
+    balance_query = frappe.db.sql("""
+                    SELECT
+                        (SUM(gl.credit) - SUM(gl.debit)) AS balance_amount 
+                        FROM `tabGL Entry` AS gl WHERE gl.docstatus = 1 AND
+                        gl.is_cancelled = 0 AND gl.party = %s GROUP BY gl.party 
+                    """, (doc.customer), as_dict=True)
+    
+    ## Initialize the balance amount
+    balance_amount = 0
+    
+    ## Set balance_amount to 0 if no records found
+    if not balance_query:
+        balance_amount = 0
+    else:
+        balance_amount = balance_query[0].get("balance_amount")
 
-    if paid_amount < doc.grand_total:
-        frappe.throw(f"Advance Payment Required: Customer has only paid {paid_amount}, but order value is {doc.grand_total}. Please ensure full advance payment before submitting this order.")
+    tds_threshold = 0.05 ## setting the  tax-witholding threshold
 
+    paid_amount_plus_tds = balance_amount + (balance_amount * tds_threshold)
+
+    if (paid_amount_plus_tds < doc.grand_total) or balance_amount is None:
+        frappe.throw(f"Advance Payment Required: Customer has only paid {balance_amount}, but order value is {doc.grand_total}. Please ensure full advance payment before submitting this order.")
 # -------------------------
 # RFQ, SQ, PO LOGIC
 # -------------------------

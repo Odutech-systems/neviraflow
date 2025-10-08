@@ -60,6 +60,7 @@ class PDCBookingandClearance(Document):
 
         pe.save()
         pe.submit()
+        frappe.db.commit()
 
         self.reference_payment_entry = pe.name
         self.set("payment_reference_date", pe.posting_date)

@@ -86,28 +86,33 @@
   {
    "fieldname": "security_officer_name",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Security Officer Name"
   },
   {
    "fieldname": "dispatch_representative",
    "fieldtype": "Link",
    "label": "Dispatch Representative",
-   "options": "User"
+   "options": "User",
+   "read_only": 1
   },
   {
    "fieldname": "employee_id",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Employee ID",
    "options": "Employee"
   },
   {
    "fieldname": "employee_name",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Employee Name"
   },
   {
    "fieldname": "department",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Department"
   },
   {
@@ -132,11 +137,13 @@
   {
    "fieldname": "supplier_delivery_note",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Supplier Delivery Note"
   },
   {
    "fieldname": "supplier_invoice_number",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Supplier Invoice Number"
   },
   {
@@ -148,18 +155,21 @@
   {
    "fieldname": "stores_representative",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Stores Representative",
    "options": "User"
   },
   {
    "fieldname": "supplier_name",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Supplier Name",
    "options": "Supplier"
   },
   {
    "fieldname": "purchase_order_reference",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Purchase Order Reference ",
    "options": "Purchase Order"
   },
@@ -207,7 +217,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-23 13:37:36.098352",
+ "modified": "2025-09-16 09:43:29.538701",
  "modified_by": "Administrator",
  "module": "Nevira Gate Pass",
  "name": "Gate Pass",
@@ -240,7 +250,6 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

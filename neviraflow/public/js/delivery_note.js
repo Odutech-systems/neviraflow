@@ -4,4 +4,3 @@ frappe.ui.form.on("Delivery Note", {
       apply_bag_tonne_logic("Delivery Note Item");
     }
   });
-  

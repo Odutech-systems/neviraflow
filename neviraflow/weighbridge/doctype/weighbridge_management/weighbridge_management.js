@@ -3,6 +3,18 @@
 
 frappe.ui.form.on("Weighbridge Management", {
   refresh(frm) {
+    const fw = flt(frm.doc.first_weight);
+    const sw = flt(frm.doc.second_weight);
+    const ready = frm.doc.weighing_status === "Ready for Capture";
+    const submitted = frm.doc.docstatus === 1;
+
+    // ✅ Auto-reload if frontend docstatus is 0 but it should be 1
+    if (!submitted && fw > 0 && sw > 0 && ready) {
+      console.log("🌀 Reloading stale doc after API auto-submit...");
+      setTimeout(() => frm.reload_doc(), 1000);
+      return;
+    }
+
     handle_field_visibility(frm);
     handle_table_visibility(frm);
     handle_stock_entry_visibility(frm);
@@ -45,6 +57,7 @@ frappe.ui.form.on("Weighbridge Management", {
   },
 });
 
+
 function update_weighing_status_based_on_type(frm) {
   const fw = flt(frm.doc.first_weight);
   const sw = flt(frm.doc.second_weight);
@@ -81,7 +94,8 @@ function handle_button_display(frm) {
     !doc.stock_entry_reference &&
     has_items;
 
-  if (can_capture && !has_items) {
+  // ✅ Show Capture Return Info even if child tables are prefilled
+  if (can_capture) {
     frm.add_custom_button("Capture Return Info", function () {
       open_capture_dialog(frm);
     });
@@ -126,6 +140,7 @@ function handle_button_display(frm) {
     });
   }
 }
+
 
 function lock_fields_if_final(frm) {
   const { doc } = frm;
@@ -262,21 +277,17 @@ function open_capture_dialog(frm) {
         return;
       }
 
-      // Build args per type
       let args = { docname: doc.name };
 
       if (chosen_type === "Partner Production") {
-        // Pack a single dialog row into array for API
         const partner_items = [
           {
             partner_description: values.partner_description || "",
             item_description: values.item_description || "",
-            // quantity omitted; backend will default from final_weight in tonnes
           },
         ];
         args.partner_items = JSON.stringify(partner_items);
       } else {
-        // Types using item_code + second_weight
         args.second_weight = doc.second_weight;
         args.item_code = values.item_code || null;
 
@@ -287,7 +298,6 @@ function open_capture_dialog(frm) {
           args.item_type = chosen_type;
         }
         if (chosen_type === "Finished Goods") {
-          // IMPORTANT: pass the Customer LINK (code/id), not the human name
           args.customer = values.customer_name || null;
         }
       }
@@ -307,40 +317,37 @@ function open_capture_dialog(frm) {
     },
   });
 
-// Populate display fields when link fields change or are selected from dropdown
-setTimeout(() => {
-  const itemInput = dialog.get_input("item_code");
-  if (itemInput) {
-    const handler = async () => {
-      const code = dialog.get_value("item_code");
-      if (code) {
-        const r = await frappe.db.get_value("Item", code, "item_name");
-        dialog.set_value("item_name_display", r?.message?.item_name || "");
-      } else {
-        dialog.set_value("item_name_display", "");
-      }
-    };
-    // Catch both typing+blur and awesomplete selection
-    itemInput.on("change", handler);
-    itemInput.on("awesomplete-selectcomplete", handler);
-  }
+  setTimeout(() => {
+    const itemInput = dialog.get_input("item_code");
+    if (itemInput) {
+      const handler = async () => {
+        const code = dialog.get_value("item_code");
+        if (code) {
+          const r = await frappe.db.get_value("Item", code, "item_name");
+          dialog.set_value("item_name_display", r?.message?.item_name || "");
+        } else {
+          dialog.set_value("item_name_display", "");
+        }
+      };
+      itemInput.on("change", handler);
+      itemInput.on("awesomplete-selectcomplete", handler);
+    }
 
-  const custInput = dialog.get_input("customer_name");
-  if (custInput) {
-    const handler = async () => {
-      const code = dialog.get_value("customer_name"); // LINK code
-      if (code) {
-        const r = await frappe.db.get_value("Customer", code, "customer_name");
-        dialog.set_value("customer_name_display", r?.message?.customer_name || "");
-      } else {
-        dialog.set_value("customer_name_display", "");
-      }
-    };
-    custInput.on("change", handler);
-    custInput.on("awesomplete-selectcomplete", handler);
-  }
-}, 0);
-
+    const custInput = dialog.get_input("customer_name");
+    if (custInput) {
+      const handler = async () => {
+        const code = dialog.get_value("customer_name");
+        if (code) {
+          const r = await frappe.db.get_value("Customer", code, "customer_name");
+          dialog.set_value("customer_name_display", r?.message?.customer_name || "");
+        } else {
+          dialog.set_value("customer_name_display", "");
+        }
+      };
+      custInput.on("change", handler);
+      custInput.on("awesomplete-selectcomplete", handler);
+    }
+  }, 0);
 
   toggle_dynamic_fields(dialog, dialog.get_value("item_type") || doc.item_type);
   dialog.show();
