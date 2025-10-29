@@ -261,11 +261,11 @@ doc_events = {
     "Delivery Note": {
         "before_save": [
             "neviraflow.api.assign_export_metadata",
-            "neviraflow.api.handle_pick_list_and_qty_patch"
+           # "neviraflow.api.handle_pick_list_and_qty_patch"
         ]
     },
     "Pick List": {
-        "before_save": "neviraflow.api.handle_pick_list_and_qty_patch"
+        #"before_save": "neviraflow.api.handle_pick_list_and_qty_patch"
     },
     "Fuel Request And Issue": {
         "validate": "neviraflow.fuel_request.validate",
