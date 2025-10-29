@@ -44,8 +44,8 @@ def compute_new_base_salary(doc, method = None):
             basic_salary_row.amount = new_basic_salary_amount
 
             ## Store the calculated fields on custom fields on the doctype
-            doc.daily_pay_calculated = daily_pay
-            doc.absenteeism_deduction = absent_days_deduction
+            doc.custom_daily_pay = daily_pay
+            doc.custom_absent_days_deduction = absent_days_deduction
             frappe.msgprint(f"Absenteeism deduction of {absent_days_deduction: ,.2f} applied to Basic Salary.")
 
         except Exception as e:
