@@ -247,16 +247,16 @@ doc_events = {
         "before_save": "neviraflow.api.assign_export_metadata"
     },
     "Sales Order": {
-        "before_validate": "neviraflow.procurement.custom_material_request.before_validate_sales_order",
-        "before_submit": "neviraflow.procurement.custom_material_request.before_submit_sales_order",
+        #"before_validate": "neviraflow.procurement.custom_material_request.before_validate_sales_order",
+        #"before_submit": "neviraflow.procurement.custom_material_request.before_submit_sales_order",
         "before_save": "neviraflow.api.assign_export_metadata"
     },
     "Sales Invoice": {
-        #"before_validate": "neviraflow.procurement.custom_material_request.before_validate_sales_invoice",
-        #"before_save": [
-            #"neviraflow.procurement.custom_material_request.before_save_sales_invoice",
-            #"neviraflow.api.assign_export_metadata",
-        #]
+        "before_validate": "neviraflow.procurement.custom_material_request.before_validate_sales_invoice",
+        "before_save": [
+            "neviraflow.procurement.custom_material_request.before_save_sales_invoice",
+            "neviraflow.api.assign_export_metadata",
+        ]
     },
     "Delivery Note": {
         "before_save": [
