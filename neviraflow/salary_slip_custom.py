@@ -3,7 +3,7 @@ import frappe
 
 
 
-def compute_new_base_salary(doc, method = None):
+def compute_absenteeism_deduction(doc, method = None):
     """
     Computes absenteeism deduction and adjusts the Basic Salary component in the earnings table.
     This function shoud be executed on the validate hook of the Salary Slip doctype.
