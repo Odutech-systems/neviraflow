@@ -9,7 +9,7 @@ def compute_new_base_salary(doc, method = None):
     This function shoud be executed on the validate hook of the Salary Slip doctype.
     """
     absent_days = flt(doc.absent_days)
-    working_days = flt(doc.working_days)
+    working_days = flt(doc.total_working_days)
     gross_salary  = flt(doc.base_gross_pay)
 
     if absent_days <= 0 or working_days <= 0:
