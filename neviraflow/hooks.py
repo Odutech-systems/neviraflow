@@ -283,7 +283,9 @@ doc_events = {
         "after_insert": "neviraflow.attendance_handlers.after_insert_action"
     },
     "Salary Slip": {
-        "validate": "neviraflow.salary_slip_custom.compute_absenteeism_deduction"
+        "validate": "neviraflow.salary_slip_custom.compute_absenteeism_deduction",
+        "on_submit": "neviraflow.salary_slip_custom.compute_absenteeism_deduction",
+        "after_insert": "neviraflow.salary_slip_custom.compute_absenteeism_deduction"
     }
 }
 

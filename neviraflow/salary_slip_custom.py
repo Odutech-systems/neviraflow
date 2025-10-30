@@ -43,6 +43,10 @@ def compute_absenteeism_deduction(doc, method = None):
             ## update the child table row amount
             basic_salary_row.amount = new_basic_salary_amount
 
+            ## Compute the new total_deductions
+            doc.total_deduction = doc.total_deduction + absent_days_deduction
+            doc.net_pay = doc.base_gross_pay - doc.total_deductions
+
             ## Store the calculated fields on custom fields on the doctype
             doc.custom_daily_pay = daily_pay
             doc.custom_absent_days_deduction = absent_days_deduction
