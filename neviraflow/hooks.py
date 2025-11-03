@@ -247,8 +247,8 @@ doc_events = {
         "before_save": "neviraflow.api.assign_export_metadata"
     },
     "Sales Order": {
-        #"before_validate": "neviraflow.procurement.custom_material_request.before_validate_sales_order",
-        #"before_submit": "neviraflow.procurement.custom_material_request.before_submit_sales_order",
+        "before_validate": "neviraflow.procurement.custom_material_request.before_validate_sales_order",
+        "before_submit": "neviraflow.procurement.custom_material_request.before_submit_sales_order",
         "before_save": "neviraflow.api.assign_export_metadata"
     },
     "Sales Invoice": {
