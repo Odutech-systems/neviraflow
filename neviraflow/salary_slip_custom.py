@@ -1,6 +1,14 @@
 from frappe.utils import datetime, flt
 import frappe
+from hrms.payroll.doctype.salary_structure.salary_structure import make_salary_slip
 
+
+def compute_display_components(doc, method = None):
+    absent_days = flt(doc.working_days)
+    gross_salary = flt(doc.gross_salary)
+
+    employee_gross_salary = frappe.db.get_value("Employee", doc.employee,"CTC")
+    
 
 
 def compute_absenteeism_deduction(doc, method = None):
@@ -45,7 +53,7 @@ def compute_absenteeism_deduction(doc, method = None):
 
             ## Compute the new total_deductions
             doc.total_deduction = doc.total_deduction + absent_days_deduction
-            doc.net_pay = doc.base_gross_pay - doc.total_deductions
+            doc.net_pay = doc.base_gross_pay - doc.total_deduction
 
             ## Store the calculated fields on custom fields on the doctype
             doc.custom_daily_pay = daily_pay
