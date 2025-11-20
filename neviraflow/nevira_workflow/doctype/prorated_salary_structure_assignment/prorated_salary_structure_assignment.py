@@ -27,10 +27,10 @@ class ProratedSalaryStructureAssignment(Document):
 		## get only employees who have joined after the 1st day of the month and before or on the last day of the month
 		employees = frappe.get_all(
 			"Employee", 
-			fields= ["name","employee_name","ctc","joining_date"],
+			fields= ["name","employee_name","ctc","date_of_joining"],
 			filters = {
 				"date_of_joining": [">", self.start_date],
-				"date_of_joining": ["<=", self.to_date],
+				#"date_of_joining": ["<=", self.to_date],
 				"status": "Active"
 			}
 		)
@@ -78,7 +78,7 @@ class ProratedSalaryStructureAssignment(Document):
 				"Salary Structure Assignment",{
 					"employee": employee_row.employee,
 					"salary_structure": self.salary_structure,
-					"from_date": employee_row.date_of_joining,
+					"from_date": employee_row.joining_date,
 					"docstatus": 1
 				}
 			)
@@ -91,7 +91,7 @@ class ProratedSalaryStructureAssignment(Document):
 			assignment_doc.update({
 				"employee": employee_row.employee,
 				"salary_structure": self.salary_structure,
-				"from_date": employee_row.date_of_joining,
+				"from_date": employee_row.joining_date,
 				"company": self.company,
 				"currency": "KES",
 				"base": employee_row.base_salary,
@@ -111,8 +111,7 @@ class ProratedSalaryStructureAssignment(Document):
 			frappe.msgprint(f"Created {len(assignments_created)} Salary structure assignments")
 		else:
 			frappe.msgprint("No new prorated slary structure created.")
-
-		self.save()
+		##self.save()
 	
 	@frappe.whitelist(allow_guest=True)
 	def get_created_assignments(self):
