@@ -16,10 +16,8 @@
   "salary_structure",
   "income_tax_slab",
   "payroll_payable_account",
-  "get_employees_btn",
   "prorated_employees_section",
-  "prorated_employees",
-  "view_assignments_btn"
+  "prorated_employees"
  ],
  "fields": [
   {
@@ -105,16 +103,6 @@
    "options": "Prorated Employees"
   },
   {
-   "fieldname": "get_employees_btn",
-   "fieldtype": "Button",
-   "label": "Get Employees"
-  },
-  {
-   "fieldname": "view_assignments_btn",
-   "fieldtype": "Button",
-   "label": "View Assignments"
-  },
-  {
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
@@ -126,7 +114,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-11-20 18:04:54.295582",
+ "modified": "2025-11-20 20:06:54.357699",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Prorated Salary Structure Assignment",

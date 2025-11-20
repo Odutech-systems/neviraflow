@@ -7,13 +7,11 @@ from frappe.model.document import Document
 
 
 class ProratedSalaryStructureAssignment(Document):
-
-	def on_submit(self):
-		self.get_employees_based_on_dates()
-
 	def validate(self):
 		self.set_payroll_payable_account()
 
+	def on_submit(self):
+		self.create_salary_structure_assignments()
 
 	@frappe.whitelist(allow_guest=True)
 	def get_employees_based_on_dates(self):
@@ -24,8 +22,9 @@ class ProratedSalaryStructureAssignment(Document):
 			frappe.throw("Please select both the start date and end date")
 
 		## Cleat the existing table
-		self.prorated_employee = []
+		self.prorated_employees = []
 
+		## get only employees who have joined after the 1st day of the month and before or on the last day of the month
 		employees = frappe.get_all(
 			"Employee", 
 			fields= ["name","employee_name","ctc","joining_date"],
@@ -65,3 +64,64 @@ class ProratedSalaryStructureAssignment(Document):
 						"is_group": 0
 					}
 				)
+
+	
+	def create_salary_structure_assignments(self):
+		"""
+		Create a salary structure assignment for each of the employees in the table
+		"""
+		assignments_created = []
+		
+		for employee_row in self.prorated_employees:
+			## Check for any existing salary structures in the current month
+			existing_assignments = frappe.db.exists(
+				"Salary Structure Assignment",{
+					"employee": employee_row.employee,
+					"salary_structure": self.salary_structure,
+					"from_date": employee_row.date_of_joining,
+					"docstatus": 1
+				}
+			)
+			if existing_assignments:
+				frappe.msgprint(f"Salary assignment already exists for employee {employee_row.employee_name}")
+				continue
+
+			## Create a new salary structure assignment
+			assignment_doc = frappe.new_doc("Salary Structure Assignment")
+			assignment_doc.update({
+				"employee": employee_row.employee,
+				"salary_structure": self.salary_structure,
+				"from_date": employee_row.date_of_joining,
+				"company": self.company,
+				"currency": "KES",
+				"base": employee_row.base_salary,
+				"income_tax_slab": self.income_tax_slab,
+				"payroll_payable_account": self.payroll_payable_account
+			})
+			
+			assignment_doc.insert(ignore_permissions=True)
+			assignment_doc.submit()
+
+			employee_row.salary_structure_assignment = assignment_doc.name
+			assignments_created.append(assignment_doc.name)
+
+			frappe.db.commit()
+
+		if assignments_created:
+			frappe.msgprint(f"Created {len(assignments_created)} Salary structure assignments")
+		else:
+			frappe.msgprint("No new prorated slary structure created.")
+
+		self.save()
+	
+	@frappe.whitelist(allow_guest=True)
+	def get_created_assignments(self):
+		"""Get a list of created salary structure assignments"""
+		assignments = []
+		for employee_row in self.prorated_employees:
+			if employee_row.salary_structure_assignment:
+				assignments.append(employee_row.salary_structure_assignment)
+		return assignments
+	
+
+
