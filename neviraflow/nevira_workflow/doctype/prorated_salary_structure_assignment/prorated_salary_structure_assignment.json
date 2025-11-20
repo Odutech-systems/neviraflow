@@ -9,6 +9,7 @@
   "section_break_57ah",
   "amended_from",
   "naming_series",
+  "company",
   "start_date",
   "to_date",
   "column_break_pylb",
@@ -112,13 +113,20 @@
    "fieldname": "view_assignments_btn",
    "fieldtype": "Button",
    "label": "View Assignments"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-11-20 17:52:53.869896",
+ "modified": "2025-11-20 18:04:54.295582",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Prorated Salary Structure Assignment",
