@@ -15,7 +15,10 @@
   "salary_structure",
   "income_tax_slab",
   "payroll_payable_account",
-  "prorated_employees_section"
+  "get_employees_btn",
+  "prorated_employees_section",
+  "prorated_employees",
+  "view_assignments_btn"
  ],
  "fields": [
   {
@@ -43,21 +46,30 @@
   {
    "fieldname": "start_date",
    "fieldtype": "Date",
+   "in_filter": 1,
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Start Date",
    "reqd": 1
   },
   {
    "fieldname": "to_date",
    "fieldtype": "Date",
+   "in_filter": 1,
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "To Date",
    "reqd": 1
   },
   {
    "fieldname": "salary_structure",
    "fieldtype": "Link",
+   "in_filter": 1,
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Salary Structure",
    "options": "Salary Structure",
    "reqd": 1
@@ -84,13 +96,29 @@
    "fieldname": "prorated_employees_section",
    "fieldtype": "Section Break",
    "label": "Prorated Employees"
+  },
+  {
+   "fieldname": "prorated_employees",
+   "fieldtype": "Table",
+   "label": "Prorated Employees",
+   "options": "Prorated Employees"
+  },
+  {
+   "fieldname": "get_employees_btn",
+   "fieldtype": "Button",
+   "label": "Get Employees"
+  },
+  {
+   "fieldname": "view_assignments_btn",
+   "fieldtype": "Button",
+   "label": "View Assignments"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-11-20 17:35:54.448938",
+ "modified": "2025-11-20 17:52:53.869896",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Prorated Salary Structure Assignment",
