@@ -86,8 +86,7 @@ def _validate_cod_backlog(doc):
         WHERE customer = %s
           AND payment_terms_template = 'Cash On Delivery'
           AND docstatus = 1
-          AND per_billed < 100
-          AND status NOT IN ('Closed', 'Completed')
+          AND billing_status NOT IN ('Fully Billed', 'Partly Billed')
           AND name != %s
     """, (doc.customer, doc.name), as_dict=True)
 
