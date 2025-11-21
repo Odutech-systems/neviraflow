@@ -29,9 +29,7 @@ class ProratedSalaryStructureAssignment(Document):
 			"Employee", 
 			fields= ["name","employee_name","ctc","date_of_joining"],
 			filters = {
-				"date_of_joining": [">", self.start_date],
-				#"date_of_joining": ["<=", self.to_date],
-				"status": "Active"
+				"date_of_joining": [">", self.start_date],"date_of_joining": ["<=", self.to_date],"status": "Active"
 			}
 		)
 
@@ -118,8 +116,8 @@ class ProratedSalaryStructureAssignment(Document):
 		"""Get a list of created salary structure assignments"""
 		assignments = []
 		for employee_row in self.prorated_employees:
-			if employee_row.salary_structure_assignment:
-				assignments.append(employee_row.salary_structure_assignment)
+			if employee_row.name:
+				assignments.append(employee_row.name)
 		return assignments
 	
 
