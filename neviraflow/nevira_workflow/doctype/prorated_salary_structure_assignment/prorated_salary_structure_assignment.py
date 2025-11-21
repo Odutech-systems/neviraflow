@@ -27,6 +27,7 @@ class ProratedSalaryStructureAssignment(Document):
 
 		## get only employees who have joined after the 1st day of the month and before or on the last day of the month
 		adjusted_start_date = add_days(self.start_date, 1)
+		
 		employees = frappe.get_all(
 			"Employee", 
 			fields= ["name","employee_name","ctc","date_of_joining"],
