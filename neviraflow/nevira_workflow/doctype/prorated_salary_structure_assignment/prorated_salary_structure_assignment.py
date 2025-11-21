@@ -4,6 +4,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
+from frappe.utils import add_days
 
 
 class ProratedSalaryStructureAssignment(Document):
@@ -25,11 +26,13 @@ class ProratedSalaryStructureAssignment(Document):
 		self.prorated_employees = []
 
 		## get only employees who have joined after the 1st day of the month and before or on the last day of the month
+		adjusted_start_date = add_days(self.start_date, 1)
 		employees = frappe.get_all(
 			"Employee", 
 			fields= ["name","employee_name","ctc","date_of_joining"],
 			filters = {
-				"date_of_joining": [">", self.start_date],"date_of_joining": ["<=", self.to_date],"status": "Active"
+				"date_of_joining": ["between", [adjusted_start_date, self.to_date]],
+				"status": "Active"
 			}
 		)
 
