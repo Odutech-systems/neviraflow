@@ -7,7 +7,7 @@ def set_daily_rate(doc, method=None):
     CTC. This is to be done before saving the employee docType
     """
     if doc.ctc and flt(doc.ctc) > 0:
-        doc.custom_daily_salary_rate = doc.ctc / 30
+        doc.custom_daily_salary_rate = flt(doc.ctc) / 30
     else:
         doc.custom_daily_salary_rate = 0
 
