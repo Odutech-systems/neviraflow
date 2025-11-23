@@ -18,3 +18,21 @@ def validate_employee_ctc(doc, method=None):
     if doc.ctc and flt(doc.ctc) < 0:
         frappe.throw("CTC cannot be negative")
 
+
+
+def update_all_daily_rates():
+    """
+    Bulk update the daily salary rate for all employees
+    """
+    employees = frappe.get_all("Employee", filters={"ctc": [">",0]}, 
+                               fields=["name","ctc"])
+    updated_count = 0
+    for employee in employees:
+        try:
+            daily_rate = flt(employee.ctc) / 30
+            frappe.db.set_value("Employee", employee.name, "custom_daily_salary_rate", daily_rate)
+            updated_count += 1
+        except Exception as e:
+            frappe.log_error(f"Error in updating the employee {employee.name}: {str(e)}")
+    frappe.db.commit()
+    print(f"Updated the daily salary rate for {updated_count} employees")
