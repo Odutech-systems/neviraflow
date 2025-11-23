@@ -282,9 +282,6 @@ doc_events = {
     "Employee Checkin": {
         "after_insert": "neviraflow.attendance_handlers.after_insert_action"
     },
-    "Salary Slip": {
-        #"validate": "neviraflow.salary_slip_custom.compute_absenteeism_deduction"
-    },
     "Employee": {
         "before_save": "neviraflow.employee_rate.set_daily_rate",
         "validate": "neviraflow.employee_rate.validate_employee_ctc"

@@ -1,13 +1,34 @@
 from frappe.utils import datetime, flt
 import frappe
-from hrms.payroll.doctype.salary_structure.salary_structure import make_salary_slip
+import json
+from frappe.utils import getdate, get_first_day, get_last_day
+from frappe.query_builder import DocType
+from frappe.query_builder.functions import Count
 
 
-@frappe.whitelist(allow_guest=True)
-def compute_daily_rate(doc, method=None):
-    gross_salary = doc.ctc
-    daily_rate = gross_salary / 30
-    return daily_rate
+
+
+def get_absent_days(employee, start_date, end_date):
+    """
+    Get the absent days marked for the emplyee in the given period using frappe.qb
+    """
+    Attendance = DocType("Attendance")
+    query = (frappe.qb.from_(Attendance)
+             .select(Count(Attendance.name).as_('absent_days'))
+             .where(
+                (Attendance.docstatus == 1)
+                & (Attendance.employee == employee)
+                & (Attendance.status == "Absent")
+                & (Attendance.attendance_date >= start_date)
+                & (Attendance.attendance_date <= end_date)
+                )
+            )
+    result = query.run()
+
+    return result[0][0] if result else 0
+
+
+
 
 
 def compute_display_components(doc, method = None):
