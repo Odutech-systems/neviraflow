@@ -7,6 +7,20 @@ from frappe.query_builder.functions import Count
 
 
 
+def get_absent_days_sql(employee, start_date, end_date):
+    """
+    Use SQL to get the number of absent days, parse the employee id, start date and end date
+    """
+    absent_sql =   """
+            SELECT COUNT(name) AS absent_days FROM `tabAttendance` WHERE docstatus = 1
+            AND status = 'Absent' 
+            AND employee = %s
+            AND attendance_date BETWEEN %s AND %s
+            """
+    result = frappe.db.sql(absent_sql,(employee, start_date, end_date), as_dict=True)
+    return result[0]['absent_days'] if result else 0
+
+
 
 def get_absent_days(employee, start_date, end_date):
     """
