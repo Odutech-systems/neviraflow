@@ -1,8 +1,8 @@
 app_name = "neviraflow"
 app_title = "Nevira Workflow App"
-app_publisher = "Victor Mandela"
+app_publisher = "Victor Mandela, Billy Adwar & Moses Njue"
 app_description = "Workflow Automatin system for Nevira Minerals"
-app_email = "vickadwar@gmail.com"
+app_email = "vickadwar@gmail.com, billyfranks98@gmail.com, moses.njue@neviraminerals.com"
 app_license = "mit"
 
 # Apps
@@ -284,7 +284,12 @@ doc_events = {
     },
     "Salary Slip": {
         #"validate": "neviraflow.salary_slip_custom.compute_absenteeism_deduction"
-    }
+    },
+    "Employee": {
+        "before_save": "neviraflow.employee_rate.set_daily_rate",
+        "validate": "neviraflow.employee_rate.validate_employee_ctc"
+
+    },
 }
 
 

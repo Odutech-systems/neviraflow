@@ -3,11 +3,33 @@ import frappe
 from hrms.payroll.doctype.salary_structure.salary_structure import make_salary_slip
 
 
+@frappe.whitelist(allow_guest=True)
+def compute_daily_rate(doc, method=None):
+    gross_salary = doc.ctc
+    daily_rate = gross_salary / 30
+    return daily_rate
+
+
 def compute_display_components(doc, method = None):
     absent_days = flt(doc.working_days)
     gross_salary = flt(doc.gross_salary)
 
     employee_gross_salary = frappe.db.get_value("Employee", doc.employee,"CTC")
+    
+
+
+def get_absent_days(doc, method=None):
+    first_date = doc.from_date
+
+    absent_days_query = frappe.db.sql(f"""
+                        SELECT name, date, employee FROM `tabAttendance` 
+                        WHERE employee = %s
+                        AND date >= {first_date}
+                        WHERE status = 'Absent'
+                        """,doc.employee)
+    
+    Attendance = frappe.qb.DocType("Attendance")
+
     
 
 
