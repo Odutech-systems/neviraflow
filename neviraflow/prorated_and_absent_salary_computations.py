@@ -53,8 +53,8 @@ def before_submit_salary_structure_assignment(doc, method):
 
     ### Extract the employee details  ----> How about just extracting this value fron the employee directly
     if employee.ctc:
-        daily_rate = employee.custom_daily_rate
-        doc.daily_rate = daily_rate                ### Create custom field on salary structure assignment to store the daily rate
+        daily_rate = employee.custom_daily_salary_rate
+        doc.custom_daily_rate = daily_rate                ### Create custom field on salary structure assignment to store the daily rate
     else:
         frappe.throw(f"CTC not set for employee {doc.employee}")
 
@@ -62,7 +62,7 @@ def before_submit_salary_structure_assignment(doc, method):
     payroll_start = getdate(payroll_start_date)
 
     if joining_date > get_first_day(payroll_start_date):
-        doc.custom_is_prorated = 1             ##### Create a custom field is_prorated on the salary structure assignment
+        doc.custom_is_prorated_salary = 1             ##### Create a custom field is_prorated on the salary structure assignment
         
         ### Calculate the number of worked days from the joining date to the end of the month
         if joining_date > payroll_start:
@@ -71,25 +71,25 @@ def before_submit_salary_structure_assignment(doc, method):
             start_date = payroll_start
         end_date = get_last_day(payroll_start)
         worked_days = (end_date - start_date).days + 1   ## Must include both ends
-        doc.custom_worked_days = max(0, worked_days)     ### Include a custom field in the salalry structure assignment doctype for worked days
+        doc.custom_worked_days = max(0, worked_days)     ### Include a custom field in the salary structure assignment doctype for worked days
 
         ### Calculate the prorated amount
         doc.custom_prorated_amount = daily_rate * worked_days
     else:
-        doc.custom_is_prorated = 0
-        doc.worked_days = 30
-        doc.prorated_amount = employee.ctc
+        doc.custom_is_prorated_salary = 0
+        doc.custom_worked_days = 30
+        doc.custom_prorated_amount = employee.ctc
     
     absent_days = get_absent_days(doc.employee, payroll_start_date, payroll_end_date)
     doc.custom_absent_days = absent_days      ##### Create a custom field called custom_absent_days in salary structure assignment docType
 
     ### Compute the absent days deductions
-    doc.custom_absent_days_deduction_amount = daily_rate * absent_days
+    doc.custom_absent_days_deduction = daily_rate * absent_days
 
-    if doc.is_custom_prorated:
-        base_amount = doc.custom_prorated_amount - doc.custom_absent_days_deduction_amount
+    if doc.custom_is_prorated_salary:
+        base_amount = doc.custom_prorated_amount - doc.custom_absent_days_deduction
     else:
-        base_amount = employee.ctc - doc.absent_days_deduction_amount
+        base_amount = employee.ctc - doc.custom_absent_days_deduction
     doc.base = base_amount
 
     
