@@ -287,6 +287,9 @@ doc_events = {
         "validate": "neviraflow.employee_rate.validate_employee_ctc"
 
     },
+    "Salary Structure Assignment":{
+        "before_save": "neviraflow.prorated_and_absent_salary_computations.before_submit_salary_structure_assignment"
+    }
 }
 
 
