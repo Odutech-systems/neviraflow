@@ -93,10 +93,15 @@ def before_submit_salary_structure_assignment(doc, method):
 
 ## Set the absent days deduction on the salary slip as well
 def compute_and_set_absent_days(doc, method=None):
-    if doc.absent_days > 0:
-        absent_days = doc.absent_days
+    employee_id = doc.employee
+    start_date = doc.start_date
+    end_date = doc.end_date
+
+    if absent_days > 0:
+        absent_days = get_absent_days(employee_id, start_date, end_date)
+        doc.custom_computed_absent_days = absent_days
         daily_rate = doc.custom_daily_pay
-        absent_days_deduction = absent_days * daily_rate
+        absent_days_deduction = absent_days * daily_rate 
         doc.custom_absent_days_deduction = absent_days_deduction
     else:
         doc.custom_absent_days_deduction = 0
