@@ -289,7 +289,10 @@ doc_events = {
     },
     "Salary Structure Assignment":{
         "before_save": "neviraflow.prorated_and_absent_salary_computations.before_submit_salary_structure_assignment"
-    }
+    },
+    "Salary Slip":{
+        "before_save": "neviraflow.prorated_and_absent_salary_computations.compute_and_set_absent_days"
+    },
 }
 
 
