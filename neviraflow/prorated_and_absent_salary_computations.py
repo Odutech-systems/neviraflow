@@ -96,12 +96,12 @@ def compute_and_set_absent_days(doc, method=None):
     employee_id = doc.employee
     start_date = doc.start_date
     end_date = doc.end_date
+    new_absent_days = get_absent_days(employee_id, start_date, end_date)
 
-    if absent_days > 0:
-        absent_days = get_absent_days(employee_id, start_date, end_date)
-        doc.custom_computed_absent_days = absent_days
+    if new_absent_days > 0:
+        doc.custom_computed_absent_days = new_absent_days
         daily_rate = doc.custom_daily_pay
-        absent_days_deduction = absent_days * daily_rate 
+        absent_days_deduction = new_absent_days * daily_rate 
         doc.custom_absent_days_deduction = absent_days_deduction
     else:
         doc.custom_absent_days_deduction = 0
