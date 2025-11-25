@@ -49,7 +49,7 @@ def before_submit_salary_structure_assignment(doc, method):
     payroll_end_date = get_last_day(doc.from_date)  ### instead of using doc.to_date which does not exist
     employee = frappe.get_doc("Employee", doc.employee)
 
-    ### Extract the employee details  and extracting the value from the employee directly
+    ### Extract the employee details  to get the value of ctc & daily rate from the employee directly
     if employee.ctc:
         daily_rate = employee.custom_daily_salary_rate
         doc.custom_daily_rate = daily_rate                
