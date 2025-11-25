@@ -5,8 +5,6 @@ from frappe.utils import getdate, get_first_day, get_last_day
 from frappe.query_builder import DocType
 from frappe.query_builder.functions import Count
 
-
-
 def get_absent_days_sql(employee, start_date, end_date):
     """
     Use SQL to get the number of absent days, parse the employee id, start date and end date
