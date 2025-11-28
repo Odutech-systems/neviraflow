@@ -104,4 +104,4 @@ def compute_and_set_absent_days(doc, method=None):
         absent_days_deduction = new_absent_days * daily_rate 
         doc.custom_absent_days_deduction = absent_days_deduction
     else:
-        doc.custom_absent_days_deduction = 0
+        doc.custom_absent_days_deduction = 0                                                                         

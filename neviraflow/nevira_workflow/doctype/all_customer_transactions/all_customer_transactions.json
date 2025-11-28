@@ -1,0 +1,75 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-11-28 09:52:23.890973",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "posting_date",
+  "voucher_type",
+  "voucher_no",
+  "cheque_reference_no",
+  "debit",
+  "credit",
+  "balance",
+  "account_currency"
+ ],
+ "fields": [
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "voucher_type",
+   "fieldtype": "Data",
+   "label": "Voucher Type"
+  },
+  {
+   "fieldname": "voucher_no",
+   "fieldtype": "Data",
+   "label": "Voucher No"
+  },
+  {
+   "fieldname": "cheque_reference_no",
+   "fieldtype": "Data",
+   "label": "Cheque Reference No"
+  },
+  {
+   "fieldname": "debit",
+   "fieldtype": "Float",
+   "label": "Debit"
+  },
+  {
+   "fieldname": "credit",
+   "fieldtype": "Float",
+   "label": "Credit"
+  },
+  {
+   "fieldname": "balance",
+   "fieldtype": "Float",
+   "label": "Balance"
+  },
+  {
+   "fieldname": "account_currency",
+   "fieldtype": "Data",
+   "label": "Account Currency"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-11-28 10:24:05.260977",
+ "modified_by": "Administrator",
+ "module": "Nevira Workflow",
+ "name": "All Customer Transactions",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
