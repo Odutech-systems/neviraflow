@@ -73,7 +73,8 @@ def before_validate_sales_order(doc, method):
         return
 
     if doc.payment_terms_template == "Cash On Delivery":
-        _validate_cod_backlog(doc)
+        ##_validate_cod_backlog(doc)
+        pass
     elif doc.payment_terms_template == "Advance Payment":
         _validate_advance_payment(doc)
 
