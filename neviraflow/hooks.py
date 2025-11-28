@@ -304,7 +304,7 @@ doctype_js = {
     "Work Order":"public/js/work_order_timer.js",
     "Gate Pass": "public/js/gate_pass.js",
     "Quotation": "public/js/quotation.js",
-    "Sales Order": "public/js/sales_order.js",
+    ##"Sales Order": "public/js/sales_order.js",
     "Sales Invoice": "public/js/sales_invoice.js",
     "Delivery Note": "public/js/delivery_note.js",
     "Purchase Invoice": "public/js/purchase_invoice.js",

@@ -14,6 +14,8 @@ class ConsolidatedCustomerReceivables(Document):
     def before_save(self):
         pass
 
+    def validate_date(self):
+        pass
     def get_accounts_receivable_data(self):
         customer = self.customer_name
         to_date = self.to_date
