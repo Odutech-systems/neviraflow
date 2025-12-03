@@ -3,19 +3,55 @@
 
 import frappe
 from frappe.model.document import Document
-from frappe.utils import today, add_days
+from frappe.utils import getdate
 from erpnext.accounts.report.accounts_receivable.accounts_receivable import execute as ar_execute
 from erpnext.accounts.report.accounts_receivable_summary.accounts_receivable_summary import execute as ar_summary_execute
 from erpnext.accounts.report.general_ledger.general_ledger import execute as gl_execute
 
 
 class ConsolidatedCustomerReceivables(Document):
-## What do I do if I want to define variables such as customer_name from self as global ?
+
+    def validate(self):
+        self.validate_from_to_dates()
+
     def before_save(self):
         pass
 
     def validate_date(self):
-        pass
+        if self.to_date and self.from_date:
+            if getdate(self.from_date) > getdate(self.to_date):
+                frappe.throw("From Date cannot be after To Date")
+
+
+    def fetch_all_legder_transaction(self):
+        """
+        Fetch the general ledger transactions based on the selected from date and to date
+        """
+        filters = {
+            "company": self.company,
+            "from_date": self.from_date,
+            "to_date": self.to_date,
+            "party_type": "Customer",
+            "party": [self.customer],
+            "group_by": "Group by Voucher (Consolidated)",
+            "account_currency": "",
+        }
+        gl_data = gl_execute(filters)
+
+        ### Really need to check what this part of the code does
+        records = gl_data[1] if isinstance(gl_data, tuple) else gl_data
+
+        for row in records:
+            if row.get("party") == self.customer:
+                cheque_ref = ""
+                if row.get("couber_type") == "Payment Entry":
+                    cheque_ref = frappe.db.get_value("Payment Entry", row.get("voucher_no"),"reference_no")
+
+                self.append("all_customer_transactions",{
+                    "posting_date": row.get("posting_date"),
+                    "voucher_type": row.get("voucher_type")
+                })
+
     def get_accounts_receivable_data(self):
         customer = self.customer_name
         to_date = self.to_date
