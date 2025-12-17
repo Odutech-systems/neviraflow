@@ -10,7 +10,6 @@ from erpnext.accounts.report.general_ledger.general_ledger import execute as gl_
 
 
 class ConsolidatedCustomerReceivables(Document):
-
     def validate(self):
         self.validate_from_to_dates()
 
