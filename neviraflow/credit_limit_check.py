@@ -48,7 +48,7 @@ def validate_credit_limit(doc, method=None):
                 frappe.utils.fmt_money(current_order_amount),
                 frappe.utils.fmt_money(projected_total),
                 frappe.utils.fmt_money(current_available_credit),
-                frappe.utils.fmt_monet(projected_total - customer_credit_limit)
+                frappe.utils.fmt_money(projected_total - customer_credit_limit)
             ), title=_("Credit Limit Exceeded"), 
             exc=CreditLimitExceedError,
         )
