@@ -63,8 +63,8 @@ def validate_credit_limit(doc, method=None):
             ).format(
                   doc.customer_name,
                   frappe.utils.fmt_money(customer_credit_limit),
-                  round(credit_utilization_percentage,2),
                   frappe.utils.fmt_money(current_available_credit),
+                  round(credit_utilization_percentage,2),
                   frappe.utils.fmt_money(current_order_amount)
             ),
             title=_("High credit Utilization warning"),
