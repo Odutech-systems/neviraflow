@@ -30,7 +30,7 @@ def validate_credit_limit(doc, method=None):
 
     if projected_total > customer_credit_limit:
         frappe.throw(
-            _("Credit limit Exceeded for customer : {0}<br>br>"
+            _("Credit limit Exceeded for customer : {0}</br></br>"
               "Credit Summary: </br></br>"
               "Credit Limit: {1} </br>"
               "Current Outstanding amount: {2} ({3}% Utilised) </br>"
@@ -38,7 +38,7 @@ def validate_credit_limit(doc, method=None):
               "Projected Total: {5} </br>"
               "Available credit: {6} </br></br>"
               "Credit exceeded by: {7} </br>"
-              "Possible Solutions: <br>"
+              "Possible Solutions: </br>"
               "1. Request credit limit increase or reduce the order amount"
             ).format(
                 frappe.bold(doc.customer_name),
@@ -57,14 +57,18 @@ def validate_credit_limit(doc, method=None):
         frappe.msgprint(
             _("High Credit Utilization for {0} </br>"
               "Credit Limit: {1} </br>"
-              "Current Utilization: {2}% <br>"
+              "Available Credit: {2} </br>"
+              "Current Utilization: {3}% </br>"
+              "This sales order will add: {4}"
             ).format(
                   doc.customer_name,
                   frappe.utils.fmt_money(customer_credit_limit),
-                  round(credit_utilization_percentage,2)
+                  round(credit_utilization_percentage,2),
+                  frappe.utils.fmt_money(current_available_credit),
+                  frappe.utils.fmt_money(current_order_amount)
             ),
             title=_("High credit Utilization warning"),
-            indicator = "yellow"
+            indicator = "orange"
         )
 
 def get_customer_outstanding_amount(customer):
