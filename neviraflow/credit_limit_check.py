@@ -1,6 +1,6 @@
 import frappe
 from frappe import _ 
-from frappe.utils import flt, nowdate
+from frappe.utils import flt
 
 
 class CreditLimitExceedError(frappe.ValidationError):
@@ -15,6 +15,7 @@ def validate_credit_limit(doc, method=None):
     
     if not customer_credit_limit or 0:
         return
+    
     total_outstanding = get_customer_outstanding_amount(doc.customer)
 
     current_order_amount = get_sales_order_amount(doc)
@@ -51,7 +52,7 @@ def validate_credit_limit(doc, method=None):
             ), title=_("Credit Limit Exceeded"), 
             exc=CreditLimitExceedError,
         )
-        
+
     elif credit_utilization_percentage >= 60:
         frappe.msgprint(
             _("High Credit Utilization for {0} </br>"
@@ -65,8 +66,6 @@ def validate_credit_limit(doc, method=None):
             title=_("High credit Utilization warning"),
             indicator = "yellow"
         )
-
-
 
 def get_customer_outstanding_amount(customer):
     """
@@ -90,7 +89,7 @@ def get_customer_outstanding_amount(customer):
 
 def get_customer_credit_limit(customer):
     """
-    FRom the credit limits child table, get the customer's credit limit amount
+    From the credit limit child table, get the customer's credit limit amount
     """
     credit_query = frappe.db.sql("""
                     SELECT  parent, credit_limit 
