@@ -14,13 +14,14 @@ class ConsolidatedCustomerReceivables(Document):
         self.validate_from_to_dates()
 
     def before_save(self):
-        pass
+        email_id, phone_number = frappe.db.get_value('Customer', self.customer,['email_id','mobile_no'])
+        self.email_id = email_id
+        self.phone_number = phone_number
 
     def validate_date(self):
         if self.to_date and self.from_date:
             if getdate(self.from_date) > getdate(self.to_date):
                 frappe.throw("From Date cannot be after To Date")
-
 
     def fetch_all_legder_transaction(self):
         """
