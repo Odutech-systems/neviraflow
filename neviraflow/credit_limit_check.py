@@ -36,10 +36,10 @@ def validate_credit_limit(doc, method=None):
               "Current Outstanding amount: {2} ({3}% Utilised) </br>"
               "This order amount : {4} </br>"
               "Projected Total: {5} </br>"
-              "Available credit: {6} </br></br>"
+              "Available credit: {6} </br>"
               "Credit exceeded by: {7} </br>"
               "Possible Solutions: </br>"
-              "1. Request credit limit increase or reduce the order amount"
+              "<strong>1. Request credit limit increase or reduce the order amount</strong>"
             ).format(
                 frappe.bold(doc.customer_name),
                 frappe.utils.fmt_money(customer_credit_limit),
