@@ -6,6 +6,11 @@ from frappe.utils import flt, nowdate
 class CreditLimitExceedError(frappe.ValidationError):
     pass
 
+
+def validate_credit_limit(doc):
+    pass
+
+
 def get_customer_outstanding_amount(customer):
     """
     From the GL entry, get the total outstanding amount for the customer.
@@ -55,9 +60,9 @@ def check_customer_credit_status(customer):
     outstanding_amount = get_customer_outstanding_amount(customer)
 
     return {
-        "Customer": customer,
-        "Credit Limit": credit_limit,
-        "Current outstanding": outstanding_amount,
-        
+        "customer": customer,
+        "credit_limit": credit_limit,
+        "current_outstanding": outstanding_amount,
+        "credit_utilization_percentage": ((outstanding_amount / credit_limit) * 100) if credit_limit > 0 else 0
     }
 
