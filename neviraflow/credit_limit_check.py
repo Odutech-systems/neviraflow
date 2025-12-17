@@ -67,7 +67,7 @@ def validate_credit_limit(doc, method=None):
                   round(credit_utilization_percentage,2),
                   frappe.utils.fmt_money(current_order_amount)
             ),
-            title=_("High credit Utilization warning"),
+            title=_("High Credit Utilization warning"),
             indicator = "orange"
         )
 
