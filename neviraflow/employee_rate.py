@@ -18,8 +18,6 @@ def validate_employee_ctc(doc, method=None):
     if doc.ctc and flt(doc.ctc) < 0:
         frappe.throw("CTC cannot be negative")
 
-
-
 def update_all_daily_rates():
     """
     Bulk update the daily salary rate for all employees
