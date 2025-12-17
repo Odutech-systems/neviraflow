@@ -18,6 +18,9 @@ def validate_credit_limit(doc, method=None):
     
     total_outstanding = get_customer_outstanding_amount(doc.customer)
 
+    if total_outstanding < 0:
+        return
+
     current_order_amount = get_sales_order_amount(doc)
 
     ## Get the projected total after order is created
