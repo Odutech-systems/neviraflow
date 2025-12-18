@@ -74,9 +74,9 @@ class ConsolidatedCustomerReceivables(Document):
 
                         self.append("all_transactions",{
                             "posting_date":row.get("posting_date"),
-                            "voucher_type":row.get("voucher_type") if row.get("voucher_type") else "",
-                            "voucher_no":row.get("voucher_no") if row.get("voucher_no") else "",
-                            "cheque_reference_no": cheque_ref if cheque_ref else "",
+                            "voucher_type":row.get("voucher_type"),
+                            "voucher_no":row.get("voucher_no"),
+                            "cheque_reference_no": cheque_ref,
                             "debit": flt(row.get("debit")),
                             "credit": flt(row.get("credit")),
                             "balance":flt(row.get("balance")),
