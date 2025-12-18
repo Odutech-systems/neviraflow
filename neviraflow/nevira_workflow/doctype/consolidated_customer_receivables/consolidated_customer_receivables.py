@@ -72,16 +72,16 @@ class ConsolidatedCustomerReceivables(Document):
                         cheque_ref = frappe.db.get_value("Payment Entry",row.get("voucher_no"), "reference_no")
                         currency = frappe.db.get_value("Account",row.get("account"),"account_currency")
 
-                        self.append("all_transactions",{
-                            "posting_date":row.get("posting_date"),
-                            "voucher_type":row.get("voucher_type"),
-                            "voucher_no":row.get("voucher_no"),
-                            "cheque_reference_no": cheque_ref,
-                            "debit": flt(row.get("debit")),
-                            "credit": flt(row.get("credit")),
-                            "balance":flt(row.get("balance")),
-                            "account_currency":currency
-                        })
+                    self.append("all_transactions",{
+                        "posting_date":row.get("posting_date"),
+                        "voucher_type":row.get("voucher_type"),
+                        "voucher_no":row.get("voucher_no"),
+                        "cheque_reference_no": cheque_ref,
+                        "debit": flt(row.get("debit")),
+                        "credit": flt(row.get("credit")),
+                        "balance":flt(row.get("balance")),
+                        "account_currency":currency
+                    })
         except Exception as e:
             frappe.log_error(f"Error encountered in fetching and populating general ledger data: {str(e)}")
             frappe.msgprint(f"Error loading GL Data {str(e)}")
