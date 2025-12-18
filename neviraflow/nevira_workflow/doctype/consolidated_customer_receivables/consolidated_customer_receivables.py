@@ -22,6 +22,7 @@ class ConsolidatedCustomerReceivables(Document):
         #### Populate the tables here
         self.fetch_general_ledger_transactions()
         self.fetch_accounts_receivable_data()
+        self.fetch_accounts_receivable_summary()
 
     def before_save(self):
         email_id, phone_number = frappe.db.get_value('Customer', self.customer,['email_id','mobile_no'])
@@ -126,7 +127,7 @@ class ConsolidatedCustomerReceivables(Document):
             frappe.msgprint(f"Error encountered in fetching accounts receivable data: {str(e)}")
 
 
-    def get_accounts_receivable_summary(self):
+    def fetch_accounts_receivable_summary(self):
         """
         Get the summarised data from the accounts receivable summary and populate the child table
         """
@@ -143,6 +144,7 @@ class ConsolidatedCustomerReceivables(Document):
 
         ### Before populating the child table with data, first clear the child table
         self.ageing_summary = []
+
         try:
             ar_summary_data = ar_summary_execute(filters_)
 
@@ -166,7 +168,8 @@ class ConsolidatedCustomerReceivables(Document):
                         })
 
         except Exception as e:
-            frappe.log_error(f"{str(e)}")
+            frappe.log_error(f" Failed to fetch the accounts receivable summary {str(e)}")
+            frappe.msgprint(f" Failed to fetch and populate the acconts receivable summary {str(e)}")
 
             
 

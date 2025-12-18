@@ -71,12 +71,14 @@
   {
    "fieldname": "email_id",
    "fieldtype": "Data",
-   "label": "Email Id"
+   "label": "Email Id",
+   "read_only": 1
   },
   {
    "fieldname": "phone_number",
    "fieldtype": "Data",
-   "label": "Phone Number"
+   "label": "Phone Number",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_n9ir",
@@ -97,7 +99,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-18 15:06:55.903586",
+ "modified": "2025-12-18 15:08:22.577989",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",
