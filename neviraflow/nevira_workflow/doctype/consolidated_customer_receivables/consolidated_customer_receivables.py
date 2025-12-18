@@ -67,10 +67,10 @@ class ConsolidatedCustomerReceivables(Document):
                 all_transactions_data = all_transactions_list[:-2]
 
                 for row in all_transactions_data:
-                    cheque_ref = ""
-                    if row.get("voucher_type") == "Payment Entry":
-                        cheque_ref = frappe.db.get_value("Payment Entry",row.get("voucher_no"), "reference_no")
-                        currency = frappe.db.get_value("Account",row.get("account"),"account_currency")
+                    cheque_ref = "REF"
+                    #if row.get("voucher_type") == "Payment Entry":
+                    #    cheque_ref = frappe.db.get_value("Payment Entry",row.get("voucher_no"), "reference_no")
+                    #    currency = frappe.db.get_value("Account",row.get("account"),"account_currency")
 
                     self.append("all_transactions",{
                         "posting_date":row.get("posting_date"),
@@ -80,7 +80,7 @@ class ConsolidatedCustomerReceivables(Document):
                         "debit": flt(row.get("debit")),
                         "credit": flt(row.get("credit")),
                         "balance":flt(row.get("balance")),
-                        "account_currency":currency
+                        "account_currency":"KES"
                     })
         except Exception as e:
             frappe.log_error(f"Error encountered in fetching and populating general ledger data: {str(e)}")
