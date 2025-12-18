@@ -160,10 +160,10 @@ class ConsolidatedCustomerReceivables(Document):
                     for row in ar_summary_list:
                         self.append("ageing_summary",{
                             "customer_name": row.get("party_name"),
-                            "invoiced_amount": row.get("invoiced_amount"),
-                            "paid_amount": row.get("paid_amount"),
-                            "credit_note": row.get("credit_note"),
-                            "outstanding_amount": row.get("outstanding"),
+                            "invoiced_amount": flt(row.get("invoiced_amount")),
+                            "paid_amount": flt(row.get("paid_amount")),
+                            "credit_note": flt(row.get("credit_note")),
+                            "outstanding_amount": flt(row.get("outstanding")),
                             "range1": flt(row.get("range1")),
                             "range2": flt(row.get("range2")),
                             "range3": flt(row.get("range3")),
