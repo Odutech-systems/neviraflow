@@ -8,6 +8,7 @@
   "amended_from",
   "from_date",
   "to_date",
+  "company",
   "column_break_n9ir",
   "customer",
   "email_id",
@@ -84,13 +85,19 @@
   {
    "fieldname": "section_break_cpmr",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-17 16:23:02.979953",
+ "modified": "2025-12-18 15:06:55.903586",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",
