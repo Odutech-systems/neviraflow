@@ -18,6 +18,11 @@ class ConsolidatedCustomerReceivables(Document):
         """
         self.validate_dates()
 
+        #### Clear the tables first
+        self.set("all_transactions",[])
+        self.set("unpaid_invoices",[])
+        self.set("ageing_summary",[])
+
 
         #### Populate the tables here
         self.fetch_general_ledger_transactions()
