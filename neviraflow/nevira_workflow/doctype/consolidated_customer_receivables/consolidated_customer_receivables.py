@@ -7,7 +7,7 @@ from frappe.model.document import Document
 from erpnext.accounts.report.accounts_receivable.accounts_receivable import execute as ar_execute
 from erpnext.accounts.report.accounts_receivable_summary.accounts_receivable_summary import execute as ar_summary_execute
 from erpnext.accounts.report.general_ledger.general_ledger import execute as gl_execute
-from frappe.utils import add_days, today, getdate
+from frappe.utils import add_days, today, getdate, flt
 
 
 class ConsolidatedCustomerReceivables(Document):
@@ -21,7 +21,7 @@ class ConsolidatedCustomerReceivables(Document):
 
         #### Populate the tables here
         self.fetch_general_ledger_transactions()
-
+        self.fetch_accounts_receivable_data()
 
     def before_save(self):
         email_id, phone_number = frappe.db.get_value('Customer', self.customer,['email_id','mobile_no'])
@@ -109,11 +109,17 @@ class ConsolidatedCustomerReceivables(Document):
                             "posting_date": row.get("posting_date"),
                             "voucher_type": row.get("voucher_type"),
                             "voucher_no": row.get("voucher_no"),
-                            "due_date": row.get("due_date")
-
+                            "due_date": row.get("due_date") if row.get("due_date") else "",
+                            "invoiced_amount": flt(row.get("invoiced_grand_total")),
+                            "credit_note": flt(row.get("credit_note")),
+                            "paid_amount": flt(row.get("paid")),
+                            "range1": flt(row.get("range1")),
+                            "range2": flt(row.get("range2")),
+                            "range3": flt(row.get("range3")),
+                            "range4": flt(row.get("range4")),
+                            "range5": flt(row.get("range5")),
+                            "outstanding_amount": flt(row.get("outstanding"))
                         })
-                else:
-                    return False
         except Exception as e:
             frappe.log_error(f"Error in fetching the accounts receivables data {str(e)}")
             frappe.msgprint(f"Error encountered in fetching accounts receivable data: {str(e)}")
