@@ -72,9 +72,9 @@ class ConsolidatedCustomerReceivables(Document):
                             "voucher_type":row.get("voucher_type") if row.get("voucher_type") else "",
                             "voucher_no":row.get("voucher_no") if row.get("voucher_no") else "",
                             "cheque_reference_no": cheque_ref if cheque_ref else "",
-                            "debit":row.get("debit"),
-                            "credit if get_unpaid_only:":row.get("credit"),
-                            "balance":row.get("balance"),
+                            "debit": flt(row.get("debit")),
+                            "credit": flt(row.get("credit")),
+                            "balance":flt(row.get("balance")),
                             "account_currency":currency
                         })
         except Exception as e:
