@@ -144,7 +144,27 @@ class ConsolidatedCustomerReceivables(Document):
         ### Before populating the child table with data, first clear the child table
         self.ageing_summary = []
         try:
-            pass
+            ar_summary_data = ar_summary_execute(filters_)
+
+            if ar_summary_data:
+                ar_summary_list = ar_summary_data[1]
+
+                if len(ar_summary_list) > 0:
+                    for row in ar_summary_list:
+                        self.append("ageing_summary",{
+                            "customer_name": row.get("party_name"),
+                            "invoiced_amount": row.get("invoiced_amount"),
+                            "paid_amount": row.get("paid_amount"),
+                            "credit_note": row.get("credit_note"),
+                            "outstanding_amount": row.get("outstanding"),
+                            "range1": flt(row.get("range1")),
+                            "range2": flt(row.get("range2")),
+                            "range3": flt(row.get("range3")),
+                            "range4": flt(row.get("range4")),
+                            "range5": flt(row.get("range5")),
+                            "total_amount_due": flt(row.get("total_due"))
+                        })
+
         except Exception as e:
             frappe.log_error(f"{str(e)}")
 
