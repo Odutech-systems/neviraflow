@@ -48,7 +48,7 @@ class ConsolidatedCustomerReceivables(Document):
         }
         filters_  = frappe._dict(filters)
 
-        ## Clear the child table first
+        ## Clear the child table first before populating it with data
         self.all_customer_transactions = []
 
         ## From the execution of the report we only want to get the data and not the columns
@@ -97,8 +97,9 @@ class ConsolidatedCustomerReceivables(Document):
         }
         filters_  = frappe._dict(filters)
         
-        ### Clear the receivables data table before appending values into it
+        ### Before populating the child table with data, first clear the child table
         self.unpaid_invoices = []
+        
         try:
             receivables_data = ar_execute(filters_)
             if receivables_data:
@@ -126,9 +127,27 @@ class ConsolidatedCustomerReceivables(Document):
 
 
     def get_accounts_receivable_summary(self):
-        pass
+        """
+        Get the summarised data from the accounts receivable summary and populate the child table
+        """
+        filters = {
+            "company": self.company,
+            "report_date": getdate(),
+            "party_type": "Customer",
+            "party":[self.customer],
+            "ageing_based_on": "Due Date",
+            "range": "30, 60, 90, 120",
+            "calculate_ageing_with": "Today Date"
+        }
+        filters_ = frappe._dict(filters)
+
+        ### Before populating the child table with data, first clear the child table
+        self.ageing_summary = []
+        try:
+            pass
+        except Exception as e:
+            frappe.log_error(f"{str(e)}")
+
             
 
-    def get_all_ledger_transctions(self):
-        pass
-	
+
