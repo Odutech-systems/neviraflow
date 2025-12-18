@@ -7,6 +7,7 @@ from frappe.utils import getdate
 from erpnext.accounts.report.accounts_receivable.accounts_receivable import execute as ar_execute
 from erpnext.accounts.report.accounts_receivable_summary.accounts_receivable_summary import execute as ar_summary_execute
 from erpnext.accounts.report.general_ledger.general_ledger import execute as gl_execute
+from frappe.utils import add_days, today
 
 
 class ConsolidatedCustomerReceivables(Document):
@@ -27,30 +28,23 @@ class ConsolidatedCustomerReceivables(Document):
         """
         Fetch the general ledger transactions based on the selected from date and to date
         """
+        from erpnext.accounts.report.general_ledger.general_ledger import execute as gl_execute
         filters = {
             "company": self.company,
             "from_date": self.from_date,
             "to_date": self.to_date,
             "party_type": "Customer",
             "party": [self.customer],
-            "group_by": "Group by Voucher (Consolidated)",
-            "account_currency": "",
+            "group_by": "Group by Voucher (Consolidated)"
         }
-        gl_data = gl_execute(filters)
-
-        ### Really need to check what this part of the code does
-        records = gl_data[1] if isinstance(gl_data, tuple) else gl_data
-
-        for row in records:
-            if row.get("party") == self.customer:
-                cheque_ref = ""
-                if row.get("couber_type") == "Payment Entry":
-                    cheque_ref = frappe.db.get_value("Payment Entry", row.get("voucher_no"),"reference_no")
-
-                self.append("all_customer_transactions",{
-                    "posting_date": row.get("posting_date"),
-                    "voucher_type": row.get("voucher_type")
-                })
+        filters_  = frappe._dict(filters)
+        
+        try:
+            gl_data = gl_execute(filters_)
+            if gl_data and len(gl_data) > 1:
+                pass
+        except:
+            pass
 
     def get_accounts_receivable_data(self):
         customer = self.customer_name

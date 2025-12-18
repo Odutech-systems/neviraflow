@@ -270,10 +270,10 @@ doc_events = {
     "Pick List": {
         #"before_save": "neviraflow.api.handle_pick_list_and_qty_patch"
     },
-    "Fuel Request And Issue": {
-        "validate": "neviraflow.fuel_request.validate",
-        "on_submit": "neviraflow.fuel_request.on_submit"
-    },
+    #"Fuel Request And Issue": {
+    #    "validate": "neviraflow.fuel_request.validate",
+    #    "on_submit": "neviraflow.fuel_request.on_submit"
+    #},
     "Weighbridge Management": {
         "after_insert": "neviraflow.weighbridge.doctype.weighbridge_management.weighbridge_management.auto_submit_if_ready",
         "on_update": "neviraflow.weighbridge.doctype.weighbridge_management.weighbridge_management.auto_submit_if_ready",
