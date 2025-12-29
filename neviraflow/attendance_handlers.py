@@ -27,21 +27,21 @@ def after_insert_action(doc, method = None):
     try:
         if log_in_type == "IN":
 
-            in_time, attendance_date = compute_shift_window(doc)
+            in_time, attendance_date_in = compute_shift_window(doc)
 
-            att = get_attendance(employee_id, attendance_date)
+            att = get_attendance(employee_id, attendance_date_in)
 
             if not att:
-                make_attendance(employee_id, attendance_date, shift_code, status="Present", in_time=in_time)
+                make_attendance(employee_id, attendance_date_in, shift_code, status="Present", in_time=in_time)
             if att:
                 frappe.msgprint("Check in & attendance for today already exists!")
                 pass
             
         ### If the log_in_type is OUT, do not try to make an attendance yet, first try to get if there is an attendance the previous day  with in_time     
         elif log_in_type == "OUT":
-            att = get_in_attendance(employee_id, attendance_date)
+            att = get_in_attendance(employee_id, ts.date())
             
-            out_time, attendance_date = compute_shift_window(doc)
+            out_time, attendance_date_out = compute_shift_window(doc)
 
             if att:
                 att_doc = frappe.get_doc("Attendance",att.name)
@@ -49,7 +49,7 @@ def after_insert_action(doc, method = None):
                 att_doc.save(ignore_permissions = True)
                 frappe.db.commit()
             if not att:
-                att_doc = make_attendance(employee_id, attendance_date, shift_code, status="Present", out_time=out_time)
+                att_doc = make_attendance(employee_id, attendance_date_out, shift_code, status="Present", out_time=out_time)
 
     except Exception as e:
         error_context = {
@@ -57,7 +57,7 @@ def after_insert_action(doc, method = None):
             "employee_name": employee_name,
             "log_in_type": log_in_type,
             "timestamp": ts.isoformat() if ts else None,
-            "attendance_date": attendance_date if 'attendance_date' in locals() else None,
+            "attendance_date": ts.date(),
             "error": str(e),
         }
         frappe.log_error(
