@@ -1,13 +1,13 @@
 from datetime import datetime, date, time, timedelta
 import frappe
-from frappe.utils import get_datetime
+from frappe.utils import get_datetime, add_days
 
 # Shift clock rules (24h)
 SHIFT_CONFIG = {
     "General Shift": (time(8, 0),  time(17, 0)),  # in-window for logs is 08:00–23:00 but attendance end is 17:00
     "SHIFT A":       (time(6, 0),  time(15, 0)),
     "SHIFT B":       (time(14, 0), time(23, 0)),
-    "SHIFT C":       (time(23, 0), time(7, 0)),   # crosses midnight
+    "SHIFT C":       (time(23, 0), time(9, 0)),   # crosses midnight
 }
 
 
@@ -22,7 +22,8 @@ def after_insert_action(doc, method = None):
     log_in_type = doc.log_type
     ts = get_datetime(doc.time)
 
-    shift_code = doc.shift
+    shift_code = doc.shift 
+
     shift_start_dt, shift_end_dt, attendance_dt = compute_shift_window(ts, shift_code)
 
     ### Fetch or create attendance per log type
@@ -94,32 +95,25 @@ def get_shift_for_employee(employee: str, when_dt: datetime) -> str | None:
         return "General Shift"
 
 
-def compute_shift_window(ts:datetime, shift_code=None):
+def compute_shift_window(doc, method=None):
     """
-    Return the shift_start_dt, shift_end_dt, attendance_date for the checkin timestamp and shift.
-    Shift C spans 23:00 -> 07:00 next day and is assigned to the previous day if time is between 00:00 - 06:59
-    """
-    from datetime import datetime, time, timedelta, date
-    SHIFT_CONFIG = {
-        "General Shift": (time(8, 0),  time(17, 0)),  # in-window for logs is 08:00–23:00 but attendance end is 17:00
-        "SHIFT A":       (time(6, 0),  time(15, 0)),
-        "SHIFT B":       (time(14, 0), time(23, 0)),
-        "SHIFT C":       (time(23, 0), time(7, 0)),   # crosses midnight
-    }
 
-    start_dt, end_dt, attendance_dt = None, None, None
+    After some review, I have decided to abandon the whole idea of having date and time determined by the shift configurations.
+    Rather, I will just process the attendance and checkin based on the time and dates I have. This is because of shift C, which starts
+    at 22.00 and ends from 7.00 the next day, therefore any checkout from 
+
+    compute_shift_window(ts:datetime, shift_code=None):
+    Args: 
+        ts (datetime): the checkin date-time on the Checkin doctype
+        shift_code (str): the employee's shift code
+
+    Returns: 
+        the attendance_date
+        the attendance_in_time
+        attendance_out_time
+
     
-    if shift_code:
-        s_start, s_end = SHIFT_CONFIG[shift_code]
-        if shift_code == "SHIFT C":
-            if ts.time() >= time(22,0):
-                start_dt = datetime.combine(ts.date(), time(23,0))
-                end_dt = datetime.combine(ts.date()+ timedelta(days=1), time(7,0))
-                attendance_dt = ts.date()
-            elif ts.time() < time(8,0):
-                start_dt = datetime.combine(ts.date() - timedelta(days=1), time(23,0))
-                end_dt = datetime.combine(ts.date(), time(7,0))
-                attendance_dt = ts.date() - timedelta(days=1)
+
         elif shift_code == "General Shift":
             start_dt = datetime.combine(ts.date(), s_start)
             end_dt = datetime.combine(ts.date(), s_end)
@@ -128,19 +122,33 @@ def compute_shift_window(ts:datetime, shift_code=None):
             start_dt = datetime.combine(ts.date(), s_start)
             end_dt = datetime.combine(ts.date(), s_end)
             attendance_dt = ts.date()
-        
-        return start_dt, end_dt, attendance_dt
-    else:
-        if ts.time() >= time(7,0) and ts.time() <= time(23,59):
-            start_dt = datetime.combine(ts.date(), time(8,0))
-            end_dt = datetime.combine(ts.date(), time(17,0))
-            attendance_dt = ts.date()
-        else:
-            start_dt = datetime.combine(ts.date() - timedelta(days=1), time(23,0))
-            end_dt = datetime.combine(ts.date(), time(6,0))
-            attendance_dt = ts.date() - timedelta(days=1)
-        return start_dt, end_dt, attendance_dt
+    """
+    
+    start_dt, end_dt, attendance_dt = None, None, None
 
+    in_time, out_time, attendance_date = None, None, None
+    ts = get_datetime(doc.time)
+
+    if doc.log_type == "IN":
+        if ts.time() >= time(22,0):
+            in_time = datetime.combine(ts.date(), ts.time()) ## get the actual date time as the in_time
+            attendance_date = ts.date() ## get the actual attendance date
+        
+        elif ts.time() >= time(5,0):
+            in_time = datetime.combine(ts.date(), ts.time())
+            attendance_date = ts.date()
+        return in_time, attendance_date
+    
+    elif doc.log_type == "OUT":
+        if (ts.time > time(1,0)) and (ts.time < time(9,0)):
+            out_time = datetime.combine(ts.date() + timedelta(days=1), ts.time()) ##the attendance date is still the same but then the out datetime is the next day
+            attendance_date = ts.date()
+        else:
+            out_time = ts
+            attendance_date = ts.date() ## Just the date as it is without adding a day
+        return out_time, attendance_date
+
+    
 def get_attendance(employee: str, attendance_date: date):
     name = frappe.db.exists("Attendance", {"employee":employee, "attendance_date": attendance_date, "docstatus":("!=",2)})
     return frappe.get_doc("Attendance", name) if name else None
