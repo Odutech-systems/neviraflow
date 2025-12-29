@@ -66,30 +66,6 @@ def after_insert_action(doc, method = None):
         )
         raise
 
-def get_shift_for_employee(employee: str, when_dt: datetime) -> str | None:
-    """
-    Find the most recent shift that the employee has neem assigned to, if no
-    shift is found then use the General Shift
-    """
-
-    the_day = when_dt.date()
-    row = frappe.db.sql(""" 
-            SELECT sa.shift_type 
-            FROM `tabShift Assignment` AS sa JOIN (
-                    SELECT employee, MAX(creation) AS maxc 
-                    FROM `tabShift Assignment` WHERE status = 'Active' GROUP BY employee)
-                    x ON x.employee = sa.employee 
-            AND x.maxc = sa.creation
-            WHERE sa.employee=%s
-            AND (sa.start_date IS NULL OR sa.start_date <= %s)
-            AND (sa.end_date IS NULL OR sa.end_date >= %s)
-            LIMIT 1
-            """, (employee, the_day, the_day), as_dict=True)
-    if row:
-        return row[0]["shift_type"]
-    else:
-        return "General Shift"
-
 
 def compute_shift_window(doc, method=None):
     """
@@ -165,3 +141,28 @@ def make_attendance(employee_id: str, attendance_date: date, shift_code: str, st
     attendance_doc.insert(ignore_permissions=True, ignore_if_duplicate=True)
     attendance_doc.submit()
     frappe.db.commit()
+
+
+def get_shift_for_employee(employee: str, when_dt: datetime) -> str | None:
+    """
+    Find the most recent shift that the employee has neem assigned to, if no
+    shift is found then use the General Shift
+    """
+
+    the_day = when_dt.date()
+    row = frappe.db.sql(""" 
+            SELECT sa.shift_type 
+            FROM `tabShift Assignment` AS sa JOIN (
+                    SELECT employee, MAX(creation) AS maxc 
+                    FROM `tabShift Assignment` WHERE status = 'Active' GROUP BY employee)
+                    x ON x.employee = sa.employee 
+            AND x.maxc = sa.creation
+            WHERE sa.employee=%s
+            AND (sa.start_date IS NULL OR sa.start_date <= %s)
+            AND (sa.end_date IS NULL OR sa.end_date >= %s)
+            LIMIT 1
+            """, (employee, the_day, the_day), as_dict=True)
+    if row:
+        return row[0]["shift_type"]
+    else:
+        return "General Shift"
