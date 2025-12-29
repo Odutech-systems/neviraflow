@@ -130,11 +130,12 @@ def compute_shift_window(doc, method=None):
     ts = get_datetime(doc.time)
 
     if doc.log_type == "IN":
-        if ts.time() >= time(22,0):
+        if ts.time() >= time(20,0):
             in_time = datetime.combine(ts.date(), ts.time()) ## get the actual date time as the in_time
             attendance_date = ts.date() ## get the actual attendance date
         
-        elif ts.time() >= time(5,0):
+        elif (ts.time() >= time(5,0)) and (ts.time() < time(20,0)):
+            ## This category includes shift A, shift B and General Shift
             in_time = datetime.combine(ts.date(), ts.time())
             attendance_date = ts.date()
         return in_time, attendance_date
