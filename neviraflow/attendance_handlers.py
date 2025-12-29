@@ -113,9 +113,8 @@ def get_attendance(employee: str, attendance_date: date):
     name = frappe.db.exists("Attendance", 
                             {"employee":employee, 
                             "attendance_date": attendance_date, 
-                            "docstatus":("!=",2), 
-                            "in_time": ["is","set"]}
-                            )
+                            "docstatus":("!=",2)})
+    
     return frappe.get_doc("Attendance", name) if name else None
 
 def get_in_attendance(employee: str, attendance_date: date):
