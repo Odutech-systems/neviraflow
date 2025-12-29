@@ -104,24 +104,11 @@ def compute_shift_window(doc, method=None):
         shift_code (str): the employee's shift code
 
     Returns: 
-        the attendance_date
-        the attendance_in_time
-        attendance_out_time
-
-    
-
-        elif shift_code == "General Shift":
-            start_dt = datetime.combine(ts.date(), s_start)
-            end_dt = datetime.combine(ts.date(), s_end)
-            attendance_dt = ts.date()
-        else:
-            start_dt = datetime.combine(ts.date(), s_start)
-            end_dt = datetime.combine(ts.date(), s_end)
-            attendance_dt = ts.date()
+        attendance_date : attendance date (date)
+        attendance_in_time : in_time (datetime)
+        attendance_out_time : out_time (datetime)
     """
     
-    start_dt, end_dt, attendance_dt = None, None, None
-
     in_time, out_time, attendance_date = None, None, None
     ts = get_datetime(doc.time)
 
