@@ -10,7 +10,6 @@ SHIFT_CONFIG = {
     "SHIFT C":       (time(23, 0), time(9, 0)),   # crosses midnight
 }
 
-
 def after_insert_action(doc, method = None):
     """
     Runs after an employee checkin is inserted.
