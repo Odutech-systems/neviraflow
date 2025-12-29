@@ -100,7 +100,7 @@ def compute_shift_window(doc, method=None):
         return in_time, attendance_date
     
     elif doc.log_type == "OUT":
-        if (ts.time > time(1,0)) and (ts.time < time(9,0)):
+        if (ts.time() > time(1,0)) and (ts.time() < time(9,0)):
             out_time = datetime.combine(ts.date() + timedelta(days=1), ts.time()) ##the attendance date is still the same but then the out datetime is the next day
             attendance_date = ts.date()
         else:
