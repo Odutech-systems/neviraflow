@@ -19,8 +19,6 @@ def get_absent_days_sql(employee, start_date, end_date):
     return result[0]['absent_days'] if result else 0
 
 def get_worked_days_on_holidays(employee):
-    from frappe.query_builder import DocType
-    from frappe.query_builder.functions import Count
     worked_days_sql = """
                         SELECT
                             employee,
@@ -101,10 +99,18 @@ def before_submit_salary_structure_assignment(doc, method):
     ### Compute the absent days deductions
     doc.custom_absent_days_deduction = daily_rate * absent_days
 
+    ## worked_days on holidays
+    overtime_days = get_worked_days_on_holidays(doc.employee)
+    doc.custom_overtime_amount = flt(overtime_days * daily_rate)
+    doc.custom_holiday_days_worked = overtime_days
+
+
+    overtime_amount = doc.custom_overtime_amount or 0
+
     if doc.custom_is_prorated_salary:
-        base_amount = doc.custom_prorated_amount - doc.custom_absent_days_deduction
+        base_amount = doc.custom_prorated_amount  + overtime_amount - doc.custom_absent_days_deduction
     else:
-        base_amount = employee.ctc - doc.custom_absent_days_deduction
+        base_amount = employee.ctc + overtime_amount - doc.custom_absent_days_deduction
     doc.base = base_amount
 
 
