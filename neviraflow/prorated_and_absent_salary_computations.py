@@ -18,6 +18,23 @@ def get_absent_days_sql(employee, start_date, end_date):
     result = frappe.db.sql(absent_sql,(employee, start_date, end_date), as_dict=True)
     return result[0]['absent_days'] if result else 0
 
+def get_worked_days_on_holidays(employee):
+    from frappe.query_builder import DocType
+    from frappe.query_builder.functions import Count
+    worked_days_sql = """
+                        SELECT
+                            employee,
+                            COUNT(name) AS worked_days
+                            FROM
+                            `tabAttendance`
+                            WHERE
+                            docstatus = 1
+                            AND attendance_date IN ('2025-12-12', '2025-12-25', '2025-12-26')
+                            AND employee = %s
+                            GROUP BY
+                            employee"""
+    res = frappe.db.sql(worked_days_sql, (employee), as_dict=True)
+    return res[0]['worked_days'] if res else 0
 
 
 def get_absent_days(employee, start_date, end_date):
