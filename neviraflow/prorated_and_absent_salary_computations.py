@@ -120,6 +120,9 @@ def compute_and_set_absent_days(doc, method=None):
     start_date = doc.start_date
     end_date = doc.end_date
     new_absent_days = get_absent_days(employee_id, start_date, end_date)
+    overtime_days = get_worked_days_on_holidays(doc.employee)
+    
+
 
     if new_absent_days > 0:
         doc.custom_computed_absent_days = new_absent_days
@@ -127,4 +130,9 @@ def compute_and_set_absent_days(doc, method=None):
         absent_days_deduction = new_absent_days * daily_rate 
         doc.custom_absent_days_deduction = absent_days_deduction
     else:
-        doc.custom_absent_days_deduction = 0                                                                         
+        doc.custom_absent_days_deduction = 0
+
+    if overtime_days > 0:
+        doc.custom_overtime_amount_addition = flt(overtime_days * doc.custom_daily_pay)
+    else:
+        doc.custom_overtime_amount_addition = 0
