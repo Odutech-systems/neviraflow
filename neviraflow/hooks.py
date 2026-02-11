@@ -294,7 +294,11 @@ doc_events = {
         "before_save": "neviraflow.prorated_and_absent_salary_computations.before_submit_salary_structure_assignment"
     },
     "Salary Slip":{
-        "before_save": "neviraflow.prorated_and_absent_salary_computations.compute_and_set_absent_days"
+        "before_save": [
+            "neviraflow.prorated_and_absent_salary_computations.compute_and_set_absent_days",
+	    "neviraflow.prorated_and_absent_salary_computations.calculate_attendance_ratio",
+        ],
+        "before_submit": "neviraflow.prorated_and_absent_salary_computations.block_submission_if_low_attendance"
     },
 }
 

@@ -37,7 +37,7 @@ def get_available_delivery_notes(doctype, txt, searchfield, start, page_len, fil
         SELECT dn.name, dn.posting_date
         FROM `tabDelivery Note` dn
         WHERE dn.customer = %s
-        AND dn.docstatus = 1
+        AND dn.docstatus != 2
         AND dn.name NOT IN (
             SELECT customer_delivery_note FROM `tabGate Pass`
             WHERE docstatus = 1 AND customer_delivery_note IS NOT NULL

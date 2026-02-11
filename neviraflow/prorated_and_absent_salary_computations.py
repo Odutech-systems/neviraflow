@@ -1,7 +1,7 @@
 from frappe.utils import datetime, flt
 import frappe
 import json
-from frappe.utils import getdate, get_first_day, get_last_day
+from frappe.utils import getdate, get_first_day, get_last_day, date_diff
 from frappe.query_builder import DocType
 from frappe.query_builder.functions import Count
 
@@ -27,7 +27,8 @@ def get_worked_days_on_holidays(employee):
                             `tabAttendance`
                             WHERE
                             docstatus = 1
-                            AND attendance_date IN ('2025-12-12', '2025-12-25', '2025-12-26')
+                            AND attendance_date = '2026-01-01'
+			    AND status = 'Present'
                             AND employee = %s
                             GROUP BY
                             employee"""
@@ -136,3 +137,65 @@ def compute_and_set_absent_days(doc, method=None):
         doc.custom_overtime_amount_addition = flt(overtime_days * doc.custom_daily_pay)
     else:
         doc.custom_overtime_amount_addition = 0
+
+
+
+##  Custom function to check the attendance_ratio for the employee within that month and not submit the salary slip if the ratio is below 75%
+
+def calculate_attendance_ratio(doc, method):
+    """
+    Computes and stores marked attendance ratio on Salary Slip during validation.
+    """
+
+    if not doc.employee or not doc.start_date or not doc.end_date:
+        return
+
+    employee = frappe.get_doc("Employee", doc.employee)
+
+    start_date = getdate(doc.start_date)
+    end_date = getdate(doc.end_date)
+    joining_date = getdate(employee.date_of_joining)
+
+    # Determine total days to be marked
+    if joining_date <= start_date:
+        total_days = date_diff(end_date, start_date) + 1
+        adjusted_days = total_days - 6
+    else:
+        total_days = date_diff(end_date, joining_date) + 1
+        adjusted_days = total_days - 3
+
+    # Guard against invalid day counts
+    if adjusted_days <= 0:
+        doc.custom_marked_attendance_ratio = 0
+        return
+    
+    # Count marked attendance
+    marked_days = frappe.db.count(
+        "Attendance",
+        {
+            "employee": doc.employee,
+            "attendance_date": ["between", [start_date, end_date]],
+            "docstatus": 1
+        }
+    )
+
+    # Compute attendance ratio
+    attendance_ratio = (marked_days / adjusted_days) * 100
+    doc.custom_marked_attendance_ratio = round(attendance_ratio, 2)
+
+
+def block_submission_if_low_attendance(doc, method):
+    """
+    Prevents submission of Salary Slip if attendance ratio is below 75%.
+    """
+
+    if doc.custom_marked_attendance_ratio > 40:
+        return
+
+    if doc.custom_marked_attendance_ratio < 40:
+        frappe.throw(
+            f"Attendance Ratio is {doc.custom_marked_attendance_ratio:.2f}%. "
+            "Salary Slip cannot be submitted if attendance ratio is below 75%. " \
+            "Employee has an issue with their attendance within the month, which need to be investigated and marked before submitting the salary slip.!"
+        )
+
