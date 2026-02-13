@@ -34,6 +34,7 @@ def after_insert_action(doc, method = None):
             if not att:
                 make_attendance(employee_id, attendance_date_in, status="Present", in_time=in_time, shift_code=shift_code)
             if att:
+                ## call the update function here
                 frappe.msgprint("Check in & attendance for today already exists!")
                 pass
             
@@ -95,7 +96,7 @@ def compute_shift_window(doc, method=None):
         if ts.time() >= time(20,0): ## why did I put >= here? I think if someone checks in past 20.00 it should part of shift C
             in_time = datetime.combine(ts.date(), ts.time()) ## get the actual date time as the in_time
             attendance_date = ts.date() ## get the actual attendance date
-        
+       
         elif (ts.time() >= time(2,0)) and (ts.time() < time(20,0)):  
             # But is someone checks in between 02.00 and 20.00 then  it should be part of shift A, shift B or General Shift,
             # drivers for example have a tendecy to checkin very early in the morning
@@ -124,6 +125,16 @@ def compute_shift_window(doc, method=None):
 
 
 def get_attendance(employee: str, attendance_date: date):
+    
+    id = frappe.db.sql("""
+                        SELECT name,
+                        employee,
+                        attendance_date, 
+                        status
+                        FROM `tabAttendance` WHERE docstatus != 2
+                        AND attendance_date = %s
+                        """, (attendance_date), as_dict=True)
+                        
     name = frappe.db.exists("Attendance", 
                             {"employee":employee, 
                             "attendance_date": attendance_date, 
@@ -135,9 +146,7 @@ def get_in_attendance(employee: str, attendance_date: date):
     name = frappe.db.exists("Attendance", {
         "employee": employee,
         "attendance_date": attendance_date,
-        "docstatus": ["!=",2],
-        "in_time":["is","set"],
-        "out_time":["is","not set"]  ### This passes the match, because we are looking for an attendance that has in_time set but out_time is not set
+        "docstatus": ["!=",2]
     })
     return frappe.get_doc("Attendance",name) if name else None
 
@@ -156,6 +165,27 @@ def make_attendance(employee_id: str, attendance_date: date, status: str, in_tim
     attendance_doc.insert(ignore_permissions=True, ignore_if_duplicate=True)
     attendance_doc.submit()
     frappe.db.commit()
+
+
+def update_attendance_time(attendance, log_type, event_time):
+    """
+    This function will update the existing attendance, whether its IN/OUT,
+    specifically the in_time and out_time
+    """
+    changed = False
+
+    if log_type == "IN":
+        if not attendance.in_time:
+            attendance.in_time = event_time
+            changed = True
+    elif log_type == "OUT":
+        if not attendance.out_time or event_time > attendance.out_time:
+            attendance.out_time = event_time
+            changed = True
+    if changed:
+        attendance.save(ignore_permissions=True)
+        frappe.db.commit()
+
 
 
 def get_shift_for_employee(employee: str, when_dt: datetime) -> str | None:
