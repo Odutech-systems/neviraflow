@@ -46,7 +46,7 @@ def after_insert_action(doc, method = None):
             if att:
                 update_attendance_time(att,log_in_type, out_time)
             if not att:
-                att_doc = make_attendance(employee_id, attendance_date_out, status="Present", out_time=out_time, shift_code=shift_code)
+                att_doc = make_attendance(employee_id, attendance_date_out, status="Present", in_time=out_time, shift_code=shift_code)
 
     except Exception as e:
         error_context = {
