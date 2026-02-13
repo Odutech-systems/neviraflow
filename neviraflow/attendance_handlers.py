@@ -20,7 +20,6 @@ def after_insert_action(doc, method = None):
     employee_name = doc.employee_name
     log_in_type = doc.log_type
     ts = get_datetime(doc.time)
-
     shift_code = doc.shift or None
 
     ### Fetch or create attendance per log type
@@ -34,9 +33,7 @@ def after_insert_action(doc, method = None):
             if not att:
                 make_attendance(employee_id, attendance_date_in, status="Present", in_time=in_time, shift_code=shift_code)
             if att:
-                ## call the update function here
-                frappe.msgprint("Check in & attendance for today already exists!")
-                pass
+                update_attendance_time(att,log_in_type,in_time)
             
         ### If the log_in_type is OUT, do not try to make an attendance yet, first try to get if there is an attendance the previous day or the current day based on the out time
         # This logic is defined in the compute_shift_window function   
@@ -44,15 +41,10 @@ def after_insert_action(doc, method = None):
             
             out_time, attendance_date_out = compute_shift_window(doc)
 
-            # att = get_in_attendance(employee_id, ts.date())
-
-            att = get_in_attendance(employee_id, attendance_date_out)  ## Try to get the attendance based on the computed attendance date
+            att = get_attendance(employee_id, attendance_date_out)  ## Try to get the attendance based on the computed attendance date
 
             if att:
-                att_doc = frappe.get_doc("Attendance",att.name)
-                att_doc.out_time = out_time
-                att_doc.save(ignore_permissions = True)
-                frappe.db.commit()
+                update_attendance_time(att,log_in_type, out_time)
             if not att:
                 att_doc = make_attendance(employee_id, attendance_date_out, status="Present", out_time=out_time, shift_code=shift_code)
 
@@ -67,18 +59,14 @@ def after_insert_action(doc, method = None):
         }
         frappe.log_error(
             message=f"Error in after_insert_action\n\nDetails:\n{frappe.as_json(error_context, indent=2)}\n\nTraceback:\n{frappe.get_traceback()}",
-            title="Attendance Entry Failed"
+            title="Attendance Processing Failed"
         )
         raise
 
 
 def compute_shift_window(doc, method=None):
     """
-
-    After some review, I have decided to abandon the whole idea of having date and time determined by the shift configurations.
-    Rather, I will just process the attendance and checkin based on the time and dates I have. This is because of shift C, which starts
-    at 22.00 and ends from 7.00 the next day, therefore any checkout from 00.00 to 07.00 will have to be considered as part of the previous day attendance.
-
+    Computes the shift window based on the check-in time
     Args: 
         ts (datetime): the checkin date-time on the Checkin doctype
         shift_code (str): the employee's shift code
@@ -93,31 +81,14 @@ def compute_shift_window(doc, method=None):
     ts = get_datetime(doc.time)
 
     if doc.log_type == "IN":
-        if ts.time() >= time(20,0): ## why did I put >= here? I think if someone checks in past 20.00 it should part of shift C
-            in_time = datetime.combine(ts.date(), ts.time()) ## get the actual date time as the in_time
-            attendance_date = ts.date() ## get the actual attendance date
-       
-        elif (ts.time() >= time(2,0)) and (ts.time() < time(20,0)):  
-            # But is someone checks in between 02.00 and 20.00 then  it should be part of shift A, shift B or General Shift,
-            # drivers for example have a tendecy to checkin very early in the morning
-            
-            in_time = datetime.combine(ts.date(), ts.time())
-            attendance_date = ts.date()
+        attendance_date = ts.date()
+        in_time = datetime.combine(ts.date(), ts.time())
         return in_time, attendance_date
-    
-    elif doc.log_type == "OUT":
-        if (ts.time() > time(2,0)) and (ts.time() < time(10,0)): 
-            # The question remains to be: what is the appropriate overlap between shift C and shift A ?
-            # If someone checks out between 2 am and 9 am, basically that means that they are checking out from the previous day's shift. 
-            # So it means that the attendance date is the current date, but we should look for the previous day's attendance record and update the out time of that attendance record
-            # out_time = datetime.combine(ts.date() + timedelta(days=1), ts.time()) ##the attendance date is still the same but then the out datetime is the next day
-            
+        
+    if doc.log_type == "OUT":
+        if (ts.time() > time(0,0)) and (ts.time() < time(10,0)): 
             out_time = datetime.combine(ts.date(), ts.time()) ## Keep the out time as it is
-            
-            # attendance_date = ts.date()
-
-            ## Another idea here is to subract one day from the attendance date, so that the out time is still the same but the attendance date is the previous day
-            attendance_date = ts.date() - timedelta(days=1) ## This means that we are updating the previous day's attendance record but will update the out_time to the current out time
+            attendance_date = ts.date() - timedelta(days=1) ## This means that check-out after midnight refer to the previous day's attendance
         else:
             out_time = ts
             attendance_date = ts.date() ## Just the date as it is without adding a day
@@ -125,30 +96,15 @@ def compute_shift_window(doc, method=None):
 
 
 def get_attendance(employee: str, attendance_date: date):
-    
-    id = frappe.db.sql("""
-                        SELECT name,
-                        employee,
-                        attendance_date, 
-                        status
-                        FROM `tabAttendance` WHERE docstatus != 2
-                        AND attendance_date = %s
-                        """, (attendance_date), as_dict=True)
-                        
+    """
+    This function will get the attendance record for an employee on the specified date.
+    """                     
     name = frappe.db.exists("Attendance", 
                             {"employee":employee, 
                             "attendance_date": attendance_date, 
                             "docstatus":("!=",2)})
     
     return frappe.get_doc("Attendance", name) if name else None
-
-def get_in_attendance(employee: str, attendance_date: date):
-    name = frappe.db.exists("Attendance", {
-        "employee": employee,
-        "attendance_date": attendance_date,
-        "docstatus": ["!=",2]
-    })
-    return frappe.get_doc("Attendance",name) if name else None
 
 
 def make_attendance(employee_id: str, attendance_date: date, status: str, in_time = None, out_time=None, shift_code=None):
@@ -166,6 +122,7 @@ def make_attendance(employee_id: str, attendance_date: date, status: str, in_tim
     attendance_doc.submit()
     frappe.db.commit()
 
+    return attendance_doc
 
 def update_attendance_time(attendance, log_type, event_time):
     """
