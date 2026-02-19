@@ -1,6 +1,7 @@
 from datetime import datetime, date, time, timedelta
 import frappe
-from frappe.utils import get_datetime, add_days
+from frappe.utils import get_datetime, add_days, date_diff, time_diff_in_hours, getdate
+
 
 # Shift clock rules (24h)
 SHIFT_CONFIG = {
@@ -142,6 +143,27 @@ def update_attendance_time(attendance, log_type, event_time):
     if changed:
         attendance.save(ignore_permissions=True)
         frappe.db.commit()
+
+
+def evaluate_and_infer_logtype(doc, method=None):
+    employee = doc.employee
+    previous_time, previous_log_type = get_previous_logtype_and_time(employee)
+    
+
+    current_date = getdate(doc.time)
+    last_checkin_date = getdate(previous_time)
+
+    time_difference_hours = time_diff_in_hours(doc.time, previous_time)
+    days_difference = date_diff(current_date, last_checkin_date)
+
+    current_log_type = ""
+    
+    if previous_log_type == "IN":
+        if current_date == last_checkin_date:
+            current_log_type = "OUT"
+        
+    if previous_log_type == "OUT":
+
 
 
 
