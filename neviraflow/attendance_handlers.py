@@ -148,7 +148,7 @@ def update_attendance_time(attendance, log_type, event_time):
 def evaluate_and_infer_logtype(doc, method=None):
     employee = doc.employee
     previous_time, previous_log_type = get_previous_logtype_and_time(employee)
-    
+
 
     current_date = getdate(doc.time)
     last_checkin_date = getdate(previous_time)
@@ -165,21 +165,20 @@ def evaluate_and_infer_logtype(doc, method=None):
         if days_difference == 1 and time_difference_hours <= 9:
             current_log_type = "OUT"
 
-    if previous_log_type == "OUT":
+    elif previous_log_type == "OUT":
         if days_difference ==1 and time_difference_hours <= 16:
             current_log_type = "IN"
         if current_date == last_checkin_date and time_difference_hours >= 10:
             current_log_type = "OUT"
-        
-    
+    else:
+        current_log_type = "IN"
 
-
-
+    doc.log_type = current_log_type
 
 
 def get_previous_logtype_and_time(employee_id):
     """
-
+    Get the previous employee's log type
     """
     previous_attendance_query = frappe.db.sql("""
                                 SELECT 
