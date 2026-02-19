@@ -143,6 +143,21 @@ def update_attendance_time(attendance, log_type, event_time):
         attendance.save(ignore_permissions=True)
         frappe.db.commit()
 
+def get_previous_logtype_and_time(employee_id):
+    previous_attendance_query = frappe.db.sql("""
+                                SELECT 
+                                    employee, 
+                                    employee_name, log_type,time FROM `tabEmployee Checkin`
+                                    WHERE employee = %s ORDER BY time DESC LIMIT 1      
+                                """,(employee_id), as_dict=True)
+    if previous_attendance_query:
+        previous_log_type = previous_attendance_query[0]["log_type"]
+        previous_timestamp = previous_attendance_query[0]["time"]
+    return previous_log_type, previous_timestamp
+
+
+
+
 
 
 def get_shift_for_employee(employee: str, when_dt: datetime) -> str | None:
