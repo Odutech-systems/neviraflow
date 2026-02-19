@@ -157,12 +157,21 @@ def evaluate_and_infer_logtype(doc, method=None):
     days_difference = date_diff(current_date, last_checkin_date)
 
     current_log_type = ""
-    
+
     if previous_log_type == "IN":
         if current_date == last_checkin_date:
             current_log_type = "OUT"
-        
+
+        if days_difference == 1 and time_difference_hours <= 9:
+            current_log_type = "OUT"
+
     if previous_log_type == "OUT":
+        if days_difference ==1 and time_difference_hours <= 16:
+            current_log_type = "IN"
+        if current_date == last_checkin_date and time_difference_hours >= 10:
+            current_log_type = "OUT"
+        
+    
 
 
 
