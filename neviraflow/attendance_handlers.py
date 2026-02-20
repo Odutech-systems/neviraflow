@@ -143,6 +143,8 @@ def update_attendance_time(attendance, log_type, event_time):
     if changed:
         attendance.save(ignore_permissions=True)
         frappe.db.commit()
+
+
 def evaluate_and_infer_logtype(doc, method=None):
     employee = doc.employee
     previous_time, previous_log_type = get_previous_logtype_and_time(employee)
