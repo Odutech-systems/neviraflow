@@ -165,15 +165,22 @@ def evaluate_and_infer_logtype(doc, method=None):
         if current_date == last_checkin_date:
             inferred_log_type = "OUT"
 
-        elif (days_difference == 1) and (time_difference_hours <= 9):
+        elif (days_difference == 1) and (time_difference_hours <= 16): ## Best case is that in Shift C, someone has until 8am to checkout
             inferred_log_type = "OUT"
+
+
+        elif (days_difference == 1) and (time_difference_hours >= 16): ### Some one forgot to checkout the previous day hence above 16hrs, so this considered as a new checkin
+            inferred_log_type = "IN"
+
         elif days_difference > 1:
             inferred_log_type = "IN"
 
     elif previous_log_type == "OUT":
         if (days_difference == 1) and (time_difference_hours <= 18):
             inferred_log_type = "IN"
-        elif (current_date == last_checkin_date) and (time_difference_hours >= 10):
+        elif (current_date == last_checkin_date): #and (time_difference_hours >= 10)
+            inferred_log_type = "IN"
+        elif days_difference > 1:
             inferred_log_type = "IN"
 
     else:
