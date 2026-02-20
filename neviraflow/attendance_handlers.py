@@ -147,26 +147,28 @@ def update_attendance_time(attendance, log_type, event_time):
 
 def evaluate_and_infer_logtype(doc, method=None):
     employee = doc.employee
-    previous_time, previous_log_type = get_previous_logtype_and_time(employee)
+    previous_log_type, previous_log_time = get_previous_logtype_and_time(employee)
 
 
     current_date = getdate(doc.time)
-    last_checkin_date = getdate(previous_time)
+    last_checkin_date = getdate(previous_log_time)
 
-    time_difference_hours = time_diff_in_hours(doc.time, previous_time)
+    frappe.msgprint(f"Previous log time: {last_checkin_date}")
+
+    time_difference_hours = time_diff_in_hours(doc.time, previous_log_time)
     days_difference = date_diff(current_date, last_checkin_date)
 
     if previous_log_type == "IN":
         if current_date == last_checkin_date:
             current_log_type = "OUT"
 
-        if days_difference == 1 and time_difference_hours <= 9:
+        if (days_difference == 1) and (time_difference_hours <= 9):
             current_log_type = "OUT"
 
     elif previous_log_type == "OUT":
-        if days_difference ==1 and time_difference_hours <= 16:
+        if (days_difference ==1) and (time_difference_hours <= 16):
             current_log_type = "IN"
-        if current_date == last_checkin_date and time_difference_hours >= 10:
+        if (current_date == last_checkin_date) and (time_difference_hours >= 10):
             current_log_type = "OUT"
     else:
         current_log_type = "IN"
@@ -181,7 +183,7 @@ def get_previous_logtype_and_time(employee_id):
     previous_attendance_query = frappe.db.sql("""
                                 SELECT 
                                     employee, 
-                                    employee_name, log_type,time FROM `tabEmployee Checkin`
+                                    employee_name, log_type, time FROM `tabEmployee Checkin`
                                     WHERE employee = %s ORDER BY time DESC LIMIT 1      
                                 """,(employee_id), as_dict=True)
     if previous_attendance_query:
