@@ -283,7 +283,7 @@ doc_events = {
         "on_submit": "neviraflow.work_order_timer.on_submit",
     },
     "Employee Checkin": {
-        "before_insert":"neviraflow.attendance_handlers.evaluate_and_infer_logtype",
+        "before_save":"neviraflow.attendance_handlers.evaluate_and_infer_logtype",
         "after_insert": "neviraflow.attendance_handlers.after_insert_action"
     },
     "Employee": {

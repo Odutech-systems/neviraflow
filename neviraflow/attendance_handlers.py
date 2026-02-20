@@ -167,16 +167,23 @@ def evaluate_and_infer_logtype(doc, method=None):
 
         elif (days_difference == 1) and (time_difference_hours <= 9):
             inferred_log_type = "OUT"
+        elif days_difference > 1:
+            inferred_log_type = "IN"
 
     elif previous_log_type == "OUT":
-        if (days_difference ==1) and (time_difference_hours <= 16):
+        if (days_difference == 1) and (time_difference_hours <= 18):
             inferred_log_type = "IN"
         elif (current_date == last_checkin_date) and (time_difference_hours >= 10):
-            inferred_log_type = "OUT"
+            inferred_log_type = "IN"
+
     else:
         inferred_log_type = "IN"
-
+        
     doc.log_type = inferred_log_type
+    print(f" Log type set is: {inferred_log_type}")
+    frappe.logger().info(f"Inferred log type: {inferred_log_type}")
+   
+    
 
 
 def get_previous_logtype_and_time(employee_id):
