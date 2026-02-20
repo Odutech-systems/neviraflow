@@ -149,46 +149,47 @@ def evaluate_and_infer_logtype(doc, method=None):
     employee = doc.employee
     previous_log_type, previous_log_time = get_previous_logtype_and_time(employee)
 
-    if not previous_log_time or not previous_log_type:
-        doc.log_type = "IN"
-        return
+    if not doc.device_id:
+        if not previous_log_time or not previous_log_type:
+            doc.log_type = "IN"
+            return
 
-    current_date = getdate(doc.time)
-    last_checkin_date = getdate(previous_log_time)
+        current_date = getdate(doc.time)
+        last_checkin_date = getdate(previous_log_time)
 
-    time_difference_hours = time_diff_in_hours(doc.time, previous_log_time)
-    days_difference = date_diff(current_date, last_checkin_date)
+        time_difference_hours = time_diff_in_hours(doc.time, previous_log_time)
+        days_difference = date_diff(current_date, last_checkin_date)
 
-    inferred_log_type = None
+        inferred_log_type = None
 
-    if previous_log_type == "IN":
-        if current_date == last_checkin_date:
-            inferred_log_type = "OUT"
+        if previous_log_type == "IN":
+            if current_date == last_checkin_date:
+                inferred_log_type = "OUT"
 
-        elif (days_difference == 1) and (time_difference_hours <= 16): ## Best case is that in Shift C, someone has until 8am to checkout
-            inferred_log_type = "OUT"
+            elif (days_difference == 1) and (time_difference_hours <= 16): ## Best case is that in Shift C, someone has until 8am to checkout
+                inferred_log_type = "OUT"
 
 
-        elif (days_difference == 1) and (time_difference_hours >= 16): ### Some one forgot to checkout the previous day hence above 16hrs, so this considered as a new checkin
+            elif (days_difference == 1) and (time_difference_hours >= 16): ### Some one forgot to checkout the previous day hence above 16hrs, so this considered as a new checkin
+                inferred_log_type = "IN"
+
+            elif days_difference > 1:
+                inferred_log_type = "IN"
+
+        elif previous_log_type == "OUT":
+            if (days_difference == 1) and (time_difference_hours <= 18):
+                inferred_log_type = "IN"
+            elif (current_date == last_checkin_date): #and (time_difference_hours >= 10)
+                inferred_log_type = "IN"
+            elif days_difference > 1:
+                inferred_log_type = "IN"
+
+        else:
             inferred_log_type = "IN"
 
-        elif days_difference > 1:
-            inferred_log_type = "IN"
-
-    elif previous_log_type == "OUT":
-        if (days_difference == 1) and (time_difference_hours <= 18):
-            inferred_log_type = "IN"
-        elif (current_date == last_checkin_date): #and (time_difference_hours >= 10)
-            inferred_log_type = "IN"
-        elif days_difference > 1:
-            inferred_log_type = "IN"
-
-    else:
-        inferred_log_type = "IN"
-
-    doc.log_type = inferred_log_type
-    print(f" Log type set is: {inferred_log_type}")
-    frappe.logger().info(f"Inferred log type: {inferred_log_type}")
+        doc.log_type = inferred_log_type
+        print(f" Log type set is: {inferred_log_type}")
+        frappe.logger().info(f"Inferred log type: {inferred_log_type}")
 
 
 def get_previous_logtype_and_time(employee_id):
