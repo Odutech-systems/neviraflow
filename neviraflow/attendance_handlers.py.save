@@ -1,3 +1,4 @@
+
 from datetime import datetime, date, time, timedelta
 import frappe
 from frappe.utils import get_datetime, add_days, date_diff, time_diff_in_hours, getdate
@@ -143,6 +144,8 @@ def update_attendance_time(attendance, log_type, event_time):
     if changed:
         attendance.save(ignore_permissions=True)
         frappe.db.commit()
+
+
 def evaluate_and_infer_logtype(doc, method=None):
     employee = doc.employee
     previous_time, previous_log_type = get_previous_logtype_and_time(employee)
@@ -188,6 +191,11 @@ def get_previous_logtype_and_time(employee_id):
         return previous_log_type, previous_timestamp
     else:
         return
+
+
+
+
+
 
 def get_shift_for_employee(employee: str, when_dt: datetime) -> str | None:
     """
