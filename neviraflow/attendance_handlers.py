@@ -152,7 +152,6 @@ def evaluate_and_infer_logtype(doc, method=None):
     if not doc.device_id:
         if not previous_log_time or not previous_log_type:
             doc.log_type = "IN"
-            return
 
         current_date = getdate(doc.time)
         last_checkin_date = getdate(previous_log_time)
@@ -184,8 +183,8 @@ def evaluate_and_infer_logtype(doc, method=None):
             elif days_difference > 1:
                 inferred_log_type = "IN"
 
-        else:
-            inferred_log_type = "IN"
+        if inferred_log_type not in ("IN","OUT"):
+            inferred_log_type =  "IN"
 
         doc.log_type = inferred_log_type
         print(f" Log type set is: {inferred_log_type}")

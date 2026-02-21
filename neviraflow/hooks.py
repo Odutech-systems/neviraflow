@@ -284,7 +284,7 @@ doc_events = {
     },
     "Employee Checkin": {
         "before_save":"neviraflow.attendance_handlers.evaluate_and_infer_logtype",
-        "after_insert": "neviraflow.attendance_handlers.after_insert_action"
+        "after_insert": "neviraflow.attendance_handlers.after_insert_action",
     },
     "Employee": {
         "before_save": "neviraflow.employee_rate.set_daily_rate",
