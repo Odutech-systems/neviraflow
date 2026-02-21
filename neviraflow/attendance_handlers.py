@@ -185,7 +185,7 @@ def evaluate_and_infer_logtype(doc, method=None):
                 doc.log_type = "IN"
 
         else:
-           doc.log_type =  "IN"
+           doc.log_type = "IN"
 
         print(f" Log type set is: {doc.log_type}")
         frappe.logger().info(f"Inferred log type: {doc.log_type}")
