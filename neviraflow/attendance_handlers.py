@@ -190,7 +190,6 @@ def evaluate_and_infer_logtype(doc, method=None):
         print(f" Log type set is: {doc.log_type}")
         frappe.logger().info(f"Inferred log type: {doc.log_type}")
 
-
 def get_previous_logtype_and_time(employee_id):
     """
     Get the previous employee's log type
