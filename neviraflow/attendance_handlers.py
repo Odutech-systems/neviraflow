@@ -192,7 +192,7 @@ def evaluate_and_infer_logtype(doc, method=None):
 
 def get_previous_logtype_and_time(employee_id):
     """
-    Get the previous employee's log type
+    Get the previous employee's log type and log time
     """
     previous_attendance_query = frappe.db.sql("""
                                 SELECT 
@@ -209,7 +209,7 @@ def get_previous_logtype_and_time(employee_id):
 
 def get_shift_for_employee(employee: str, when_dt: datetime) -> str | None:
     """
-    Find the most recent shift that the employee has neem assigned to, if no
+    Find the most recent shift that the employee has been assigned to, if no
     shift is found then use the General Shift
     """
 
