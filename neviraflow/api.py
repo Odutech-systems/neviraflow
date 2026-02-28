@@ -11,7 +11,7 @@ from frappe.model.naming import make_autoname
 from frappe.utils.pdf import get_pdf
 import yaml
 from frappe.utils import today
-from frappe.utils import nowdate, nowtime
+from frappe.utils import nowdate, nowtime, date_diff, time_diff_in_hours, getdate, get_datetime
 
 
 
@@ -421,4 +421,62 @@ def export_submitted_docs():
                 frappe.log_error(f"{doctype} {doc['name']} export failed", str(e))
 
 
+####### THESE FUNCTIONS ARE ONLY USED AS BACKUPS TO THE MAIN api.py file functions incase the developer decides to overwrite them
 
+
+def _get_previous_logtype_and_time(employee_id):
+    """
+    Get the previous employee's log type
+    """
+    previous_attendance_query = frappe.db.sql("""
+                                SELECT 
+                                    employee, 
+                                    employee_name, log_type, time FROM `tabEmployee Checkin`
+                                    WHERE employee = %s AND log_type 
+                                    IS NOT NULL ORDER BY time DESC LIMIT 1      
+                                """,(employee_id,), as_dict=True)
+    if previous_attendance_query:
+        previous_log_type = previous_attendance_query[0]["log_type"]
+        previous_timestamp = previous_attendance_query[0]["time"]
+        return previous_log_type, previous_timestamp
+    else:
+        return None, None
+
+
+def _evaluate_and_infer_logtype(employee, ts):
+    
+    previous_log_type, previous_log_time = _get_previous_logtype_and_time(employee)
+
+    if not previous_log_time or not previous_log_type:
+        return "IN"
+
+    current_date = getdate(ts)
+    current_datetime = get_datetime(ts)
+    last_checkin_date = getdate(previous_log_time)
+
+    time_difference_hours = time_diff_in_hours(current_datetime, previous_log_time)
+    days_difference = date_diff(current_date, last_checkin_date)
+
+    if previous_log_type == "IN":
+        if current_date == last_checkin_date:
+            return "OUT"
+
+        elif (days_difference == 1) and (time_difference_hours <= 15): ## Best case is that in Shift C, someone has until 8am to checkout
+            return "OUT"
+
+
+        elif (days_difference == 1) and (time_difference_hours >= 16): ### Some one forgot to checkout the previous day hence above 16hrs, so this considered as a new checkin
+            return "IN"
+
+        elif days_difference > 1:
+           return "IN"
+
+    elif previous_log_type == "OUT":
+        if (days_difference == 1) and (time_difference_hours <= 18):
+            return "IN"
+        elif (current_date == last_checkin_date): #and (time_difference_hours >= 10)
+            return "IN"
+        elif days_difference > 1:
+            return "IN"
+    
+    return "IN"
