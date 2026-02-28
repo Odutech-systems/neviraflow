@@ -18,6 +18,7 @@ def get_absent_days_sql(employee, start_date, end_date):
     result = frappe.db.sql(absent_sql,(employee, start_date, end_date), as_dict=True)
     return result[0]['absent_days'] if result else 0
 
+### This is the code block that gets us the holidays within a month i.e named holidays
 def get_worked_days_on_holidays(employee):
     worked_days_sql = """
                         SELECT
