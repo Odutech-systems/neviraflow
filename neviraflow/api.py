@@ -493,7 +493,7 @@ def check_zero_rate_items(doc, method=None):
         if not item.rate or item.rate == 0:
             frappe.throw(
                 f"Item <b>{item.item_name} </b> in row {item.idx} has a rate of 0"
-                "Please set a valid rate before submitting"
+                " Please set a valid rate before submitting"
                 )
 
 
