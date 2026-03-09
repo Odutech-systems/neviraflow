@@ -251,7 +251,8 @@ doc_events = {
         "before_submit": "neviraflow.procurement.custom_material_request.before_submit_sales_order",
         "before_save": [
             "neviraflow.api.assign_export_metadata",
-            "neviraflow.credit_limit_check.validate_credit_limit"
+            "neviraflow.credit_limit_check.validate_credit_limit",
+            "neviraflow.api.check_zero_rate_items"
             ]
     },
     "Sales Invoice": {
@@ -259,11 +260,13 @@ doc_events = {
         "before_save": [
             "neviraflow.procurement.custom_material_request.before_save_sales_invoice",
             "neviraflow.api.assign_export_metadata",
+            "neviraflow.api.check_zero_rate_items"
         ]
     },
     "Delivery Note": {
         "before_save": [
             "neviraflow.api.assign_export_metadata",
+            "neviraflow.api.check_zero_rate_items"
            # "neviraflow.api.handle_pick_list_and_qty_patch"
         ]
     },
