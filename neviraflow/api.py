@@ -480,3 +480,20 @@ def _evaluate_and_infer_logtype(employee, ts):
             return "IN"
     
     return "IN"
+
+
+def check_zero_rate_items(doc, method=None):
+    """
+    Check that the items in the sales order, 
+    sales invoice and delivery note do not have an item that has zero rate
+    """
+    items = doc.items
+
+    for item in items:
+        if not item.rate or item.rate == 0:
+            frappe.throw(
+                f"Item <b>{item.item_name} </b> in row {item.idx} has a rate of 0"
+                "Please set a valid rate before submitting"
+                )
+
+
