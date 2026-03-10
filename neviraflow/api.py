@@ -508,5 +508,5 @@ def validate_qty_bags(doc, method=None):
         if item.qty != item.bags_input:
             frappe.throw(
                 f"Item <b> {item.item_name} </b> in row {item.idx} does not have the same value in quantity and bags"
-                "Please verify before proceeding")
+                " Please verify before proceeding")
 
