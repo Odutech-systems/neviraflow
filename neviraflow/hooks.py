@@ -252,7 +252,8 @@ doc_events = {
         "before_save": [
             "neviraflow.api.assign_export_metadata",
             "neviraflow.credit_limit_check.validate_credit_limit",
-            "neviraflow.api.check_zero_rate_items"
+            "neviraflow.api.check_zero_rate_items",
+            "neviraflow.api.validate_qty_bags"
             ]
     },
     "Sales Invoice": {
@@ -266,7 +267,8 @@ doc_events = {
     "Delivery Note": {
         "before_save": [
             "neviraflow.api.assign_export_metadata",
-            "neviraflow.api.check_zero_rate_items"
+            "neviraflow.api.check_zero_rate_items",
+            "neviraflow.api.validate_qty_bags"
            # "neviraflow.api.handle_pick_list_and_qty_patch"
         ]
     },
