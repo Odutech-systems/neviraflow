@@ -497,3 +497,16 @@ def check_zero_rate_items(doc, method=None):
                 )
 
 
+def validate_qty_bags(doc, method=None):
+    """
+    Validate that the bags number is the same as the qty value in 
+    sales invoices, sales orders and delivery note documents
+    """
+    items = doc.items
+
+    for item in items:
+        if item.qty != item.bags_input:
+            frappe.throw(
+                f"Item <b> {item.item_name} </b> in row {item.idx} does not have the same value in quantity and bags"
+                "Please verify before proceeding")
+
