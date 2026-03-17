@@ -9,7 +9,6 @@ from erpnext.accounts.report.accounts_receivable_summary.accounts_receivable_sum
 from erpnext.accounts.report.general_ledger.general_ledger import execute as gl_execute
 from frappe.utils import add_days, today, getdate, flt
 
-
 class ConsolidatedCustomerReceivables(Document):
     def validate(self):
         """

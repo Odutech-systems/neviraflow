@@ -51,6 +51,12 @@
    "reqd": 1
   },
   {
+    "fieldname":"customer_name",
+    "fieldtype":"Data",
+    "label":"Customer Name",
+    "read_only":1
+  },
+  {
    "fieldname": "all_transactions",
    "fieldtype": "Table",
    "label": "All Transactions",
