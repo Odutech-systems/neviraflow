@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "posting_date",
+  "account",
   "voucher_type",
   "voucher_no",
   "cheque_reference_no",
@@ -55,20 +56,22 @@
    "fieldname": "account_currency",
    "fieldtype": "Data",
    "label": "Account Currency"
+  },
+  {
+   "fieldname": "account",
+   "fieldtype": "Data",
+   "label": "Account"
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-11-28 10:24:05.260977",
+ "modified": "2026-03-17 11:00:57.860280",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "All Customer Transactions",
  "owner": "Administrator",
  "permissions": [],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

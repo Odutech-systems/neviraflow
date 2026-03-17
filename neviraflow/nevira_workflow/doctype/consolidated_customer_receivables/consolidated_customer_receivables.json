@@ -11,6 +11,7 @@
   "company",
   "column_break_n9ir",
   "customer",
+  "customer_name",
   "email_id",
   "phone_number",
   "section_break_cpmr",
@@ -49,12 +50,6 @@
    "label": "Customer",
    "options": "Customer",
    "reqd": 1
-  },
-  {
-    "fieldname":"customer_name",
-    "fieldtype":"Data",
-    "label":"Customer Name",
-    "read_only":1
   },
   {
    "fieldname": "all_transactions",
@@ -99,13 +94,18 @@
    "fieldtype": "Link",
    "label": "Company",
    "options": "Company"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-18 15:08:22.577989",
+ "modified": "2026-03-17 11:30:54.929209",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",
@@ -183,8 +183,6 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

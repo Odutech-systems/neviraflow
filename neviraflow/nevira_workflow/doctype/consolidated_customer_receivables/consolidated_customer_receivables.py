@@ -52,6 +52,15 @@ class ConsolidatedCustomerReceivables(Document):
             "group_by": "Group by Voucher (Consolidated)",
             "show_opening_entries": 1
         }
+        filters_b = {
+            "company":"NEVIRA MINERALS LIMITED",
+            "from_date": getdate("2026-01-01"),
+            "to_date": getdate("2026-03-31"),
+            "party_type": "Customer",
+            "party": ["CUST-2025-00190"],
+            "group_by":"Group by Voucher (Consolidated)",
+            "show_opening_entries": 1
+        }
         filters_  = frappe._dict(filters)
 
         ## Clear the child table first before populating it with data
@@ -64,9 +73,9 @@ class ConsolidatedCustomerReceivables(Document):
 
                 all_transactions_list = gl_data[1]
 
-                all_transactions_data = all_transactions_list[:-2]
+                #all_transactions_data = all_transactions_list[:-2]
 
-                for row in all_transactions_data:
+                for row in all_transactions_list:
                     cheque_ref = "REF"
                     #if row.get("voucher_type") == "Payment Entry":
                     #    cheque_ref = frappe.db.get_value("Payment Entry",row.get("voucher_no"), "reference_no")
@@ -74,6 +83,7 @@ class ConsolidatedCustomerReceivables(Document):
 
                     self.append("all_transactions",{
                         "posting_date":row.get("posting_date"),
+                        "account": row.get("account"),
                         "voucher_type":row.get("voucher_type"),
                         "voucher_no":row.get("voucher_no"),
                         "cheque_reference_no": cheque_ref,
@@ -101,6 +111,7 @@ class ConsolidatedCustomerReceivables(Document):
             "range": "30, 60, 90, 120",
             "calculate_ageing_with": "Today Date"
         }
+        
         filters_  = frappe._dict(filters)
         
         ### Before populating the child table with data, first clear the child table
