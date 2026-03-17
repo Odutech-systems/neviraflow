@@ -29,9 +29,10 @@ class ConsolidatedCustomerReceivables(Document):
         self.fetch_accounts_receivable_summary()
 
     def before_save(self):
-        email_id, phone_number = frappe.db.get_value('Customer', self.customer,['email_id','mobile_no'])
+        customer_name, email_id, phone_number = frappe.db.get_value('Customer', self.customer,['customer_name','email_id','mobile_no'])
         self.email_id = email_id
         self.phone_number = phone_number
+        self.customer_name = customer_name
 
     def validate_dates(self):
         if self.to_date and self.from_date:
