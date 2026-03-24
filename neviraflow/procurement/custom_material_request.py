@@ -64,22 +64,24 @@ def before_validate_sales_invoice(doc, method):
 # -------------------------
 # SALES ORDER: ADVANCE PAYMENT CHECK
 # -------------------------
-def before_validate_sales_order(doc, method):
+def before_validate_sales_order(doc, method=None):
     if not doc.customer or not doc.payment_terms_template:
         return
 
     customer = frappe.get_doc("Customer", doc.customer)
+
+    payment_terms = customer.get("payment_terms")
+
     if customer.get("bypass_advance_payment"):
         return
 
     if doc.payment_terms_template == "Cash On Delivery":
         ##_validate_cod_backlog(doc)
         pass
-    elif doc.payment_terms_template == "Advance Payment":
+    
+    elif payment_terms == "Advance Payment":
         _validate_advance_payment(doc)
 
-def before_submit_sales_order(doc, method):
-    pass
 
 def _validate_cod_backlog(doc):
     pending_cod = frappe.db.sql("""
@@ -117,8 +119,10 @@ def _validate_advance_payment(doc):
 
     paid_amount_plus_tds = balance_amount + (balance_amount * tds_threshold)
 
+    frappe.local.flags.disable_traceback = True
     if (paid_amount_plus_tds < doc.grand_total) or balance_amount is None:
         frappe.throw(f"Advance Payment Required: Customer has only paid {balance_amount}, but order value is {doc.grand_total}. Please ensure full advance payment before submitting this order.")
+
 # -------------------------
 # RFQ, SQ, PO LOGIC
 # -------------------------
