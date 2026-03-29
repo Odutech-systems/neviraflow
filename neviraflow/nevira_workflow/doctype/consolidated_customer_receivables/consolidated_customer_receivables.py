@@ -52,15 +52,7 @@ class ConsolidatedCustomerReceivables(Document):
             "group_by": "Group by Voucher (Consolidated)",
             "show_opening_entries": 1
         }
-        filters_b = {
-            "company":"NEVIRA MINERALS LIMITED",
-            "from_date": getdate("2026-01-01"),
-            "to_date": getdate("2026-03-31"),
-            "party_type": "Customer",
-            "party": ["CUST-2025-00190"],
-            "group_by":"Group by Voucher (Consolidated)",
-            "show_opening_entries": 1
-        }
+       
         filters_  = frappe._dict(filters)
 
         ## Clear the child table first before populating it with data
@@ -73,13 +65,12 @@ class ConsolidatedCustomerReceivables(Document):
 
                 all_transactions_list = gl_data[1]
 
-                #all_transactions_data = all_transactions_list[:-2]
-
                 for row in all_transactions_list:
-                    cheque_ref = "REF"
-                    #if row.get("voucher_type") == "Payment Entry":
-                    #    cheque_ref = frappe.db.get_value("Payment Entry",row.get("voucher_no"), "reference_no")
-                    #    currency = frappe.db.get_value("Account",row.get("account"),"account_currency")
+                    cheque_ref = ""
+                    if row.get("voucher_type") == "Payment Entry":
+                        pe_number = row.get("voucher_no")
+                        cheque_ref += frappe.db.get_value("Payment Entry",pe_number, "reference_no")
+                        currency = frappe.db.get_value("Account",row.get("account"),"account_currency")
 
                     self.append("all_transactions",{
                         "posting_date":row.get("posting_date"),
@@ -112,6 +103,7 @@ class ConsolidatedCustomerReceivables(Document):
             "calculate_ageing_with": "Today Date"
         }
         
+
         filters_  = frappe._dict(filters)
         
         ### Before populating the child table with data, first clear the child table
@@ -128,7 +120,7 @@ class ConsolidatedCustomerReceivables(Document):
                             "voucher_type": row.get("voucher_type"),
                             "voucher_no": row.get("voucher_no"),
                             "due_date": row.get("due_date") if row.get("due_date") else "",
-                            "invoiced_amount": flt(row.get("invoiced_grand_total")),
+                            "invoiced_amount": flt(row.get("invoice_grand_total")),
                             "credit_note": flt(row.get("credit_note")),
                             "paid_amount": flt(row.get("paid")),
                             "range1": flt(row.get("range1")),
