@@ -8,6 +8,8 @@ from erpnext.accounts.report.accounts_receivable.accounts_receivable import exec
 from erpnext.accounts.report.accounts_receivable_summary.accounts_receivable_summary import execute as ar_summary_execute
 from erpnext.accounts.report.general_ledger.general_ledger import execute as gl_execute
 from frappe.utils import add_days, today, getdate, flt
+from erpnext.accounts.party import get_due_date, get_party_account, get_party_details
+
 
 class ConsolidatedCustomerReceivables(Document):
     def validate(self):
@@ -33,6 +35,8 @@ class ConsolidatedCustomerReceivables(Document):
         self.email_id = email_id
         self.phone_number = phone_number
         self.customer_name = customer_name
+        
+        self.total_outstanding_amount = self.get_customer_balance()
 
     def validate_dates(self):
         if self.to_date and self.from_date:
@@ -180,5 +184,25 @@ class ConsolidatedCustomerReceivables(Document):
             frappe.msgprint(f" Failed to fetch and populate the acconts receivable summary {str(e)}")
 
             
+    ## Get the customer's balance from the ledger 
+    def get_customer_balance(self):
+        customer_id = self.customer
+        balance_query = frappe.db.sql(""" SELECT (SUM(debit) - SUM(credit)) AS balance 
+                FROM `tabGL Entry` WHERE party = %s""",
+                (customer_id), as_dict=True) 
+        if balance_query:
+            balance = balance_query[0]["balance"]
+            return balance
+        else:
+            return 0.00
 
-
+def get_balance(customer):
+    balance_query = frappe.db.sql(""" SELECT (SUM(debit) - SUM(credit)) AS balance 
+                FROM `tabGL Entry` WHERE party = %s""",
+                (customer), as_dict=True) 
+    if balance_query:
+        balance = balance_query[0]["balance"]
+        return balance
+    else:
+        return 0.00
+    
