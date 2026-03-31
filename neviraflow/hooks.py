@@ -305,6 +305,9 @@ doc_events = {
         ],
         "before_submit": "neviraflow.prorated_and_absent_salary_computations.block_submission_if_low_attendance"
     },
+    "Stock Entry":{
+        "before_save":"neviraflow.api.set_difference_account_stock_issue"
+    }
 }
 
 

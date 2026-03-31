@@ -510,3 +510,23 @@ def validate_qty_bags(doc, method=None):
                 f"Item <b> {item.item_name} </b> in row {item.idx} does not have the same value in quantity and bags"
                 " Please verify before proceeding")
 
+
+def set_difference_account_stock_issue(doc, method=None):
+    if doc.stock_entry_type == "Material Issue":
+        for row in doc.items:
+            item_code = row.item_code
+            expense_account = frappe.db.get_value("Item Default",{"parent": row.item_code},"expense_account")
+            
+            if not expense_account:
+                expense_account = "5119 - Stock Adjustment - NML"
+
+            row.difference_account = expense_account
+
+def set_difference_account_manufacturing(doc, method=None):
+    if doc.stock_entry_type == "Manufacture":
+        if doc.value_difference < 0:
+            for row in doc.items:
+                item_code = row.item_code
+                expense_account = frappe.db.get_value("Item Default",{"parent": row.item_code},"expense_account")
+                
+
