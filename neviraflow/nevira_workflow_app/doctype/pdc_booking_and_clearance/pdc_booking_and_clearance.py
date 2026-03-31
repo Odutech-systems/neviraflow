@@ -6,6 +6,7 @@ from frappe.model.document import Document
 from frappe import _
 from erpnext.accounts.utils import get_account_currency
 from erpnext.accounts.party import get_party_account
+from frappe.utils import getdate
 
 class PDCBookingandClearance(Document):
 
@@ -26,7 +27,9 @@ class PDCBookingandClearance(Document):
         pe.party_type = self.party_type
         pe.party = self.party_code
         pe.party_name = self.party_name
-        pe.posting_date = frappe.utils.nowdate()
+
+        #pe.posting_date = frappe.utils.nowdate()
+        pe.posting_date = getdate(self.clearance_date)
         pe.company = self.company or "NEVIRA MINERALS LIMITED"
         pe.paid_amount = self.paid_amount
         pe.received_amount = self.paid_amount
@@ -65,7 +68,7 @@ class PDCBookingandClearance(Document):
         self.reference_payment_entry = pe.name
         self.set("payment_reference_date", pe.posting_date)
         self.clearance_status = "Cleared"
-        self.clearance_date = frappe.utils.nowdate()
+        self.clearance_date = pe.posting_date
         self.save()
 
         frappe.msgprint(_(f"PDC marked as Cleared. Payment Entry: <a href='/app/payment-entry/{pe.name}'>{pe.name}</a>"))

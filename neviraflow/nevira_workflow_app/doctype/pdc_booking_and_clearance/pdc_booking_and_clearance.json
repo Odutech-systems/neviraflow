@@ -72,7 +72,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "allow_on_submit": 1,
    "description": "Cheque Posting Date (Bank Clearance Date)",
    "fieldname": "clearance_date",
    "fieldtype": "Date",
@@ -95,8 +94,7 @@
    "fieldname": "reference_payment_entry",
    "fieldtype": "Link",
    "label": "Reference Payment Entry",
-   "options": "Payment Entry",
-   "read_only": 1
+   "options": "Payment Entry"
   },
   {
    "fieldname": "cheque_payment_from_to_section",
@@ -108,7 +106,6 @@
    "fieldtype": "Select",
    "label": "Party Type",
    "options": "Customer\nSupplier",
-   "read_only": 1,
    "reqd": 1
   },
   {
@@ -208,7 +205,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-09-01 09:56:13.846361",
+ "modified": "2026-03-31 09:51:19.184157",
  "modified_by": "Administrator",
  "module": "Nevira Workflow App",
  "name": "PDC Booking and Clearance",
