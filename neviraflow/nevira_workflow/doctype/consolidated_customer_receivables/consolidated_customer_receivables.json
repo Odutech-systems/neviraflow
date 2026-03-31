@@ -17,7 +17,8 @@
   "section_break_cpmr",
   "all_transactions",
   "unpaid_invoices",
-  "ageing_summary"
+  "ageing_summary",
+  "total_outstanding_amount"
  ],
  "fields": [
   {
@@ -100,12 +101,19 @@
    "fieldtype": "Data",
    "label": "Customer Name",
    "read_only": 1
+  },
+  {
+   "fieldname": "total_outstanding_amount",
+   "fieldtype": "Float",
+   "label": "Total Outstanding Amount",
+   "precision": "2",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-03-17 11:30:54.929209",
+ "modified": "2026-03-31 10:21:02.071357",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",
@@ -183,6 +191,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
