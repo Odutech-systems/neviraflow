@@ -516,11 +516,12 @@ def set_difference_account_stock_issue(doc, method=None):
         for row in doc.items:
             item_code = row.item_code
             expense_account = frappe.db.get_value("Item Default",{"parent": row.item_code},"expense_account")
+            row.difference_account = expense_account
             
             if not expense_account:
-                expense_account = "5119 - Stock Adjustment - NML"
+                row.expense_account = "5119 - Stock Adjustment - NML"
 
-            row.difference_account = expense_account
+            
 
 def set_difference_account_manufacturing(doc, method=None):
     if doc.stock_entry_type == "Manufacture":
