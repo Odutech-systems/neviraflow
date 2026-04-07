@@ -28,8 +28,8 @@ def get_worked_days_on_holidays(employee):
                             `tabAttendance`
                             WHERE
                             docstatus = 1
-                            AND attendance_date = '2026-01-01'
-			    AND status = 'Present'
+                            AND attendance_date IN ('2026-04-06','2026-04-03')
+			            AND status = 'Present'
                             AND employee = %s
                             GROUP BY
                             employee"""
