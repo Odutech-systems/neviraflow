@@ -187,7 +187,7 @@ class WeighbridgeManagement(Document):
 # -------------------------------------------------------------------
 # Capture Methods (set child tables + advance status)
 # -------------------------------------------------------------------
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def capture_raw_material_return(docname: str, second_weight: float, item_code: str, quarry_from: str):
     doc = frappe.get_doc("Weighbridge Management", docname)
 
@@ -227,7 +227,7 @@ def capture_raw_material_return(docname: str, second_weight: float, item_code: s
     return "Raw material captured."
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def capture_production_material_return(docname: str, second_weight: float, item_code: str, item_type: str):
     doc = frappe.get_doc("Weighbridge Management", docname)
 
@@ -263,7 +263,7 @@ def capture_production_material_return(docname: str, second_weight: float, item_
     return "Production material captured."
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def capture_purchased_material(docname: str, second_weight: float, item_code: str):
     """For Purchased Materials we do NOT convert; store net weight (Kg) directly.
     Quantity is the final weight in KG; receipt happens via Purchase Receipt separately.
@@ -299,7 +299,7 @@ def capture_purchased_material(docname: str, second_weight: float, item_code: st
     return "Purchased material captured."
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def capture_inter_company_transfer(docname: str, second_weight: float, item_code: str):
     doc = frappe.get_doc("Weighbridge Management", docname)
 
@@ -346,7 +346,7 @@ def capture_inter_company_transfer(docname: str, second_weight: float, item_code
 
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def capture_finished_goods(docname: str, second_weight: float, item_code: str, customer: str):
     doc = frappe.get_doc("Weighbridge Management", docname)
 
@@ -402,7 +402,7 @@ def capture_finished_goods(docname: str, second_weight: float, item_code: str, c
 
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def capture_partner_production(docname: str, partner_items: str):
     """Capture rows into partner_item_list.
     partner_items is a JSON array of objects:
@@ -452,7 +452,7 @@ def capture_partner_production(docname: str, partner_items: str):
 # -------------------------------------------------------------------
 # Confirmation Methods (create Stock Entry)
 # -------------------------------------------------------------------
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def confirm_rm_receipt(docname: str):
     doc = frappe.get_doc("Weighbridge Management", docname)
 
@@ -492,7 +492,7 @@ def confirm_rm_receipt(docname: str):
     return se.name
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def confirm_production_transfer(docname: str, work_order: str):
     doc = frappe.get_doc("Weighbridge Management", docname)
 
@@ -539,7 +539,7 @@ def confirm_production_transfer(docname: str, work_order: str):
 # -------------------------------------------------------------------
 # Auto-submit fallback for API inserts
 # -------------------------------------------------------------------
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def auto_submit_if_ready(doc: Document, method: Optional[str] = None):
     """
     Hybrid auto-submit:
