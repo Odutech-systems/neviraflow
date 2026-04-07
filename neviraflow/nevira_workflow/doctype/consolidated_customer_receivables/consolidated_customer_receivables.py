@@ -32,6 +32,9 @@ class ConsolidatedCustomerReceivables(Document):
 
     def before_save(self):
         customer_name, email_id, phone_number = frappe.db.get_value('Customer', self.customer,['customer_name','email_id','mobile_no'])
+        self.payment_terms = frappe.db.get_value("Customer",self.customer,'payment_terms')
+        customer_credit_limit = frappe.db.get_value("Customer Credit Limit",{"parent": self.customer, "parenttype": "Customer"}, 'credit_limit')
+        self.credit_limit = customer_credit_limit or 0.00
         self.email_id = email_id
         self.phone_number = phone_number
         self.customer_name = customer_name

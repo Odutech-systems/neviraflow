@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-04-07 11:08:46.509238",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_3gso",
+  "pd_cheque_id",
+  "clearance_date",
+  "cheque_number",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_3gso",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pd_cheque_id",
+   "fieldtype": "Data",
+   "label": "pd_cheque_id",
+   "read_only": 1
+  },
+  {
+   "fieldname": "clearance_date",
+   "fieldtype": "Date",
+   "label": "clearance_date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cheque_number",
+   "fieldtype": "Data",
+   "label": "cheque_number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Float",
+   "label": "amount",
+   "precision": "2",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-04-07 11:11:19.824921",
+ "modified_by": "Administrator",
+ "module": "Nevira Workflow",
+ "name": "PD Cheques Reference",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

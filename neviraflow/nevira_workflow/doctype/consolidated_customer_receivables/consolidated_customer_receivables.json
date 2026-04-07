@@ -12,6 +12,8 @@
   "column_break_n9ir",
   "customer",
   "customer_name",
+  "payment_terms",
+  "credit_limit",
   "email_id",
   "phone_number",
   "section_break_cpmr",
@@ -108,12 +110,25 @@
    "label": "Total Outstanding Amount",
    "precision": "2",
    "read_only": 1
+  },
+  {
+   "fieldname": "payment_terms",
+   "fieldtype": "Data",
+   "label": "Payment Terms",
+   "read_only": 1
+  },
+  {
+   "fieldname": "credit_limit",
+   "fieldtype": "Float",
+   "label": "Credit Limit",
+   "precision": "2",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-03-31 10:21:02.071357",
+ "modified": "2026-04-07 11:03:20.077350",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",
