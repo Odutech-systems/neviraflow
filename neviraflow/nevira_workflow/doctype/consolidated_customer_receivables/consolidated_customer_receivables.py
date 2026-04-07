@@ -199,6 +199,39 @@ class ConsolidatedCustomerReceivables(Document):
         else:
             return 0.00
 
+    def fetch_customer_pd_cheques(self):
+        customer_id = self.customer
+        filters = {
+            "pdc_type": "Customer PDC",
+            "clearance_status": "Pending",
+            "party_code": customer_id,
+            "docstatus": 1
+        }
+
+        filters_  = frappe._dict(filters)
+
+        self.pending_pd_cheques = []
+
+        pd_cheques = frappe.db.get_list("PDC Booking and Clearance",
+                                filters = filters_, fields =  ["name","pdc_type",
+                                        "cheque_reference_no",
+                                        "clearance_date","clearance_status","paid_amount"])
+        
+        if not pd_cheques:
+            return
+        try: 
+            if pd_cheques:
+                for pdc_data in pd_cheques:
+                    self.append("pending_pd_cheques",{
+                        "pd_cheque_id": pdc_data.get("name"),
+                        "clearance_date": pdc_data.get("clearance_date"),
+                        "cheque_number": pdc_data.get("cheque_reference_no"),
+                        "amount": pdc_data.get("paid_amount")
+                    })
+        except:
+            frappe.log_error("Failed to fetch and load PDC data")
+
+        
 def get_balance(customer):
     balance_query = frappe.db.sql(""" SELECT (SUM(debit) - SUM(credit)) AS balance 
                 FROM `tabGL Entry` WHERE party = %s""",

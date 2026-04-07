@@ -20,6 +20,7 @@
   "all_transactions",
   "unpaid_invoices",
   "ageing_summary",
+  "pending_pd_cheques",
   "total_outstanding_amount"
  ],
  "fields": [
@@ -123,12 +124,18 @@
    "label": "Credit Limit",
    "precision": "2",
    "read_only": 1
+  },
+  {
+   "fieldname": "pending_pd_cheques",
+   "fieldtype": "Table",
+   "label": "Pending PD Cheques",
+   "options": "PD Cheques Reference"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-07 11:03:20.077350",
+ "modified": "2026-04-07 11:43:45.534640",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",

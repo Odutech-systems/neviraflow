@@ -20,25 +20,25 @@
   {
    "fieldname": "pd_cheque_id",
    "fieldtype": "Data",
-   "label": "pd_cheque_id",
+   "label": "PDC ID",
    "read_only": 1
   },
   {
    "fieldname": "clearance_date",
    "fieldtype": "Date",
-   "label": "clearance_date",
+   "label": "Clearance ID",
    "read_only": 1
   },
   {
    "fieldname": "cheque_number",
    "fieldtype": "Data",
-   "label": "cheque_number",
+   "label": "Cheque No",
    "read_only": 1
   },
   {
    "fieldname": "amount",
    "fieldtype": "Float",
-   "label": "amount",
+   "label": "Amount",
    "precision": "2",
    "read_only": 1
   }
@@ -47,7 +47,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-04-07 11:11:19.824921",
+ "modified": "2026-04-07 11:45:24.277353",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "PD Cheques Reference",
