@@ -9,6 +9,7 @@
   "from_date",
   "to_date",
   "company",
+  "get_ledger_transactions",
   "column_break_n9ir",
   "customer",
   "customer_name",
@@ -130,12 +131,18 @@
    "fieldtype": "Table",
    "label": "Pending PD Cheques",
    "options": "PD Cheques Reference"
+  },
+  {
+   "default": "1",
+   "fieldname": "get_ledger_transactions",
+   "fieldtype": "Check",
+   "label": "Get Ledger Transactions"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-07 11:43:45.534640",
+ "modified": "2026-04-07 12:31:23.319013",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",

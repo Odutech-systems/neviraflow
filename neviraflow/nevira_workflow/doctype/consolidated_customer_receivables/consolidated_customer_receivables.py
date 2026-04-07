@@ -23,12 +23,15 @@ class ConsolidatedCustomerReceivables(Document):
         self.set("all_transactions",[])
         self.set("unpaid_invoices",[])
         self.set("ageing_summary",[])
+        self.set("pending_pd_cheques",[])
 
 
         #### Populate the tables here
         self.fetch_general_ledger_transactions()
         self.fetch_accounts_receivable_data()
         self.fetch_accounts_receivable_summary()
+        self.fetch_customer_pd_cheques()
+        
 
     def before_save(self):
         customer_name, email_id, phone_number = frappe.db.get_value('Customer', self.customer,['customer_name','email_id','mobile_no'])
@@ -213,9 +216,7 @@ class ConsolidatedCustomerReceivables(Document):
         self.pending_pd_cheques = []
 
         pd_cheques = frappe.db.get_list("PDC Booking and Clearance",
-                                filters = filters_, fields =  ["name","pdc_type",
-                                        "cheque_reference_no",
-                                        "clearance_date","clearance_status","paid_amount"])
+                                filters = filters_, fields =  ["name","pdc_type","cheque_reference_no","clearance_date","clearance_status","paid_amount"])
         
         if not pd_cheques:
             return
