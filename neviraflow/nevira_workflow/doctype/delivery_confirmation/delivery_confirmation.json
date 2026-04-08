@@ -41,7 +41,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Fully Delivered\nPartly Delivered\nNot Delivered\nRejected"
+   "options": "Fully Delivered\nPartly Delivered\nNot Delivered"
   },
   {
    "fieldname": "driver_name",
@@ -105,7 +105,7 @@
    "link_fieldname": "name"
   }
  ],
- "modified": "2026-04-08 14:18:41.101740",
+ "modified": "2026-04-08 14:22:59.011583",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Delivery Confirmation",
@@ -168,19 +168,15 @@
  "states": [
   {
    "color": "Green",
-   "title": "Completed"
+   "title": "Fully Delivered"
   },
   {
    "color": "Yellow",
-   "title": "Partially Delivered"
-  },
-  {
-   "color": "Orange",
-   "title": "Not Delivered"
+   "title": "Partly Delivered"
   },
   {
    "color": "Red",
-   "title": "Rejected"
+   "title": "Not Delivered"
   }
  ],
  "track_changes": 1
