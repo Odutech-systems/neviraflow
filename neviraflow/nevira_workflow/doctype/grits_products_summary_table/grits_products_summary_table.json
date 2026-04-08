@@ -1,0 +1,84 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-04-08 10:57:18.153025",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_bh3z",
+  "product",
+  "bags_issued",
+  "bags_returned",
+  "raw_material",
+  "qc_pass",
+  "qc_nc_tons",
+  "tons",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_bh3z",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "label": "Product",
+   "link_filters": "[[\"Item\",\"item_group\",\"=\",\"Finished Goods-BULK\"]]",
+   "options": "Item"
+  },
+  {
+   "fieldname": "bags_issued",
+   "fieldtype": "Int",
+   "label": "Bags Issued"
+  },
+  {
+   "fieldname": "raw_material",
+   "fieldtype": "Link",
+   "label": "Raw material",
+   "link_filters": "[[\"Item\",\"item_group\",\"=\",\"Raw Materials - BULK\"]]",
+   "options": "Item"
+  },
+  {
+   "fieldname": "qc_pass",
+   "fieldtype": "Float",
+   "label": "QC Pass"
+  },
+  {
+   "fieldname": "qc_nc_tons",
+   "fieldtype": "Float",
+   "label": "QC NC Tons"
+  },
+  {
+   "fieldname": "tons",
+   "fieldtype": "Float",
+   "label": "Tons"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "bags_returned",
+   "fieldtype": "Int",
+   "label": "Bags Returned"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-04-08 11:03:34.927441",
+ "modified_by": "Administrator",
+ "module": "Nevira Workflow",
+ "name": "Grits Products Summary Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

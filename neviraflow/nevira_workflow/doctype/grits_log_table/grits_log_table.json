@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-04-08 09:58:34.886679",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_bge3",
+  "from",
+  "to",
+  "product",
+  "no_of_bags",
+  "tons",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_bge3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "from",
+   "fieldtype": "Time",
+   "label": "From"
+  },
+  {
+   "fieldname": "to",
+   "fieldtype": "Time",
+   "label": "To"
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "label": "Product",
+   "link_filters": "[[\"Item\",\"item_group\",\"=\",\"Finished Goods-BULK\"]]",
+   "options": "Item"
+  },
+  {
+   "fieldname": "no_of_bags",
+   "fieldtype": "Int",
+   "label": "No of bags"
+  },
+  {
+   "fieldname": "tons",
+   "fieldtype": "Float",
+   "label": "Tons"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Text",
+   "label": "Remarks"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-04-08 10:09:09.571269",
+ "modified_by": "Administrator",
+ "module": "Nevira Workflow",
+ "name": "Grits Log Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

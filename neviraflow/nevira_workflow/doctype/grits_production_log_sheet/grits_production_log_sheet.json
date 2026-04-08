@@ -1,0 +1,237 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:GP-{YY}-{MM}-{####}",
+ "creation": "2026-04-07 14:04:24.179639",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_o7sl",
+  "amended_from",
+  "grits_plant_no",
+  "shift",
+  "date",
+  "start_time",
+  "end_time",
+  "column_break_2aw5",
+  "store_keeper",
+  "operator",
+  "coordinator",
+  "grits_products_section",
+  "grits_log_table",
+  "summary_section",
+  "grits_products_summary",
+  "section_break_jgp0",
+  "operator_remarks",
+  "column_break_ls1r",
+  "coordinator_remarks",
+  "column_break_gwlx",
+  "storekeeper_remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_o7sl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Grits Production Log Sheet",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "grits_plant_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Grits Plant No",
+   "options": "Workstation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shift",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Shift",
+   "options": "Shift Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Start Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_time",
+   "fieldtype": "Time",
+   "label": "End Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "store_keeper",
+   "fieldtype": "Link",
+   "label": "Store Keeper",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "operator",
+   "fieldtype": "Link",
+   "label": "Operator",
+   "link_filters": "[[\"Employee\",\"department\",\"=\",\"Production - NML\"]]",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "coordinator",
+   "fieldtype": "Link",
+   "label": "Coordinator",
+   "link_filters": "[[\"Employee\",\"department\",\"=\",\"Production - NML\"]]",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "operator_remarks",
+   "fieldtype": "Long Text",
+   "label": "Operator Remarks",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "coordinator_remarks",
+   "fieldtype": "Text",
+   "label": "Coordinator Remarks",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "grits_log_table",
+   "fieldtype": "Table",
+   "label": "Grits Log Table",
+   "options": "Grits Log Table"
+  },
+  {
+   "fieldname": "column_break_2aw5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grits_products_section",
+   "fieldtype": "Section Break",
+   "label": "Grits products"
+  },
+  {
+   "fieldname": "section_break_jgp0",
+   "fieldtype": "Section Break",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_ls1r",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_gwlx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "storekeeper_remarks",
+   "fieldtype": "Text",
+   "label": "Storekeeper remarks"
+  },
+  {
+   "fieldname": "summary_section",
+   "fieldtype": "Section Break",
+   "label": "Summary"
+  },
+  {
+   "fieldname": "grits_products_summary",
+   "fieldtype": "Table",
+   "label": "Grits Products Summary",
+   "options": "Grits Products Summary Table",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-08 11:04:52.602675",
+ "modified_by": "Administrator",
+ "module": "Nevira Workflow",
+ "name": "Grits Production Log Sheet",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Manufacturing User",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Manufacturing Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "translated_doctype": 1
+}

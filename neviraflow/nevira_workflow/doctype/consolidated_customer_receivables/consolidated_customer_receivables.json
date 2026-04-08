@@ -9,7 +9,7 @@
   "from_date",
   "to_date",
   "company",
-  "get_ledger_transactions",
+  "print_ledger_transactions",
   "column_break_n9ir",
   "customer",
   "customer_name",
@@ -134,15 +134,15 @@
   },
   {
    "default": "1",
-   "fieldname": "get_ledger_transactions",
+   "fieldname": "print_ledger_transactions",
    "fieldtype": "Check",
-   "label": "Get Ledger Transactions"
+   "label": "Print Ledger Transactions"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-07 12:31:23.319013",
+ "modified": "2026-04-07 12:45:22.420250",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",
