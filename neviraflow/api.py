@@ -531,3 +531,23 @@ def set_difference_account_manufacturing(doc, method=None):
                 expense_account = frappe.db.get_value("Item Default",{"parent": row.item_code},"expense_account")
                 
 
+def prevent_sales_order_closure(doc, method=None):
+    """
+    Prevent closure of sales orders by a user who is not a System Manager
+    """
+    if doc.is_new():
+        return
+    
+    original_doc = frappe.get_doc("Sales Order", doc.name)
+
+    if original_doc.status == doc.status: # type: ignore
+        return
+    
+    if original_doc.status in ['On Hold','Closed']: # pyright: ignore[reportAttributeAccessIssue]
+        user_roles = frappe.get_roles(frappe.session.user)
+        if "System Manager" not in user_roles:
+            frappe.throw(
+                title = "Permission Denied",
+                msg = "Only system managers are allowed to Close or Hold a sales order"
+            )
+

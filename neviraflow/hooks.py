@@ -253,7 +253,10 @@ doc_events = {
             "neviraflow.credit_limit_check.validate_credit_limit",
             "neviraflow.api.check_zero_rate_items",
             "neviraflow.api.validate_qty_bags"
-            ]
+            ],
+        "on_update":"neviraflow.api.prevent_sales_order_closures",
+        "on_update_after_submit":"neviraflow.api.prevent_sales_order_closures",
+        "validate": "neviraflow.api.prevent_sales_order_closures",
     },
     "Sales Invoice": {
         "before_validate": "neviraflow.procurement.custom_material_request.before_validate_sales_invoice",
