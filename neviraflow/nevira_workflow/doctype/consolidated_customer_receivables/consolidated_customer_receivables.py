@@ -52,6 +52,14 @@ class ConsolidatedCustomerReceivables(Document):
             if getdate(self.from_date) > getdate(self.to_date):
                 frappe.throw("From Date cannot be after To Date")
 
+    def before_submit(self):
+        pdc_total = 0.0
+        for pdc_item in self.pending_pd_cheques:
+            pdc_total += pdc_item.amount
+        
+        self.total_pdc_amount = pdc_total
+
+
     def fetch_general_ledger_transactions(self):
         """
         Fetch the general ledger transactions based on the selected from date and to date

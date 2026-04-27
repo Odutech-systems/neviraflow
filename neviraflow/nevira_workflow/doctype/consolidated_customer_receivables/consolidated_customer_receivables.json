@@ -24,7 +24,8 @@
   "unpaid_invoices",
   "ageing_summary",
   "pending_pd_cheques",
-  "total_outstanding_amount"
+  "total_outstanding_amount",
+  "total_pdc_amount"
  ],
  "fields": [
   {
@@ -151,12 +152,17 @@
    "fieldtype": "Data",
    "label": "Sales Person Email",
    "read_only": 1
+  },
+  {
+   "fieldname": "total_pdc_amount",
+   "fieldtype": "Float",
+   "label": "Total PDC Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-27 14:53:10.175747",
+ "modified": "2026-04-28 01:46:10.853441",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",
