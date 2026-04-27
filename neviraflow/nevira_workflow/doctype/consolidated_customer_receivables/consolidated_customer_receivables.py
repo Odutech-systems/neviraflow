@@ -41,7 +41,10 @@ class ConsolidatedCustomerReceivables(Document):
         self.email_id = email_id
         self.phone_number = phone_number
         self.customer_name = customer_name
-        
+
+        sales_person_query = frappe.db.get_value('Sales Team', {"parent":self.customer, "parenttype":"Customer"}, 'sales_person')
+        self.sales_person = sales_person_query or ""
+        self.sales_person_email = frappe.db.get_value('Customer', self.customer, 'account_manager')
         self.total_outstanding_amount = self.get_customer_balance()
 
     def validate_dates(self):

@@ -149,13 +149,14 @@
   {
    "fieldname": "sales_person_email",
    "fieldtype": "Data",
-   "label": "Sales Person Email"
+   "label": "Sales Person Email",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-27 14:13:11.639178",
+ "modified": "2026-04-27 14:53:10.175747",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",
