@@ -10,6 +10,7 @@
   "account",
   "voucher_type",
   "voucher_no",
+  "export_series",
   "cheque_reference_no",
   "debit",
   "credit",
@@ -61,20 +62,22 @@
    "fieldname": "account",
    "fieldtype": "Data",
    "label": "Account"
+  },
+  {
+   "fieldname": "export_series",
+   "fieldtype": "Data",
+   "label": "Export series"
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-03-22 21:28:35.639938",
+ "modified": "2026-04-27 15:08:50.757278",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "All Customer Transactions",
  "owner": "Administrator",
  "permissions": [],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

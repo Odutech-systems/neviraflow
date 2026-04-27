@@ -9,6 +9,7 @@
   "posting_date",
   "voucher_type",
   "voucher_no",
+  "export_series",
   "due_date",
   "invoiced_amount",
   "credit_note",
@@ -85,20 +86,22 @@
    "fieldname": "outstanding_amount",
    "fieldtype": "Float",
    "label": "Outstanding Amount"
+  },
+  {
+   "fieldname": "export_series",
+   "fieldtype": "Data",
+   "label": "Export series"
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-11-28 10:23:39.112161",
+ "modified": "2026-04-27 15:09:50.567150",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Accounts Receivable Data",
  "owner": "Administrator",
  "permissions": [],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
