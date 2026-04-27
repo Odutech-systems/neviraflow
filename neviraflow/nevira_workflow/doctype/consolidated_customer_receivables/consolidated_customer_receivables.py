@@ -49,7 +49,7 @@ class ConsolidatedCustomerReceivables(Document):
         self.total_outstanding_amount = self.get_customer_balance()
 
         ## Get and set the party's account currency
-        party_account = get_party_account("Customer",self.customer, "NEVIRA MINERALS LTD")
+        party_account = get_party_account("Customer",self.customer, "NEVIRA MINERALS LIMITED")
         currency = frappe.db.get_value("Account", party_account, "account_currency")
         self.account_currency = currency
 
