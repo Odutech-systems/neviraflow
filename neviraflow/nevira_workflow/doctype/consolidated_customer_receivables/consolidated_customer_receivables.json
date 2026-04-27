@@ -156,13 +156,15 @@
   {
    "fieldname": "total_pdc_amount",
    "fieldtype": "Float",
-   "label": "Total PDC Amount"
+   "label": "Total PDC Amount",
+   "precision": "2",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-28 01:46:10.853441",
+ "modified": "2026-04-28 01:51:56.717659",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",

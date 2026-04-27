@@ -53,9 +53,10 @@ class ConsolidatedCustomerReceivables(Document):
                 frappe.throw("From Date cannot be after To Date")
 
     def before_submit(self):
-        pdc_total = 0.0
+        pdc_total = 0
+
         for pdc_item in self.pending_pd_cheques:
-            pdc_total += pdc_item.amount
+            pdc_total += pdc_item.amount or 0
         
         self.total_pdc_amount = pdc_total
 
