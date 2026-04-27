@@ -14,6 +14,7 @@
   "print_ledger_transactions",
   "column_break_n9ir",
   "customer",
+  "account_currency",
   "customer_name",
   "payment_terms",
   "credit_limit",
@@ -159,12 +160,18 @@
    "label": "Total PDC Amount",
    "precision": "2",
    "read_only": 1
+  },
+  {
+   "fieldname": "account_currency",
+   "fieldtype": "Data",
+   "label": "Account Currency",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-28 01:51:56.717659",
+ "modified": "2026-04-28 01:59:43.279448",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",

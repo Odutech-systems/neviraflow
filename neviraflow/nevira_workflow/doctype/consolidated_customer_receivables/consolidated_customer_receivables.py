@@ -8,6 +8,7 @@ from erpnext.accounts.report.accounts_receivable.accounts_receivable import exec
 from erpnext.accounts.report.accounts_receivable_summary.accounts_receivable_summary import execute as ar_summary_execute
 from erpnext.accounts.report.general_ledger.general_ledger import execute as gl_execute
 from frappe.utils import add_days, today, getdate, flt
+from erpnext.accounts.party import get_party_account, get_party_details
 from erpnext.accounts.party import get_due_date, get_party_account, get_party_details
 
 
@@ -46,6 +47,11 @@ class ConsolidatedCustomerReceivables(Document):
         self.sales_person = sales_person_query or ""
         self.sales_person_email = frappe.db.get_value('Customer', self.customer, 'account_manager')
         self.total_outstanding_amount = self.get_customer_balance()
+
+        ## Get and set the party's account currency
+        party_account = get_party_account("Customer",self.customer, "NEVIRA MINERALS LTD")
+        currency = frappe.db.get_value("Account", party_account, "account_currency")
+        self.account_currency = currency
 
     def validate_dates(self):
         if self.to_date and self.from_date:
