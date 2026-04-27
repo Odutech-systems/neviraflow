@@ -9,6 +9,8 @@
   "from_date",
   "to_date",
   "company",
+  "sales_person",
+  "sales_person_email",
   "print_ledger_transactions",
   "column_break_n9ir",
   "customer",
@@ -137,12 +139,23 @@
    "fieldname": "print_ledger_transactions",
    "fieldtype": "Check",
    "label": "Print Ledger Transactions"
+  },
+  {
+   "fieldname": "sales_person",
+   "fieldtype": "Data",
+   "label": "Sales Person",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sales_person_email",
+   "fieldtype": "Data",
+   "label": "Sales Person Email"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-07 12:45:22.420250",
+ "modified": "2026-04-27 14:13:11.639178",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",
@@ -220,7 +233,6 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
