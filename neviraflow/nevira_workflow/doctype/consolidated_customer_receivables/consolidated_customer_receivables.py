@@ -63,7 +63,8 @@ class ConsolidatedCustomerReceivables(Document):
             "party_type": "Customer",
             "party": [self.customer],
             "group_by": "Group by Voucher (Consolidated)",
-            "show_opening_entries": 1
+            "show_opening_entries": 1,
+            "add_values_in_transaction_currency":1
         }
        
         filters_  = frappe._dict(filters)
@@ -80,21 +81,29 @@ class ConsolidatedCustomerReceivables(Document):
 
                 for row in all_transactions_list:
                     cheque_ref = ""
+                    export_series = ""
+
                     if row.get("voucher_type") == "Payment Entry":
                         pe_number = row.get("voucher_no")
                         cheque_ref += frappe.db.get_value("Payment Entry",pe_number, "reference_no")
                         currency = frappe.db.get_value("Account",row.get("account"),"account_currency")
+
+                    if row.get("voucher_type") == "Sales Invoice":
+                        invoice_id = row.get("voucher_no")
+                        series = frappe.db.get_value('Sales Invoice', invoice_id,"export_series") or ""
+                        export_series += series
 
                     self.append("all_transactions",{
                         "posting_date":row.get("posting_date"),
                         "account": row.get("account"),
                         "voucher_type":row.get("voucher_type"),
                         "voucher_no":row.get("voucher_no"),
+                        "export_series": export_series,
                         "cheque_reference_no": cheque_ref,
                         "debit": flt(row.get("debit")),
                         "credit": flt(row.get("credit")),
                         "balance":flt(row.get("balance")),
-                        "account_currency":"KES"
+                        "account_currency":row.get("transaction_currency")
                     })
         except Exception as e:
             frappe.log_error(f"Error encountered in fetching and populating general ledger data: {str(e)}")
@@ -126,12 +135,22 @@ class ConsolidatedCustomerReceivables(Document):
             receivables_data = ar_execute(filters_)
             if receivables_data:
                 receivables_list = receivables_data[1]
+
                 if len(receivables_list) > 0:
                     for row in receivables_list:
+
+                        export_series = ""
+                        if row.get("voucher_type") == "Sales Invoice":
+
+                            invoice_id = row.get("voucher_no")
+                            series = frappe.db.get_value('Sales Invoice', invoice_id, "export_series") or ""
+                            export_series += series
+
                         self.append("unpaid_invoices",{
                             "posting_date": row.get("posting_date"),
                             "voucher_type": row.get("voucher_type"),
                             "voucher_no": row.get("voucher_no"),
+                            "export_series": export_series,
                             "due_date": row.get("due_date") if row.get("due_date") else "",
                             "invoiced_amount": flt(row.get("invoice_grand_total")),
                             "credit_note": flt(row.get("credit_note")),
