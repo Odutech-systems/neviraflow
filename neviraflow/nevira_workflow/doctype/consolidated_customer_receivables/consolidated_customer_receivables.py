@@ -66,6 +66,8 @@ class ConsolidatedCustomerReceivables(Document):
             "show_opening_entries": 1,
             "add_values_in_transaction_currency":1
         }
+
+       
        
         filters_  = frappe._dict(filters)
 
@@ -122,10 +124,10 @@ class ConsolidatedCustomerReceivables(Document):
             "party": [self.customer],
             "ageing_based_on": "Due Date",
             "range": "30, 60, 90, 120",
-            "calculate_ageing_with": "Today Date"
+            "calculate_ageing_with": "Today Date",
+            "in_party_currency": 1
         }
         
-
         filters_  = frappe._dict(filters)
         
         ### Before populating the child table with data, first clear the child table
@@ -160,7 +162,8 @@ class ConsolidatedCustomerReceivables(Document):
                             "range3": flt(row.get("range3")),
                             "range4": flt(row.get("range4")),
                             "range5": flt(row.get("range5")),
-                            "outstanding_amount": flt(row.get("outstanding"))
+                            "outstanding_amount": flt(row.get("outstanding")),
+                            "currency": row.get("currency")
                         })
         except Exception as e:
             frappe.log_error(f"Error in fetching the accounts receivables data {str(e)}")
