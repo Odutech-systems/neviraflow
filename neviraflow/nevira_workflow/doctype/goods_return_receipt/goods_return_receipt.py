@@ -29,6 +29,7 @@ class GoodsReturnReceipt(Document):
 	def send_mail_after_submit(self):
 		## Send an email to users after submit
 		mail_list = ["billy.franks@neviraminerals.com",
+			   		"moses.njue@neviraminerals.com",
 			   		"sales@neviraminerals.com",
 					"fiona@neviraminerals.com",
 			   		"jackline.akinyi@neviraminerals.com",
