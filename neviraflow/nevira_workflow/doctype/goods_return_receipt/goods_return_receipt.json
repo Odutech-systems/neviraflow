@@ -90,7 +90,8 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Sales Person",
-   "options": "Sales Person"
+   "options": "Sales Person",
+   "read_only": 1
   },
   {
    "fieldname": "return_details_column",
@@ -138,7 +139,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-06-04 11:17:20.421819",
+ "modified": "2026-06-15 09:08:18.306527",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Goods Return Receipt",
