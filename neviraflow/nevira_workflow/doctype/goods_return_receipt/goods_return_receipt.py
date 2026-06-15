@@ -35,7 +35,7 @@ class GoodsReturnReceipt(Document):
 			   		"sales@neviraminerals.com",
 					"fiona@neviraminerals.com",
 			   		"jackline.akinyi@neviraminerals.com",
-					"steve@neviraminerals.com"]
+					"steve@neviraminerals.com", "edwinmjoel@gmail.com"]
 					
 		subject = "ALERT: Potential Credit Note or Inventory Check due to return"
 		sender = "systems@neviraminerals.com"
