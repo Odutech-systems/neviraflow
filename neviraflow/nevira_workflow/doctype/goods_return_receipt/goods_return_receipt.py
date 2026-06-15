@@ -3,7 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
-from frappe.utils import getdate
+from frappe.utils import getdate, get_datetime
 
 ## Have a button action that can be triggered at any time to send an email to users, as an API 
 ## On click of the button, an email is sent
@@ -17,6 +17,7 @@ class GoodsReturnReceipt(Document):
 		self.customer_name = customer_name
 		sales_person = frappe.db.get_value("Sales Team", {"parent":self.customer, "parenttype":"Customer"}, "sales_person")
 		self.sales_person = sales_person
+		self.arrival_date = get_datetime()
 
 	def after_insert(self):
 		self.send_mail_after_submit()
