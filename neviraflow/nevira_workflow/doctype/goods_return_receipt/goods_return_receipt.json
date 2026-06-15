@@ -55,7 +55,7 @@
   },
   {
    "fieldname": "vehicle_number",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
@@ -146,7 +146,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-06-15 09:11:24.977201",
+ "modified": "2026-06-15 11:37:24.938161",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Goods Return Receipt",
