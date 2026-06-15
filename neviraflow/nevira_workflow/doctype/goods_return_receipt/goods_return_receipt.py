@@ -12,7 +12,7 @@ from frappe.utils import getdate
 class GoodsReturnReceipt(Document):
 	def before_save(self):
 		## Set details on the document before it is saved
-		customer, customer_name, sales_person = self.get_customer_name()
+		customer, customer_name = self.get_customer_name()
 		self.customer = customer
 		self.customer_name = customer_name
 		sales_person = frappe.db.get_value("Sales Team", {"parent":self.customer, "parenttype":"Customer"}, "sales_person")
@@ -24,7 +24,7 @@ class GoodsReturnReceipt(Document):
 	def get_customer_name(self):
 		## Extract some details and return values
 		customer_id = frappe.db.get_value('Delivery Note',self.delivery_note,'customer')
-		customer_name = frappe.db.get_value('Delivery Note', self.elivery_note,'customer_name')
+		customer_name = frappe.db.get_value('Delivery Note', self.delivery_note,'customer_name')
 		return customer_id, customer_name
 
 	def send_mail_after_submit(self):
