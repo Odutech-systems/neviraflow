@@ -43,7 +43,7 @@ class GoodsReturnReceipt(Document):
 			recipients = mail_list,
 			sender = sender,
 			subject = subject,
-			message = f"Please check the return for delivery note {self.delivery_note}.\nThere is a possible need to create a credit note or material receipt.",
+			message = f"Please check the return for delivery note https://erp.neviraminerals.com/delivery-note/{self.delivery_note}.\n There is a possible need to create a credit note or material receipt.",
 			reference_doctype = self.doctype,
 			reference_name = self.name
 		)

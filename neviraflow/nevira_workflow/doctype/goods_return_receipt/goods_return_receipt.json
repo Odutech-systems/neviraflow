@@ -19,7 +19,8 @@
   "warehouse_name",
   "return_type",
   "bags_offloaded_on_return",
-  "reason_for_return"
+  "reason_for_return",
+  "attachment"
  ],
  "fields": [
   {
@@ -133,13 +134,19 @@
    "in_standard_filter": 1,
    "label": "Customer Name",
    "read_only": 1
+  },
+  {
+   "description": "Attach a picture of the delivery note from the customer",
+   "fieldname": "attachment",
+   "fieldtype": "Attach Image",
+   "label": "Attachment"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-06-15 09:08:18.306527",
+ "modified": "2026-06-15 09:11:24.977201",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Goods Return Receipt",
