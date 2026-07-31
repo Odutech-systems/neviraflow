@@ -28,7 +28,7 @@ def get_worked_days_on_holidays(employee):
                             `tabAttendance`
                             WHERE
                             docstatus = 1
-                            AND attendance_date IN ('2026-05-01','2026-05-27')
+                            AND attendance_date IN ('2026-10-10')
 			            AND status = 'Present'
                             AND employee = %s
                             GROUP BY
@@ -190,10 +190,10 @@ def block_submission_if_low_attendance(doc, method):
     Prevents submission of Salary Slip if attendance ratio is below 75%.
     """
 
-    if doc.custom_marked_attendance_ratio > 80:
+    if doc.custom_marked_attendance_ratio > 75:
         return
 
-    if doc.custom_marked_attendance_ratio < 80:
+    if doc.custom_marked_attendance_ratio < 75:
         frappe.throw(
             f"Attendance Ratio is {doc.custom_marked_attendance_ratio:.2f}%. "
             "Salary Slip cannot be submitted if attendance ratio is below 75%. " \

@@ -26,6 +26,7 @@
   "ageing_summary",
   "pending_pd_cheques",
   "total_outstanding_amount",
+  "currency",
   "total_pdc_amount"
  ],
  "fields": [
@@ -166,12 +167,22 @@
    "fieldtype": "Data",
    "label": "Account Currency",
    "read_only": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "fieldname": "currency",
+   "fieldtype": "Data",
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Currency",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-28 01:59:43.279448",
+ "modified": "2026-07-31 10:31:31.624760",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Consolidated Customer Receivables",

@@ -46,7 +46,8 @@ class ConsolidatedCustomerReceivables(Document):
         sales_person_query = frappe.db.get_value('Sales Team', {"parent":self.customer, "parenttype":"Customer"}, 'sales_person')
         self.sales_person = sales_person_query or ""
         self.sales_person_email = frappe.db.get_value('Customer', self.customer, 'account_manager')
-        self.total_outstanding_amount = self.get_customer_balance()
+        self.total_outstanding_amount = self.get_customer_balance()[0]  ## Get the balance from the ledger
+        self.currency = self.get_customer_balance()[1]  ## Get the currency from the ledger
 
         ## Get and set the party's account currency
         party_account = get_party_account("Customer",self.customer, "NEVIRA MINERALS LIMITED")
@@ -134,7 +135,7 @@ class ConsolidatedCustomerReceivables(Document):
         """
         filters = {
             "company": self.company,
-            "report_date": getdate(),
+            "report_date": getdate(self.to_date),
             "party_type": "Customer",
             "party": [self.customer],
             "ageing_based_on": "Due Date",
@@ -191,7 +192,7 @@ class ConsolidatedCustomerReceivables(Document):
         """
         filters = {
             "company": self.company,
-            "report_date": getdate(),
+            "report_date": getdate(self.to_date),
             "party_type": "Customer",
             "party":[self.customer],
             "ageing_based_on": "Due Date",
@@ -233,12 +234,19 @@ class ConsolidatedCustomerReceivables(Document):
     ## Get the customer's balance from the ledger 
     def get_customer_balance(self):
         customer_id = self.customer
-        balance_query = frappe.db.sql(""" SELECT (SUM(debit) - SUM(credit)) AS balance 
-                FROM `tabGL Entry` WHERE party = %s""",
+        balance_query = frappe.db.sql(""" 
+                    SELECT 
+                        party, 
+                        transaction_currency,
+                        (SUM(debit_in_transaction_currency) - SUM(credit_in_transaction_currency)) AS balance 
+                FROM `tabGL Entry` WHERE party = %s 
+                AND is_cancelled = 0
+                GROUP BY party """,
                 (customer_id), as_dict=True) 
         if balance_query:
             balance = balance_query[0]["balance"]
-            return balance
+            transaction_currency = balance_query[0]["transaction_currency"]
+            return balance, transaction_currency
         else:
             return 0.00
 
