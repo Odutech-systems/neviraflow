@@ -550,6 +550,3 @@ def prevent_sales_order_closure(doc, method=None):
                 title = "Permission Denied",
                 msg = "Only system managers are allowed to Close or Hold a sales order"
             )
-
-def checks():
-    pass
