@@ -290,4 +290,6 @@ def get_balance(customer):
         return balance
     else:
         return 0.00
-    
+
+def checker():
+    pass
