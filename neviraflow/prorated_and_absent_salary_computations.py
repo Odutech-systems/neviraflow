@@ -190,13 +190,13 @@ def block_submission_if_low_attendance(doc, method):
     Prevents submission of Salary Slip if attendance ratio is below 75%.
     """
 
-    if doc.custom_marked_attendance_ratio > 75:
+    if doc.custom_marked_attendance_ratio > 60:
         return
 
-    if doc.custom_marked_attendance_ratio < 75:
+    if doc.custom_marked_attendance_ratio < 60:
         frappe.throw(
             f"Attendance Ratio is {doc.custom_marked_attendance_ratio:.2f}%. "
-            "Salary Slip cannot be submitted if attendance ratio is below 75%. " \
+            "Salary Slip cannot be submitted if attendance ratio is below 60%. " \
             "Employee has an issue with their attendance within the month, which need to be investigated and marked before submitting the salary slip.!"
         )
 
