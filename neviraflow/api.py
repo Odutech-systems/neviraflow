@@ -11,7 +11,7 @@ from frappe.model.naming import make_autoname
 from frappe.utils.pdf import get_pdf
 import yaml
 from frappe.utils import today
-from frappe.utils import nowdate, nowtime, date_diff, time_diff_in_hours, getdate, get_datetime
+from frappe.utils import nowdate, nowtime, date_diff, time_diff_in_hours, getdate, get_datetime, cint
 
 
 
