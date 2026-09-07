@@ -11,7 +11,7 @@ from frappe.model.naming import make_autoname
 from frappe.utils.pdf import get_pdf
 import yaml
 from frappe.utils import today
-from frappe.utils import nowdate, nowtime, date_diff, time_diff_in_hours, getdate, get_datetime, cint
+from frappe.utils import nowdate, nowtime, date_diff, time_diff_in_hours, getdate, get_datetime, cint, add_days
 
 
 
@@ -183,7 +183,8 @@ def handle_pick_list_and_qty_patch(doc, method):
 
             item.set("__readonly", True)
  
-            
+
+
 # Endpoint to accept payloads from the weighbridge software and ensure the
 # Vehicle exists, then create/submit a Weighbridge Management document.
 
@@ -543,7 +544,7 @@ def prevent_sales_order_closure(doc, method=None):
     if original_doc.status == doc.status: # type: ignore
         return
     
-    if original_doc.status in ['On Hold','Closed']: # pyright: ignore[reportAttributeAccessIssue]
+    if original_doc.status in ['On Hold','Closed']:
         user_roles = frappe.get_roles(frappe.session.user)
         if "System Manager" not in user_roles:
             frappe.throw(
@@ -551,6 +552,20 @@ def prevent_sales_order_closure(doc, method=None):
                 msg = "Only system managers are allowed to Close or Hold a sales order"
             )
 
+
+
+def get_due_date(doc, method = None):
+    posting_date = getdate(doc.posting_date)
+    credit_days = frappe.db.get_value("Payment Term", doc.payment_terms_template, "credit_days")
+    computed_due_date = add_days(posting_date, credit_days)
+    payment_schedules = doc.payment_schedule
+
+    for row in payment_schedules:
+            row.due_date = computed_due_date
+
+    doc.save()
+    
+    return computed_due_date
 
 ## Api end-point to get the consolidated customer data
 frappe.whitelist(allow_guest = True)
