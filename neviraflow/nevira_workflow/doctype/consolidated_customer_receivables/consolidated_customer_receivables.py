@@ -238,7 +238,7 @@ class ConsolidatedCustomerReceivables(Document):
                     SELECT 
                         party, 
                         transaction_currency,
-                        (SUM(debit_in_transaction_currency) - SUM(credit_in_transaction_currency)) AS balance 
+                        (SUM(debit_in_account_currency) - SUM(credit_in_account_currency)) AS balance 
                 FROM `tabGL Entry` WHERE party = %s 
                 AND is_cancelled = 0
                 GROUP BY party """,

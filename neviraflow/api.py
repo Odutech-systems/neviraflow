@@ -553,14 +553,10 @@ def prevent_sales_order_closure(doc, method=None):
 
 
 ## Api end-point to get the consolidated customer data
-frappe.whitelist(allow_guest = False)
+frappe.whitelist(allow_guest = True)
 def get_customer_list(search=None, page = 1, page_length=40):
-
-
     if not frappe.has_permission("Customer",ptype = "read"):
         frappe.throw(_("You do not have permission to view customers"),frappe.PermissionError())
-
-
 
     page = max(cint(page),1)
 
