@@ -8,9 +8,7 @@ from erpnext.accounts.report.accounts_receivable.accounts_receivable import exec
 from erpnext.accounts.report.accounts_receivable_summary.accounts_receivable_summary import execute as ar_summary_execute
 from erpnext.accounts.report.general_ledger.general_ledger import execute as gl_execute
 from frappe.utils import add_days, today, getdate, flt
-from erpnext.accounts.party import get_party_account, get_party_details
-from erpnext.accounts.party import get_due_date, get_party_account, get_party_details
-
+from erpnext.accounts.party import get_party_account,get_party_account_currency, get_party_details, get_due_date
 
 class ConsolidatedCustomerReceivables(Document):
     def validate(self):
@@ -234,6 +232,7 @@ class ConsolidatedCustomerReceivables(Document):
     ## Get the customer's balance from the ledger 
     def get_customer_balance(self):
         customer_id = self.customer
+        party_currency = get_party_account_currency("Customer",customer_id, self.company)
         balance_query = frappe.db.sql(""" 
                     SELECT 
                         party, 
@@ -248,7 +247,8 @@ class ConsolidatedCustomerReceivables(Document):
             transaction_currency = balance_query[0]["transaction_currency"]
             return balance, transaction_currency
         else:
-            return 0.00
+            balance = 0.00
+            return balance, party_currency
 
     def fetch_customer_pd_cheques(self):
         customer_id = self.customer
