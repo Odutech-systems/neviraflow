@@ -568,7 +568,7 @@ def get_due_date(doc, method = None):
     return computed_due_date
 
 ## Api end-point to get the consolidated customer data
-frappe.whitelist(allow_guest = True)
+frappe.whitelist(allow_guest = False)
 def get_customer_list(search=None, page = 1, page_length=40):
     if not frappe.has_permission("Customer",ptype = "read"):
         frappe.throw(_("You do not have permission to view customers"),frappe.PermissionError())
@@ -666,7 +666,7 @@ def get_customer_list(search=None, page = 1, page_length=40):
 
 
 ## API end-point to get a single customer 
-frappe.whitelist(allow_guest=True)
+frappe.whitelist(allow_guest=False)
 def get_single_customer(customer_id):
     """
     Return a single customer
