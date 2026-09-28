@@ -566,7 +566,7 @@ def get_due_date(doc, method = None):
 
 
 ## Get the employe section name after selecting the employee's section
-def get_employee_section(doc, methods = None):
+def get_employee_section(doc, method = None):
     section = doc.custom_section
     section_name = frappe.db.get_value("Employee Section", section, "section_name")
     doc.custom_section_name = section_name
