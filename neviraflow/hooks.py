@@ -267,8 +267,8 @@ doc_events = {
         "before_save": [
             "neviraflow.api.assign_export_metadata",
             "neviraflow.api.check_zero_rate_items",
-            #"neviraflow.api.validate_qty_bags"
-           # "neviraflow.api.handle_pick_list_and_qty_patch"
+            "neviraflow.api.validate_qty_bags"
+            "neviraflow.api.handle_pick_list_and_qty_patch"
         ]
     },
     "Pick List": {
@@ -291,7 +291,10 @@ doc_events = {
         "after_insert": "neviraflow.attendance_handlers.after_insert_action",
     },
     "Employee": {
-        "before_save": "neviraflow.employee_rate.set_daily_rate",
+        "before_save": [
+            "neviraflow.employee_rate.set_daily_rate",
+            "neviraflow.api.get_employee_section"
+        ],
         "validate": "neviraflow.employee_rate.validate_employee_ctc"
 
     },
