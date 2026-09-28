@@ -267,7 +267,7 @@ doc_events = {
         "before_save": [
             "neviraflow.api.assign_export_metadata",
             "neviraflow.api.check_zero_rate_items",
-            "neviraflow.api.validate_qty_bags"
+            "neviraflow.api.validate_qty_bags",
             "neviraflow.api.handle_pick_list_and_qty_patch"
         ]
     },
