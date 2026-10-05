@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from email import message
 from typing import Optional
 from datetime import datetime, timedelta
 
@@ -549,20 +550,27 @@ def prevent_sales_order_closure(doc, method=None):
             )
 
 
-
+## Update payment in sales invoice based on customer's payment terms.
 def update_due_date(doc, method = None):
     posting_date = getdate(doc.posting_date)
+    
     customer_terms = frappe.db.get_value('Customer',doc.customer, 'payment_terms')
-    credit_days = frappe.db.get_value("Payment Term", customer_terms, "credit_days")
-    if not credit_days:
+
+    if not customer_terms:
         return
     
+    credit_days = frappe.db.get_value("Payment Terms Template Detail", {"parent": customer_terms, "parenttype":"Payment Terms Template"}, "credit_days")
+    credit_days = cint(credit_days or 0)
+
     computed_due_date = add_days(posting_date, credit_days)
     
     for row in doc.payment_schedule:
         row.due_date = computed_due_date
-    doc.save()
 
+    doc.due_date = getdate(computed_due_date)
+
+    if getdate(doc.due_date) < getdate(doc.posting_date):
+        frappe.msgprint(msg="Due date cannot be before posting date", title="Due date incorrect",raise_exception=True)
 
 
 ## Get the employe section name after selecting the employee's section
