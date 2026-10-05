@@ -260,7 +260,8 @@ doc_events = {
         "before_save": [
             "neviraflow.procurement.custom_material_request.before_save_sales_invoice",
             "neviraflow.api.assign_export_metadata",
-            "neviraflow.api.check_zero_rate_items"
+            "neviraflow.api.check_zero_rate_items",
+            "neviraflow.api.update_due_date"
         ]
     },
     "Delivery Note": {

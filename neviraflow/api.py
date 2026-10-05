@@ -550,18 +550,18 @@ def prevent_sales_order_closure(doc, method=None):
 
 
 
-def get_due_date(doc, method = None):
+def update_due_date(doc, method = None):
     posting_date = getdate(doc.posting_date)
-    credit_days = frappe.db.get_value("Payment Term", doc.payment_terms_template, "credit_days")
-    computed_due_date = add_days(posting_date, credit_days)
-    payment_schedules = doc.payment_schedule
-
-    for row in payment_schedules:
-            row.due_date = computed_due_date
-
-    doc.save()
+    customer_terms = frappe.db.get_value('Customer',doc.customer, 'payment_terms')
+    credit_days = frappe.db.get_value("Payment Term", customer_terms, "credit_days")
+    if not credit_days:
+        return
     
-    return computed_due_date
+    computed_due_date = add_days(posting_date, credit_days)
+    
+    for row in doc.payment_schedule:
+        row.due_date = computed_due_date
+    doc.save()
 
 
 
