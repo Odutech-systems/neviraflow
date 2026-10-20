@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class WeighbridgeItemDetails(Document):
+class WeighbridgeManagementItem(Document):
 	pass

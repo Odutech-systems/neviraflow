@@ -44,6 +44,7 @@
    "fieldname": "product",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Product",
    "options": "Item",
    "reqd": 1
@@ -52,6 +53,7 @@
    "fieldname": "customer",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Customer",
    "options": "Customer",
    "reqd": 1
@@ -59,11 +61,15 @@
   {
    "fieldname": "analysis_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Analysis Date"
   },
   {
    "fieldname": "production_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Production Date"
   },
   {
@@ -74,6 +80,8 @@
   {
    "fieldname": "invoice_number",
    "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Invoice Number"
   },
   {
@@ -85,11 +93,10 @@
    "reqd": 1
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-20 10:58:50.173729",
+ "modified": "2026-10-19 14:05:00.808604",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Certificate of analysis",
@@ -109,7 +116,6 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

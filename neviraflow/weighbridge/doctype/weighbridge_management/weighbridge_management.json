@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "item_type",
+  "company",
   "weight_verification_date",
   "weight_verification_time",
   "has_multiple_weights",
@@ -46,6 +47,7 @@
   "accounts_officer",
   "column_break_rkvl",
   "remarks",
+  "quality_inspection",
   "amended_from"
  ],
  "fields": [
@@ -97,7 +99,7 @@
    "fieldname": "item_details",
    "fieldtype": "Table",
    "label": "Item Details",
-   "options": "Weighbridge Item Details"
+   "options": "Weighbridge Management Item"
   },
   {
    "fieldname": "column_break_atfb",
@@ -304,12 +306,26 @@
    "fieldtype": "Table",
    "label": "Purchased Item List",
    "options": "Weighbridge Purchased Items Detail"
+  },
+  {
+   "default": "NEVIRA MINERALS LIMITED",
+   "fieldname": "company",
+   "fieldtype": "Select",
+   "label": "Company",
+   "options": "NEVIRA MINERALS LIMITED"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "quality_inspection",
+   "fieldtype": "Link",
+   "label": "Quality Inspection",
+   "options": "Quality Inspection"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-22 11:47:38.840798",
+ "modified": "2026-10-20 12:39:25.369077",
  "modified_by": "Administrator",
  "module": "Weighbridge",
  "name": "Weighbridge Management",
@@ -356,7 +372,6 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

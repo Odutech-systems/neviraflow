@@ -9,7 +9,11 @@
   "section_break_bh3z",
   "product",
   "bags_issued",
+  "bags_used",
   "bags_returned",
+  "recycled_bags_issed",
+  "recycled_bags_used",
+  "recycled_bags_returned",
   "raw_material",
   "qc_pass",
   "qc_nc_tons",
@@ -64,20 +68,37 @@
    "fieldname": "bags_returned",
    "fieldtype": "Int",
    "label": "Bags Returned"
+  },
+  {
+   "fieldname": "recycled_bags_used",
+   "fieldtype": "Int",
+   "label": "Recycled bags used"
+  },
+  {
+   "fieldname": "bags_used",
+   "fieldtype": "Int",
+   "label": "Bags used"
+  },
+  {
+   "fieldname": "recycled_bags_issed",
+   "fieldtype": "Int",
+   "label": "Recycled bags issed"
+  },
+  {
+   "fieldname": "recycled_bags_returned",
+   "fieldtype": "Int",
+   "label": "Recycled bags returned"
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-04-08 11:03:34.927441",
+ "modified": "2026-10-15 14:39:46.659894",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Grits Products Summary Table",
  "owner": "Administrator",
  "permissions": [],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

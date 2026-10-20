@@ -17,8 +17,6 @@
   "store_keeper",
   "operator",
   "coordinator",
-  "grits_products_section",
-  "grits_log_table",
   "summary_section",
   "grits_products_summary",
   "section_break_jgp0",
@@ -115,19 +113,8 @@
    "options": "Employee"
   },
   {
-   "fieldname": "grits_log_table",
-   "fieldtype": "Table",
-   "label": "Grits Log Table",
-   "options": "Grits Log Table"
-  },
-  {
    "fieldname": "column_break_2aw5",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "grits_products_section",
-   "fieldtype": "Section Break",
-   "label": "Grits products"
   },
   {
    "fieldname": "section_break_jgp0",
@@ -160,11 +147,10 @@
    "reqd": 1
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-08 11:24:43.166532",
+ "modified": "2026-10-15 11:47:56.982389",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Grits Production Log Sheet",
@@ -242,8 +228,6 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
