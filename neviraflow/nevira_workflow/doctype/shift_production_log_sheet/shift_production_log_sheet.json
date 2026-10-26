@@ -1,6 +1,5 @@
 {
  "actions": [],
- "allow_rename": 1,
  "autoname": "SPLC-.YYYY.-.MM.-.#####",
  "creation": "2025-08-18 01:48:03.984540",
  "doctype": "DocType",
@@ -105,11 +104,10 @@
    "label": "Coordinator Remarks"
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-18 08:15:05.842312",
+ "modified": "2026-10-23 11:04:22.613994",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Shift Production Log Sheet",
@@ -117,6 +115,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -131,7 +130,9 @@
    "write": 1
   },
   {
+   "cancel": 1,
    "create": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
@@ -180,8 +181,9 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1,
+ "track_views": 1
 }

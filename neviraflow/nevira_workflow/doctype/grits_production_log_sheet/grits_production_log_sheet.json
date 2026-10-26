@@ -53,6 +53,7 @@
    "fieldname": "shift",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Shift",
    "options": "Shift Type",
    "reqd": 1
@@ -68,6 +69,7 @@
    "fieldname": "start_time",
    "fieldtype": "Time",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Start Time",
    "reqd": 1
   },
@@ -87,6 +89,8 @@
   {
    "fieldname": "operator",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Operator",
    "link_filters": "[[\"Employee\",\"department\",\"=\",\"Production - NML\"]]",
    "options": "Employee",
@@ -150,7 +154,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-10-15 11:47:56.982389",
+ "modified": "2026-10-26 09:29:16.811196",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Grits Production Log Sheet",
