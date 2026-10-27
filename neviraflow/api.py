@@ -565,7 +565,7 @@ def update_due_date(doc, method = None):
     computed_due_date = add_days(posting_date, credit_days)
     
     for row in doc.payment_schedule:
-        row.due_date = computed_due_date
+        row.due_date = getdate(computed_due_date)
 
     doc.due_date = getdate(computed_due_date)
 
