@@ -42,6 +42,7 @@
    "search_index": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "grits_plant_no",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -50,6 +51,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "shift",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -59,6 +61,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -154,7 +157,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-10-26 09:29:16.811196",
+ "modified": "2026-10-30 11:37:22.118708",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Grits Production Log Sheet",
@@ -162,6 +165,8 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -176,6 +181,8 @@
    "write": 1
   },
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -190,6 +197,8 @@
    "write": 1
   },
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -204,6 +213,8 @@
    "write": 1
   },
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -218,6 +229,8 @@
    "write": 1
   },
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,

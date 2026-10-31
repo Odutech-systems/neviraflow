@@ -11,8 +11,8 @@
   "gate_pass_id",
   "gate_pass_type",
   "date",
-  "time",
   "gate_pass_status",
+  "time",
   "security_officer_name",
   "dispatch_representative",
   "employee_id",
@@ -23,12 +23,11 @@
   "vehicle_registration_number",
   "column_break_slck",
   "delivery_remarks",
-  "supplier_delivery_note",
+  "supplier_lpo",
   "supplier_invoice_number",
   "customer_delivery_note",
   "stores_representative",
   "supplier_name",
-  "purchase_order_reference",
   "customer_name",
   "weighbridge_reference",
   "discrepancy_remarks",
@@ -118,6 +117,7 @@
    "label": "Department"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "driver_name",
    "fieldtype": "Data",
    "label": "Driver Name"
@@ -137,21 +137,17 @@
    "label": "Delivery Remarks"
   },
   {
-   "fieldname": "supplier_delivery_note",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Supplier Delivery Note"
-  },
-  {
    "fieldname": "supplier_invoice_number",
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Supplier Invoice Number"
   },
   {
+   "depends_on": "eval:doc.custom_load_type ==\"FINISHED GOODS\"",
    "fieldname": "customer_delivery_note",
    "fieldtype": "Link",
    "label": "Customer Delivery Note",
+   "mandatory_depends_on": "eval:doc.custom_load_type ==\"FINISHED GOODS\"",
    "options": "Delivery Note"
   },
   {
@@ -162,23 +158,18 @@
    "options": "User"
   },
   {
+   "depends_on": "eval:doc.custom_load_type ==\"PURCHASE MATERIAL RECEIPT\"",
    "fieldname": "supplier_name",
    "fieldtype": "Link",
-   "hidden": 1,
    "label": "Supplier Name",
    "options": "Supplier"
   },
   {
-   "fieldname": "purchase_order_reference",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "label": "Purchase Order Reference ",
-   "options": "Purchase Order"
-  },
-  {
+   "depends_on": "eval:doc.custom_load_type ==\"FINISHED GOODS\" ||doc.custom_load_type == \"SAMPLE\"",
    "fieldname": "customer_name",
    "fieldtype": "Link",
    "label": "Customer Name",
+   "mandatory_depends_on": "eval:doc.custom_load_type ==\"FINISHED GOODS\"",
    "options": "Customer"
   },
   {
@@ -217,12 +208,20 @@
    "fieldtype": "Table",
    "label": "Item List",
    "options": "Gatepass Item Details"
+  },
+  {
+   "depends_on": "eval:doc.custom_load_type ==\"PURCHASE MATERIAL RECEIPT\"",
+   "fieldname": "supplier_lpo",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supplier LPO",
+   "options": "Purchase Order"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-10-27 15:25:48.214098",
+ "modified": "2026-10-29 07:31:06.703449",
  "modified_by": "Administrator",
  "module": "Nevira Gate Pass",
  "name": "Gate Pass",

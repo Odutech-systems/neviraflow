@@ -36,6 +36,7 @@
    "label": "Station Details"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "work_station",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -44,6 +45,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "shift",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -51,14 +53,18 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "shift_start_time",
    "fieldtype": "Datetime",
-   "label": "Shift Start Time"
+   "label": "Shift Start Time",
+   "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "shift_stop_time",
    "fieldtype": "Datetime",
-   "label": "Shift Stop Time"
+   "label": "Shift Stop Time",
+   "reqd": 1
   },
   {
    "fieldname": "shift_log_details",
@@ -107,7 +113,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-10-23 11:04:22.613994",
+ "modified": "2026-10-30 12:02:16.634407",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Shift Production Log Sheet",
