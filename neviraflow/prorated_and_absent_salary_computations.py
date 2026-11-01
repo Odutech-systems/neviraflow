@@ -24,15 +24,12 @@ def get_worked_days_on_holidays(employee):
                         SELECT
                             employee,
                             COUNT(name) AS worked_days
-                            FROM
-                            `tabAttendance`
-                            WHERE
-                            docstatus = 1
+                        FROM `tabAttendance`
+                        WHERE docstatus = 1
                             AND attendance_date IN ('2026-10-10','2026-10-20')
-			            AND status = 'Present'
+			                AND status = 'Present'
                             AND employee = %s
-                            GROUP BY
-                            employee"""
+                        GROUP BY employee"""
     res = frappe.db.sql(worked_days_sql, (employee), as_dict=True)
     return res[0]['worked_days'] if res else 0
 
