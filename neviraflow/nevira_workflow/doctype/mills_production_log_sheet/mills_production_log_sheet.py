@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class ShiftProductionLogSheet(Document):
+class MillsProductionLogSheet(Document):
 	pass

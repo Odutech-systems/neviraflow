@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestShiftProductionLogSheet(FrappeTestCase):
+class TestMillsProductionLogSheet(FrappeTestCase):
 	pass

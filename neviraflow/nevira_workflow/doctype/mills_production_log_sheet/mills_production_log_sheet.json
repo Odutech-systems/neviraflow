@@ -12,6 +12,7 @@
   "shift_stop_time",
   "shift_log_details",
   "production_summary",
+  "machine_stoppages",
   "store_keeper",
   "operator",
   "coordinator",
@@ -25,7 +26,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Shift Production Log Sheet",
+   "options": "Mills Production Log Sheet",
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
@@ -70,33 +71,34 @@
    "fieldname": "shift_log_details",
    "fieldtype": "Table",
    "label": "Shift Log Details",
-   "options": "Shift Log Details",
-   "reqd": 1
+   "options": "Shift Log Details"
   },
   {
    "fieldname": "production_summary",
    "fieldtype": "Table",
    "label": "Production Summary",
-   "options": "Shift Production Summary",
-   "reqd": 1
+   "options": "Shift Production Summary"
   },
   {
    "fieldname": "store_keeper",
-   "fieldtype": "Data",
-   "label": "Store Keeper"
+   "fieldtype": "Link",
+   "label": "Store Keeper",
+   "options": "Employee"
   },
   {
    "fieldname": "operator",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Operator",
+   "options": "Employee",
    "reqd": 1
   },
   {
    "fieldname": "coordinator",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Coordinator",
+   "options": "Employee",
    "reqd": 1
   },
   {
@@ -108,15 +110,21 @@
    "fieldname": "coordinator_remarks",
    "fieldtype": "Text",
    "label": "Coordinator Remarks"
+  },
+  {
+   "fieldname": "machine_stoppages",
+   "fieldtype": "Table",
+   "label": "Machine Stoppages",
+   "options": "Machine Stoppage"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-10-30 12:02:16.634407",
+ "modified": "2026-11-01 22:11:08.795665",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
- "name": "Shift Production Log Sheet",
+ "name": "Mills Production Log Sheet",
  "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
