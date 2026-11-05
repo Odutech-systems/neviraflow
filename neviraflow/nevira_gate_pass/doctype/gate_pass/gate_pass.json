@@ -165,7 +165,7 @@
    "options": "Supplier"
   },
   {
-   "depends_on": "eval:doc.custom_load_type ==\"FINISHED GOODS\" ||doc.custom_load_type == \"SAMPLE\"",
+   "depends_on": "eval:doc.custom_load_type ==\"FINISHED GOODS\" ||doc.custom_load_type == \"SAMPLE\" ||doc.custom_load_type == \"CUSTOMER REPLACEMENT\"",
    "fieldname": "customer_name",
    "fieldtype": "Link",
    "label": "Customer Name",
@@ -221,7 +221,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-10-29 07:31:06.703449",
+ "modified": "2026-11-03 13:05:06.432219",
  "modified_by": "Administrator",
  "module": "Nevira Gate Pass",
  "name": "Gate Pass",
