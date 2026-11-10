@@ -21,6 +21,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Customer",
+   "link_filters": "[[\"Customer\",\"disabled\",\"=\",0]]",
    "options": "Customer",
    "reqd": 1
   },
@@ -35,6 +36,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Product",
+   "link_filters": "[[\"Item\",\"item_group\",\"=\",\"Finished Goods-BULK\"]]",
    "options": "Item",
    "reqd": 1
   },
@@ -43,6 +45,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Warehouse",
+   "link_filters": "[[\"Warehouse\",\"warehouse_type\",\"=\",\"Finished Goods\"]]",
    "options": "Warehouse",
    "reqd": 1
   },
@@ -58,6 +61,7 @@
    "fieldname": "vehicle",
    "fieldtype": "Link",
    "label": "Vehicle",
+   "link_filters": "[[\"Vehicle\",\"custom_disabled\",\"=\",0]]",
    "options": "Vehicle",
    "reqd": 1
   },
@@ -84,7 +88,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-11-10 15:09:36.169903",
+ "modified": "2026-11-10 15:36:29.909428",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "After Midnight Trip",

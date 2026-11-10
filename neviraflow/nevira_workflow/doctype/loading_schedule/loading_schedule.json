@@ -134,8 +134,7 @@
   },
   {
    "fieldname": "after_midgnight_trip",
-   "fieldtype": "Link",
-   "in_list_view": 1,
+   "fieldtype": "Table",
    "label": "After Midnight Trip",
    "options": "After Midnight Trip",
    "reqd": 1
@@ -145,7 +144,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-10 15:18:45.375722",
+ "modified": "2026-11-10 15:22:00.197268",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Loading Schedule",
