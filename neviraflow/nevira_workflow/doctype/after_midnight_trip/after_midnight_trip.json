@@ -8,6 +8,8 @@
   "customer",
   "customer_name",
   "product",
+  "tonnage",
+  "bags",
   "warehouse",
   "driver",
   "vehicle",
@@ -66,12 +68,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "vehicle_type",
-   "fieldtype": "Data",
-   "label": "Vehicle Type",
-   "read_only": 1
-  },
-  {
    "fieldname": "fuel_issued",
    "fieldtype": "Float",
    "label": "Fuel Issued"
@@ -82,13 +78,31 @@
    "fieldtype": "Data",
    "label": "Destination",
    "reqd": 1
+  },
+  {
+   "fieldname": "tonnage",
+   "fieldtype": "Float",
+   "label": "Tonnage",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bags",
+   "fieldtype": "Float",
+   "label": "Bags",
+   "reqd": 1
+  },
+  {
+   "fieldname": "vehicle_type",
+   "fieldtype": "Data",
+   "label": "Vehicle Type",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-11-10 15:36:29.909428",
+ "modified": "2026-11-10 15:49:00.797712",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "After Midnight Trip",
