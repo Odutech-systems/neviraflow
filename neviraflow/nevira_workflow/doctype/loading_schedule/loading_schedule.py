@@ -32,7 +32,7 @@ class LoadingSchedule(Document):
 		pass
 
 	def compute_totals(self):
-		total_trucks = 0
+		
 		company_trucks = 0
 		transporter_trucks = 0
 		self_collect_trucks = 0
@@ -55,5 +55,15 @@ class LoadingSchedule(Document):
 				elif row.vehicle_type == "Customer Provided Vehicle":
 					self_collect_trucks += 1
 
-		if row.after_midnight_trip:
-			pass
+		if self.after_midnight_trip:
+			for row in self.after_midnight_trip:
+				if row.vehicle_type == "Transporter Vehicle":
+					transporter_trucks += 1
+				elif row.vehicle_type == "Company Vehicle":
+					company_trucks += 1
+				elif row.vehicle_type == "Customer Provided Vehicle":
+					self_collect_trucks += 1
+
+		total_trucks = company_trucks + transporter_trucks + self_collect_trucks
+
+		return company_trucks, transporter_trucks, self_collect_trucks, total_trucks
