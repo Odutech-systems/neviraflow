@@ -1,0 +1,79 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-11-13 15:44:00.493366",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "posting_date",
+  "from_date",
+  "to_date",
+  "total_casual_staff",
+  "total_gross_pay",
+  "casuals"
+ ],
+ "fields": [
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Posting Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "total_casual_staff",
+   "fieldtype": "Data",
+   "label": "Total Casual Staff"
+  },
+  {
+   "fieldname": "total_gross_pay",
+   "fieldtype": "Data",
+   "label": "Total Gross Pay"
+  },
+  {
+   "fieldname": "casuals",
+   "fieldtype": "Table",
+   "label": "Casuals ",
+   "options": "Casuals Payroll Entry Detail"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-11-13 15:46:21.647992",
+ "modified_by": "Administrator",
+ "module": "Nevira Workflow",
+ "name": "Casuals Payroll Entry",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

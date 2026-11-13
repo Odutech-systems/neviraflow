@@ -1,0 +1,251 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-11-13 15:08:55.722423",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_w1vf",
+  "first_name",
+  "middle_name",
+  "last_name",
+  "full_name",
+  "column_break_p839",
+  "phone_number",
+  "national_id",
+  "gender",
+  "date_of_birth",
+  "column_break_nawy",
+  "date_of_joining",
+  "status",
+  "working_details_section",
+  "company",
+  "department",
+  "column_break_bgh0",
+  "section",
+  "department_head",
+  "payment_details_tab",
+  "payment_currency",
+  "daily_rate",
+  "payment_mode",
+  "column_break_cdxa",
+  "mpesa_number",
+  "bank_name",
+  "bank_account_number",
+  "statutory_details_tab",
+  "sha_number",
+  "tax_id",
+  "nssf_number"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_w1vf",
+   "fieldtype": "Tab Break",
+   "label": "Personal Details"
+  },
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "First Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "middle_name",
+   "fieldtype": "Data",
+   "label": "Middle Name"
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Phone Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "national_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "National ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Link",
+   "label": "Gender",
+   "options": "Gender",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_of_joining",
+   "fieldtype": "Date",
+   "label": "Date of joining",
+   "reqd": 1
+  },
+  {
+   "fieldname": "working_details_section",
+   "fieldtype": "Section Break",
+   "label": "Working Details"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section",
+   "fieldtype": "Link",
+   "label": "Section",
+   "options": "Employee Section",
+   "reqd": 1
+  },
+  {
+   "fieldname": "department_head",
+   "fieldtype": "Link",
+   "label": "Department Head",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_p839",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_bgh0",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_nawy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status"
+  },
+  {
+   "fieldname": "payment_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Payment Details"
+  },
+  {
+   "fieldname": "mpesa_number",
+   "fieldtype": "Data",
+   "label": "MPESA Number"
+  },
+  {
+   "depends_on": "eval: doc.salary_mode === \"Bank\"",
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name",
+   "mandatory_depends_on": "eval: doc.salary_mode === \"Bank\""
+  },
+  {
+   "fieldname": "bank_account_number",
+   "fieldtype": "Data",
+   "label": "Bank Account Number",
+   "mandatory_depends_on": "eval: doc.salary_mode === \"Bank\"",
+   "unique": 1
+  },
+  {
+   "fieldname": "daily_rate",
+   "fieldtype": "Currency",
+   "label": "Daily Rate"
+  },
+  {
+   "fieldname": "payment_currency",
+   "fieldtype": "Link",
+   "label": "Payment Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "column_break_cdxa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_mode",
+   "fieldtype": "Select",
+   "label": "Payment Mode",
+   "options": "\nBank\nMPESA\nCash",
+   "reqd": 1
+  },
+  {
+   "fieldname": "statutory_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Statutory Details"
+  },
+  {
+   "fieldname": "sha_number",
+   "fieldtype": "Data",
+   "label": "SHA Number"
+  },
+  {
+   "fieldname": "tax_id",
+   "fieldtype": "Data",
+   "label": "Tax ID"
+  },
+  {
+   "fieldname": "nssf_number",
+   "fieldtype": "Data",
+   "label": "NSSF Number"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Casual Staff Attendance",
+   "link_fieldname": "name"
+  }
+ ],
+ "modified": "2026-11-13 15:36:32.782301",
+ "modified_by": "Administrator",
+ "module": "Nevira Workflow",
+ "name": "Casual Staff",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
