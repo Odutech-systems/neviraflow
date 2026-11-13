@@ -121,7 +121,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-01 22:11:08.795665",
+ "modified": "2026-11-07 12:42:25.730202",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Mills Production Log Sheet",
@@ -159,7 +159,9 @@
    "write": 1
   },
   {
+   "cancel": 1,
    "create": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
@@ -172,7 +174,9 @@
    "write": 1
   },
   {
+   "cancel": 1,
    "create": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
@@ -181,9 +185,12 @@
    "role": "Accounts Manager",
    "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
+   "cancel": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
@@ -192,6 +199,7 @@
    "role": "HR Manager",
    "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

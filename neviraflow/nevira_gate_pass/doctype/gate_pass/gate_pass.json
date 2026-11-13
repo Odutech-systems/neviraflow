@@ -162,6 +162,7 @@
    "fieldname": "supplier_name",
    "fieldtype": "Link",
    "label": "Supplier Name",
+   "mandatory_depends_on": "eval:doc.custom_load_type ==\"PURCHASE MATERIAL RECEIPT\"",
    "options": "Supplier"
   },
   {
@@ -185,6 +186,7 @@
    "fieldname": "weighbridge_reference",
    "fieldtype": "Link",
    "label": "Weighbridge Reference",
+   "mandatory_depends_on": "eval:doc.custom_load_type ==\"RAW MATERIALS\"",
    "options": "Weighbridge Management"
   },
   {
@@ -215,13 +217,14 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Supplier LPO",
+   "mandatory_depends_on": "eval:doc.custom_load_type ==\"PURCHASE MATERIAL RECEIPT\"",
    "options": "Purchase Order"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-03 13:05:06.432219",
+ "modified": "2026-11-11 11:05:49.057449",
  "modified_by": "Administrator",
  "module": "Nevira Gate Pass",
  "name": "Gate Pass",
