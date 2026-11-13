@@ -39,29 +39,29 @@ class LoadingSchedule(Document):
 
 		if row.first_trip:
 			for row in self.first_trip:
-				if row.vehicle_type == "Transporter Vehicle":
+				if row.custom_vehicle_ownership== "Transporter Vehicle":
 					transporter_trucks += 1 
-				elif row.vehicle_type == "Company Vehicle":
+				elif row.custom_vehicle_ownership == "Company Vehicle":
 					company_trucks += 1
-				elif row.vehicle_type == "Customer Provided Vehicle":
+				elif row.custom_vehicle_ownership == "Customer Provided Vehicle":
 					self_collect_trucks += 1
 
 		if self.second_trip:
 			for row in self.second_trip:
-				if row.vehicle_type == "Transporter Vehicle":
+				if row.custom_vehicle_ownership == "Transporter Vehicle":
 					transporter_trucks += 1 
-				elif row.vehicle_type == "Company Vehicle":
+				elif row.custom_vehicle_ownership == "Company Vehicle":
 					company_trucks += 1
-				elif row.vehicle_type == "Customer Provided Vehicle":
+				elif row.custom_vehicle_ownership == "Customer Provided Vehicle":
 					self_collect_trucks += 1
 
 		if self.after_midnight_trip:
 			for row in self.after_midnight_trip:
-				if row.vehicle_type == "Transporter Vehicle":
+				if row.custom_vehicle_ownership == "Transporter Vehicle":
 					transporter_trucks += 1
-				elif row.vehicle_type == "Company Vehicle":
+				elif row.custom_vehicle_ownership == "Company Vehicle":
 					company_trucks += 1
-				elif row.vehicle_type == "Customer Provided Vehicle":
+				elif row.custom_vehicle_ownership == "Customer Provided Vehicle":
 					self_collect_trucks += 1
 
 		total_trucks = company_trucks + transporter_trucks + self_collect_trucks
