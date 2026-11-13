@@ -12,7 +12,7 @@ class LoadingSchedule(Document):
 		self.validate_date()
 
 	def validate_date(self):
-		if self.getdate(self.loading_date) != getdate(today()):
+		if getdate(self.loading_date) != getdate(today()):
 			frappe.throw("Loading date cannot be a day in future or in the past.")
 
 	def before_save(self):
