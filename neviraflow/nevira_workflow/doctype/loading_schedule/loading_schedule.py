@@ -1,4 +1,4 @@
-# Copyright (c) 2026, Victor Mandela, Billy Adwar & Moses Njue and contributors
+# Copyright (c) 2026 Billy Adwar & Moses Njue and contributors
 # For license information, please see license.txt
 
 # import frappe
