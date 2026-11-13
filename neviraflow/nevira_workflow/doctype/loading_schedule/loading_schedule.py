@@ -29,7 +29,13 @@ class LoadingSchedule(Document):
 			row.customer_name = frappe.db.get_value("Customer", row.customer, "customer_name")
 
 	def before_submit(self):
-		pass
+		truck_totals = self.compute_totals()
+		
+		self.total_trucks = truck_totals[3]
+		self.total_company_trucks = truck_totals[0]
+		self.total_transporter_trucks = truck_totals[1]
+		
+
 
 	def compute_totals(self):
 		
