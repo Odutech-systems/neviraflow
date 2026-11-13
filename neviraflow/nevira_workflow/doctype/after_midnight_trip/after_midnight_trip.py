@@ -7,5 +7,5 @@ from frappe.model.document import Document
 
 class AfterMidnightTrip(Document):
 	def before_save(self):
-			self.customer_name = frappe.db.get_value("Customer", self.customer_name, "customer_name")
-			self.vehicle_type = frappe.db.get_value("Vehicle", self.vehicle, "custom_vehicle_ownership")
+		self.customer_name = frappe.db.get_value("Customer", self.customer_name, "customer_name")
+		self.vehicle_type = frappe.db.get_value("Vehicle", self.vehicle, "custom_vehicle_ownership")
