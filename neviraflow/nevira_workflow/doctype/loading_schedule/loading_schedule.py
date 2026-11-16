@@ -57,6 +57,7 @@ class LoadingSchedule(Document):
 				elif row.vehicle_type == "Customer Provided Vehicle":
 					self_collect_trucks += 1
 				total_tonnage += row.tonnage
+				total_fuel_issued += row.fuel_issued
 
 		if self.second_trip:
 			for row in self.second_trip:
@@ -67,6 +68,7 @@ class LoadingSchedule(Document):
 				elif row.vehicle_type == "Customer Provided Vehicle":
 					self_collect_trucks += 1
 				total_tonnage += row.tonnage
+				total_fuel_issued += row.fuel_issued
 
 		if self.after_midnight_trip:
 			for row in self.after_midnight_trip:
@@ -77,6 +79,7 @@ class LoadingSchedule(Document):
 				elif row.vehicle_type == "Customer Provided Vehicle":
 					self_collect_trucks += 1
 				total_tonnage += row.tonnage
+				total_fuel_issued += row.fuel_issued
 
 		total_trucks = company_trucks + transporter_trucks + self_collect_trucks
 
@@ -85,5 +88,6 @@ class LoadingSchedule(Document):
 			"transporter_trucks": transporter_trucks,
 			"self_collect_trucks": self_collect_trucks,
 			"total_trucks": total_trucks,
-			"total_tonnage": total_tonnage
+			"total_tonnage": total_tonnage,
+			"total_fuel_issued": total_fuel_issued
 		}
