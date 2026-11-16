@@ -17,6 +17,7 @@ class LoadingSchedule(Document):
 		self.total_trucks = truck_totals["total_trucks"]
 		self.total_company_trucks = truck_totals["company_trucks"]
 		self.total_transporter_trucks = truck_totals["transporter_trucks"]	
+		self.total_self_collect_trucks = truck_totals["self_collect_trucks"]
 		self.total_tonnage = truck_totals["total_tonnage"]
 		self.total_fuel_issued = truck_totals["total_fuel_issued"]
 

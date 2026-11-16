@@ -16,6 +16,7 @@
   "total_trucks",
   "total_company_trucks",
   "total_transporter_trucks",
+  "total_self_collect_trucks",
   "total_tonnage",
   "total_fuel_issued",
   "first_trip_section",
@@ -148,13 +149,18 @@
    "fieldtype": "Table",
    "label": "After Midnight Trip",
    "options": "After Midnight Trip"
+  },
+  {
+   "fieldname": "total_self_collect_trucks",
+   "fieldtype": "Int",
+   "label": "Total self collect trucks"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-13 14:28:55.829641",
+ "modified": "2026-11-16 05:57:47.235731",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Loading Schedule",
