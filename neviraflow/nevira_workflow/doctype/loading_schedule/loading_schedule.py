@@ -11,9 +11,16 @@ class LoadingSchedule(Document):
 	def validate(self):
 		self.validate_date()
 
+		truck_totals = self.compute_totals()
+		self.total_trucks = truck_totals["total_trucks"]
+		self.total_company_trucks = truck_totals["company_trucks"]
+		self.total_transporter_trucks = truck_totals["transporter_trucks"]		
+
 	def validate_date(self):
 		if getdate(self.loading_date) != getdate(today()):
 			frappe.throw("Loading date cannot be a day in future or in the past.")
+
+		
 
 	def before_save(self):
 		self.prepared_by = frappe.session.user
@@ -28,14 +35,6 @@ class LoadingSchedule(Document):
 		for row in self.after_midnight_trip:
 			row.customer_name = frappe.db.get_value("Customer", row.customer, "customer_name")
 
-	def before_submit(self):
-		truck_totals = self.compute_totals()
-		
-		self.total_trucks = truck_totals[3]
-		self.total_company_trucks = truck_totals[0]
-		self.total_transporter_trucks = truck_totals[1]
-		
-
 
 	def compute_totals(self):
 		
@@ -43,7 +42,7 @@ class LoadingSchedule(Document):
 		transporter_trucks = 0
 		self_collect_trucks = 0
 
-		if row.first_trip:
+		if self.first_trip:
 			for row in self.first_trip:
 				if row.custom_vehicle_ownership== "Transporter Vehicle":
 					transporter_trucks += 1 
@@ -72,4 +71,9 @@ class LoadingSchedule(Document):
 
 		total_trucks = company_trucks + transporter_trucks + self_collect_trucks
 
-		return company_trucks, transporter_trucks, self_collect_trucks, total_trucks
+		return {
+			"company_trucks": company_trucks,
+			"transporter_trucks": transporter_trucks,
+			"self_collect_trucks": self_collect_trucks,
+			"total_trucks": total_trucks
+		}
