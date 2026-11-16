@@ -18,6 +18,7 @@ class LoadingSchedule(Document):
 		self.total_company_trucks = truck_totals["company_trucks"]
 		self.total_transporter_trucks = truck_totals["transporter_trucks"]	
 		self.total_tonnage = truck_totals["total_tonnage"]
+		self.total_fuel_issued = truck_totals["total_fuel_issued"]
 
 	def before_save(self):
 		self.prepared_by = frappe.session.user
