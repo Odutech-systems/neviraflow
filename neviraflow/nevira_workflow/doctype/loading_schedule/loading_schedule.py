@@ -17,6 +17,7 @@ class LoadingSchedule(Document):
 		self.total_trucks = truck_totals["total_trucks"]
 		self.total_company_trucks = truck_totals["company_trucks"]
 		self.total_transporter_trucks = truck_totals["transporter_trucks"]	
+		self.total_tonnage = truck_totals["total_tonnage"]
 
 	def before_save(self):
 		self.prepared_by = frappe.session.user
@@ -44,6 +45,8 @@ class LoadingSchedule(Document):
 		company_trucks = 0
 		transporter_trucks = 0
 		self_collect_trucks = 0
+		total_tonnage = 0
+		total_fuel_issued = 0
 
 		if self.first_trip:
 			for row in self.first_trip:
@@ -53,6 +56,7 @@ class LoadingSchedule(Document):
 					company_trucks += 1
 				elif row.vehicle_type == "Customer Provided Vehicle":
 					self_collect_trucks += 1
+				total_tonnage += row.tonnage
 
 		if self.second_trip:
 			for row in self.second_trip:
@@ -62,6 +66,7 @@ class LoadingSchedule(Document):
 					company_trucks += 1
 				elif row.vehicle_type == "Customer Provided Vehicle":
 					self_collect_trucks += 1
+				total_tonnage += row.tonnage
 
 		if self.after_midnight_trip:
 			for row in self.after_midnight_trip:
@@ -71,6 +76,7 @@ class LoadingSchedule(Document):
 					company_trucks += 1
 				elif row.vehicle_type == "Customer Provided Vehicle":
 					self_collect_trucks += 1
+				total_tonnage += row.tonnage
 
 		total_trucks = company_trucks + transporter_trucks + self_collect_trucks
 
@@ -78,5 +84,6 @@ class LoadingSchedule(Document):
 			"company_trucks": company_trucks,
 			"transporter_trucks": transporter_trucks,
 			"self_collect_trucks": self_collect_trucks,
-			"total_trucks": total_trucks
+			"total_trucks": total_trucks,
+			"total_tonnage": total_tonnage
 		}
