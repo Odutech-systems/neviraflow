@@ -70,7 +70,7 @@
    "fieldname": "logistics_manager",
    "fieldtype": "Link",
    "label": "Logistics Manager",
-   "link_filters": "[[\"Employee\",\"designation\",\"=\",\"Logistics Manager\"]]",
+   "link_filters": "[[\"Employee\",\"designation\",\"=\",\"Transport and Logistics Manager\"]]",
    "options": "Employee",
    "reqd": 1
   },
@@ -156,11 +156,14 @@
    "label": "Total self collect trucks"
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
+<<<<<<< Updated upstream
  "modified": "2026-11-16 05:57:47.235731",
+=======
+ "modified": "2026-11-16 11:20:33.637500",
+>>>>>>> Stashed changes
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Loading Schedule",
@@ -268,8 +271,6 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
