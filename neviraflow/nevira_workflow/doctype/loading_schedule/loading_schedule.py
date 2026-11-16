@@ -11,16 +11,12 @@ class LoadingSchedule(Document):
 	def validate(self):
 		self.validate_date()
 
+			
+	def before_submit(self):
 		truck_totals = self.compute_totals()
 		self.total_trucks = truck_totals["total_trucks"]
 		self.total_company_trucks = truck_totals["company_trucks"]
-		self.total_transporter_trucks = truck_totals["transporter_trucks"]		
-
-	def validate_date(self):
-		if getdate(self.loading_date) != getdate(today()):
-			frappe.throw("Loading date cannot be a day in future or in the past.")
-
-		
+		self.total_transporter_trucks = truck_totals["transporter_trucks"]	
 
 	def before_save(self):
 		self.prepared_by = frappe.session.user
@@ -36,6 +32,13 @@ class LoadingSchedule(Document):
 			row.customer_name = frappe.db.get_value("Customer", row.customer, "customer_name")
 
 
+	def validate_date(self):
+			if getdate(self.loading_date) != getdate(today()):
+				frappe.throw("Loading date cannot be a day in future or in the past.")
+	
+			
+
+
 	def compute_totals(self):
 		
 		company_trucks = 0
@@ -44,29 +47,29 @@ class LoadingSchedule(Document):
 
 		if self.first_trip:
 			for row in self.first_trip:
-				if row.custom_vehicle_ownership== "Transporter Vehicle":
+				if row.vehicle_type== "Transporter Vehicle":
 					transporter_trucks += 1 
-				elif row.custom_vehicle_ownership == "Company Vehicle":
+				elif row.vehicle_type == "Company Vehicle":
 					company_trucks += 1
-				elif row.custom_vehicle_ownership == "Customer Provided Vehicle":
+				elif row.vehicle_type == "Customer Provided Vehicle":
 					self_collect_trucks += 1
 
 		if self.second_trip:
 			for row in self.second_trip:
-				if row.custom_vehicle_ownership == "Transporter Vehicle":
+				if row.vehicle_type == "Transporter Vehicle":
 					transporter_trucks += 1 
-				elif row.custom_vehicle_ownership == "Company Vehicle":
+				elif row.vehicle_type == "Company Vehicle":
 					company_trucks += 1
-				elif row.custom_vehicle_ownership == "Customer Provided Vehicle":
+				elif row.vehicle_type == "Customer Provided Vehicle":
 					self_collect_trucks += 1
 
 		if self.after_midnight_trip:
 			for row in self.after_midnight_trip:
-				if row.custom_vehicle_ownership == "Transporter Vehicle":
+				if row.vehicle_type == "Transporter Vehicle":
 					transporter_trucks += 1
-				elif row.custom_vehicle_ownership == "Company Vehicle":
+				elif row.vehicle_type == "Company Vehicle":
 					company_trucks += 1
-				elif row.custom_vehicle_ownership == "Customer Provided Vehicle":
+				elif row.vehicle_type == "Customer Provided Vehicle":
 					self_collect_trucks += 1
 
 		total_trucks = company_trucks + transporter_trucks + self_collect_trucks
