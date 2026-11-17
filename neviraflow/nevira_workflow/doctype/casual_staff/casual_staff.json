@@ -83,7 +83,8 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Phone Number",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "national_id",
@@ -257,7 +258,7 @@
    "link_fieldname": "casual_staff"
   }
  ],
- "modified": "2026-11-17 18:40:48.497435",
+ "modified": "2026-11-17 19:35:17.120554",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Casual Staff",
