@@ -331,7 +331,8 @@ doctype_js = {
     "Material Request": "public/js/material_request.js",
     "Pick List": "public/js/pick_list.js",
     "Stock Reconciliation": "public/js/stock_reconciliation.js",
-    "Weighbridge Management": "neviraflow/weighbridge/doctype/weighbridge_management/weighbridge_management.js"
+    "Weighbridge Management": "neviraflow/weighbridge/doctype/weighbridge_management/weighbridge_management.js",
+    "Loading Schedule": "public/js/loading_schedule.js"
 }
 
 
