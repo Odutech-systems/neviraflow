@@ -181,7 +181,8 @@
   {
    "fieldname": "mpesa_number",
    "fieldtype": "Data",
-   "label": "MPESA Number"
+   "label": "MPESA Number",
+   "read_only": 1
   },
   {
    "depends_on": "eval: doc.salary_mode === \"Bank\"",
@@ -256,7 +257,7 @@
    "link_fieldname": "casual_staff"
   }
  ],
- "modified": "2026-11-17 11:20:16.405775",
+ "modified": "2026-11-17 18:40:48.497435",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Casual Staff",
