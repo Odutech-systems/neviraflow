@@ -22,6 +22,14 @@ class LoadingSchedule(Document):
 		self.total_fuel_issued = truck_totals["total_fuel_issued"]
 
 	def before_save(self):
+
+		truck_totals = self.compute_totals()
+		self.total_trucks = truck_totals["total_trucks"]
+		self.total_company_trucks = truck_totals["company_trucks"]
+		self.total_transporter_trucks = truck_totals["transporter_trucks"]	
+		self.total_self_collect_trucks = truck_totals["self_collect_trucks"]
+		self.total_tonnage = truck_totals["total_tonnage"]
+		self.total_fuel_issued = truck_totals["total_fuel_issued"]
 		self.prepared_by = frappe.session.user
 		self.logistics_manager_name = frappe.get_value("Employee", self.logistics_manager, "employee_name")
 
@@ -34,6 +42,7 @@ class LoadingSchedule(Document):
 		for row in self.after_midnight_trip:
 			row.customer_name = frappe.db.get_value("Customer", row.customer, "customer_name")
 
+		
 
 	def validate_date(self):
 			if getdate(self.loading_date) != getdate(today()):

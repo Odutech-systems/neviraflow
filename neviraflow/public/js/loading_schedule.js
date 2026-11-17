@@ -3,10 +3,5 @@ frappe.ui.form.on("Loading Schedule",{
         apply_bag_tonne_logic("First Trip");
         apply_bag_tonne_logic("Second Trip");
         apply_bag_tonne_logic("After Midnight Trip");
-    },
-    refresh(frm){
-        apply_bag_tonne_logic("First Trip");
-        apply_bag_tonne_logic("Second Trip");
-        apply_bag_tonne_logic("After Midnight Trip");
     }
 });
