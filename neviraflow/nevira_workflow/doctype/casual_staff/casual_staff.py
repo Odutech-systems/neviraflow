@@ -29,7 +29,7 @@ class CasualStaff(Document):
 
 	def validate_phone(self):
 		if len(self.phone_number) > 10 or len(self.phone_number) < 10:
-			frappe.throw("Phone number should not be more than 10 characters")
+			frappe.throw("Phone number should not be less than or more than 10 characters")
 
 	
 	def validate_employee_existing(self):
