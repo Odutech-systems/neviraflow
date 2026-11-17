@@ -69,7 +69,8 @@
   {
    "fieldname": "hours_worked",
    "fieldtype": "Float",
-   "label": "Hours Worked"
+   "label": "Hours Worked",
+   "read_only": 1
   },
   {
    "fieldname": "attendance_status",
@@ -127,7 +128,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-17 12:48:53.089502",
+ "modified": "2026-11-17 19:25:14.342606",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Casual Staff Attendance",
