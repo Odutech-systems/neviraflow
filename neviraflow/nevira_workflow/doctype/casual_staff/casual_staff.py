@@ -12,6 +12,7 @@ class CasualStaff(Document):
 		self.set_casual_staff_name()
 		self.validate_phone()
 		self.set_mpesa_phone()
+		self.validate_employee_existing()
 
 
 	def validate_date(self):
