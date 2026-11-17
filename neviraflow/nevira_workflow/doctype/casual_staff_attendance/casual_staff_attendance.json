@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "CS-ATT-.YYYY.-.#####",
  "creation": "2026-11-13 15:31:06.028713",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -31,19 +32,21 @@
    "fieldname": "department",
    "fieldtype": "Link",
    "label": "Department",
-   "options": "Department",
-   "reqd": 1
+   "options": "Department"
   },
   {
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
-   "options": "Employee Section",
-   "reqd": 1
+   "options": "Employee Section"
   },
   {
    "fieldname": "shift",
    "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Shift",
    "options": "Shift Type",
    "reqd": 1
@@ -70,8 +73,13 @@
   },
   {
    "fieldname": "attendance_status",
-   "fieldtype": "Data",
-   "label": "Attendance Status"
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Attendance Status",
+   "options": "\nPresent\nHalf Day"
   },
   {
    "fieldname": "recorded_by",
@@ -87,7 +95,10 @@
   {
    "fieldname": "casual_staff",
    "fieldtype": "Link",
+   "in_filter": 1,
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Casual Staff",
    "options": "Casual Staff",
    "reqd": 1
@@ -95,6 +106,9 @@
   {
    "fieldname": "attendance_date",
    "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Attendance Date",
    "reqd": 1
   },
@@ -113,10 +127,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-13 15:35:32.670815",
+ "modified": "2026-11-17 11:13:33.236809",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Casual Staff Attendance",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

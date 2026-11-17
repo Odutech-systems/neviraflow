@@ -56,8 +56,7 @@
    "fieldtype": "Link",
    "label": "Vehicle",
    "link_filters": "[[\"Vehicle\",\"custom_disabled\",\"=\",0]]",
-   "options": "Vehicle",
-   "reqd": 1
+   "options": "Vehicle"
   },
   {
    "fieldname": "fuel_issued",
@@ -119,7 +118,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-11-17 07:33:44.982518",
+ "modified": "2026-11-17 11:43:44.294466",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Second Trip",

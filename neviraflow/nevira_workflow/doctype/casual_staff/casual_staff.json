@@ -1,6 +1,8 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
+ "autoname": "CS-.####",
  "creation": "2026-11-13 15:08:55.722423",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -46,7 +48,10 @@
   {
    "fieldname": "first_name",
    "fieldtype": "Data",
+   "in_filter": 1,
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "First Name",
    "reqd": 1
   },
@@ -63,20 +68,30 @@
   {
    "fieldname": "full_name",
    "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Full Name",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "phone_number",
    "fieldtype": "Data",
+   "in_filter": 1,
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Phone Number",
    "reqd": 1
   },
   {
    "fieldname": "national_id",
    "fieldtype": "Data",
+   "in_filter": 1,
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "National ID",
    "reqd": 1,
    "unique": 1
@@ -114,6 +129,10 @@
   {
    "fieldname": "department",
    "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Department",
    "options": "Department",
    "reqd": 1
@@ -145,9 +164,14 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Active",
    "fieldname": "status",
-   "fieldtype": "Data",
-   "label": "Status"
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "\nActive\nSuspended\nOn boarded"
   },
   {
    "fieldname": "payment_details_tab",
@@ -221,13 +245,22 @@
  "links": [
   {
    "link_doctype": "Casual Staff Attendance",
-   "link_fieldname": "name"
+   "link_fieldname": "casual_staff"
+  },
+  {
+   "link_doctype": "Casuals Additional Salary",
+   "link_fieldname": "casual_staff"
+  },
+  {
+   "link_doctype": "Casuals Salary Slip",
+   "link_fieldname": "casual_staff"
   }
  ],
- "modified": "2026-11-13 15:36:32.782301",
+ "modified": "2026-11-17 11:20:16.405775",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Casual Staff",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -235,10 +268,40 @@
    "delete": 1,
    "email": 1,
    "export": 1,
+   "import": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR User",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "select": 1,
    "share": 1,
    "write": 1
   }
@@ -247,5 +310,18 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [
+  {
+   "color": "Green",
+   "title": "Active"
+  },
+  {
+   "color": "Red",
+   "title": "Suspended"
+  },
+  {
+   "color": "Orange",
+   "title": "On boarded"
+  }
+ ]
 }

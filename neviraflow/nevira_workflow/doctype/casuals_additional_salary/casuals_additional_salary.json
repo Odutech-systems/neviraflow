@@ -6,7 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "company",
-  "amended_from",
+  "casual_staff",
   "full_name",
   "payroll_start_date",
   "column_break_sd60",
@@ -15,18 +15,6 @@
   "amount"
  ],
  "fields": [
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Casual Staff",
-   "no_copy": 1,
-   "options": "Casuals Additional Salary",
-   "print_hide": 1,
-   "read_only": 1,
-   "reqd": 1,
-   "search_index": 1
-  },
   {
    "fieldname": "company",
    "fieldtype": "Link",
@@ -72,13 +60,25 @@
   {
    "fieldname": "column_break_sd60",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "casual_staff",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Casual Staff",
+   "no_copy": 1,
+   "options": "Casual Staff",
+   "print_hide": 1,
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-13 15:50:39.427048",
+ "modified": "2026-11-17 11:03:09.886634",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Casuals Additional Salary",
