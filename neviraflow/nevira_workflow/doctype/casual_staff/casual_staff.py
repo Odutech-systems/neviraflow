@@ -28,15 +28,15 @@ class CasualStaff(Document):
 		self.mpesa_number = self.phone_number
 
 	def validate_phone(self):
-		if len(self.phone_number) > 10:
+		if len(self.phone_number) > 10 or len(self.phone_number) < 10:
 			frappe.throw("Phone number should not be more than 10 characters")
 
 	
 	def validate_employee_existing(self):
 		"""Check if the casual staff we are trying to on board already exists as a general employee."""
-		existing_id = frappe.db.exists("Employee", {
+		existing_employee = frappe.db.exists("Employee", {
 			"national_id": self.national_id,
 			"cell_number": self.phone_number
 		})
-		if existing_id:
-			frappe.throw(f"Casual already exists as an employee.<br>Check employee with national ID Number {existing_id["national_id"]}</br>")
+		if existing_employee:
+			frappe.throw(f"Casual already exists as an employee, Payroll number {existing_employee}</br>")
