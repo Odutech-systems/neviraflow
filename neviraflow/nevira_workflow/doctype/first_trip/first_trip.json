@@ -9,14 +9,15 @@
   "customer",
   "customer_name",
   "product",
-  "tonnage",
-  "bags",
+  "tonnes_input",
+  "bags_input",
   "warehouse",
   "driver",
   "vehicle",
   "vehicle_type",
   "fuel_issued",
-  "destination"
+  "destination",
+  "qty"
  ],
  "fields": [
   {
@@ -91,23 +92,30 @@
    "reqd": 1
   },
   {
-   "fieldname": "tonnage",
+   "fieldname": "tonnes_input",
    "fieldtype": "Float",
    "label": "Tonnage",
    "reqd": 1
   },
   {
-   "fieldname": "bags",
+   "fieldname": "bags_input",
    "fieldtype": "Float",
    "label": "Bags",
    "reqd": 1
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Qty",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-11-16 12:44:09.752451",
+ "modified": "2026-11-17 06:12:13.481944",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "First Trip",
