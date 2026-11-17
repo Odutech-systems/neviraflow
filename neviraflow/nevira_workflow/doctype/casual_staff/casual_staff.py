@@ -11,8 +11,9 @@ class CasualStaff(Document):
 	def after_save(self):
 		self.full_name = self.first_name+" " + self.middle_name+" "+ self.last_name
 
-	def before_save(self):
-		pass
+	def validate(self):
+		self.validate_date()
+
 
 	def validate_date(self):
 		if self.date_of_birth and getdate(self.date_of_birth) > getdate(today()):
