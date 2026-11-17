@@ -35,8 +35,7 @@ class CasualStaff(Document):
 	def validate_employee_existing(self):
 		"""Check if the casual staff we are trying to on board already exists as a general employee."""
 		existing_employee = frappe.db.exists("Employee", {
-			"national_id": self.national_id,
-			"cell_number": self.phone_number
+			"national_id": self.national_id
 		})
 		if existing_employee:
 			frappe.throw(f"Casual already exists as an employee, Payroll number {existing_employee}</br>")
