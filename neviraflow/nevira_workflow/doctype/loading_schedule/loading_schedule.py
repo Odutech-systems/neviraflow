@@ -70,7 +70,9 @@ class LoadingSchedule(Document):
 					self_collect_trucks += 1
 				total_tonnage += row.tonnes_input
 				total_bags += row.bags_input
-				total_fuel_issued += row.fuel_issued
+				
+				if row.fuel_issued:
+					total_fuel_issued += row.fuel_issued
 
 		if self.second_trip:
 			for row in self.second_trip:
@@ -82,7 +84,8 @@ class LoadingSchedule(Document):
 					self_collect_trucks += 1
 				total_tonnage += row.tonnes_input
 				total_bags += row.bags_input
-				total_fuel_issued += row.fuel_issued
+				if row.fuel_issued:
+					total_fuel_issued += row.fuel_issued
 
 		if self.after_midnight_trip:
 			for row in self.after_midnight_trip:
@@ -94,7 +97,9 @@ class LoadingSchedule(Document):
 					self_collect_trucks += 1
 				total_tonnage += row.tonnes_input
 				total_bags += row.bags_input
-				total_fuel_issued += row.fuel_issued
+
+				if row.fuel_issued:
+					total_fuel_issued += row.fuel_issued
 
 		total_trucks = company_trucks + transporter_trucks + self_collect_trucks
 
