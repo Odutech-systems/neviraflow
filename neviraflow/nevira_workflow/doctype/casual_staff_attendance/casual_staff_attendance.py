@@ -25,7 +25,8 @@ class CasualStaffAttendance(Document):
 		""" Prevent having more than one attendance record on the same day """
 		existing_attendance = frappe.db.exists("Casual Staff Attendance",{
 			"casual_staff" : self.casual_staff,
-			"attendance_date": self.attendance_date
+			"attendance_date": self.attendance_date,
+			"name": ["!=", self.name]
 		})
 		if existing_attendance:
 			frappe.throw(f"Attendance for casual <b>{self.casual_staff}</b> already exists for the current date")
@@ -34,7 +35,7 @@ class CasualStaffAttendance(Document):
 	def validate_joining_date(self):
 		""" We cannot have the attendance date earlier than the joining date"""
 		joining_date = frappe.db.get_value("Casual Staff", self.casual_staff, "date_of_joining")
-		if getdate(self.attendance) < getdate(joining_date):
+		if getdate(self.attendance_date) < getdate(joining_date):
 			frappe.throw(f"Attendance date cannot be earlier than the staff joing date")
 	
 	def fetch_casual_staff_details(self):
