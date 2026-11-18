@@ -8,7 +8,15 @@ from frappe.model.document import Document
 
 class CasualsPayrollEntry(Document):
 	def validate(self):
-		pass
+		self.validate_dates()
+
+	def validate_dates(self):
+		if not self.from_date or not self.to_date:
+			frappe.throw("Please select from date and to date")
+
+		if getdate(self.from_date) > getdate(self.to_date):
+			frappe.throw("From date cannot be after to date")
+
 	def get_casuals_working_days_and_rate(self):
 		query = """ 
 				WITH attendance_data AS (

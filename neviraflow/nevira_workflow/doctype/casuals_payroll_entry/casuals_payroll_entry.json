@@ -29,12 +29,14 @@
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "From Date"
+   "label": "From Date",
+   "reqd": 1
   },
   {
    "fieldname": "to_date",
    "fieldtype": "Date",
-   "label": "To Date"
+   "label": "To Date",
+   "reqd": 1
   },
   {
    "fieldname": "total_casual_staff",
@@ -83,7 +85,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-18 09:58:24.962966",
+ "modified": "2026-11-18 10:01:03.258876",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Casuals Payroll Entry",
