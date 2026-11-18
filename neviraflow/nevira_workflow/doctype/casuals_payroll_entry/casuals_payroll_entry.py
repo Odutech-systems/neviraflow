@@ -66,4 +66,19 @@ class CasualsPayrollEntry(Document):
 	def create_salary_slips(self):
 		salary_slips_created = []
 		for data in self.casual_staff_details:
-			existing_casuals_slip = frappe.db.exists("")
+			existing_casuals_slip = frappe.db.exists("Casuals Salary Slip",{
+				"casual_staff": data.casual_staff,
+				"payroll_date": self.from_date,
+				"docstatus": 1
+			})
+
+			if existing_casuals_slip:
+				frappe.msgprint(f"Salary slip already exists for employee", raise_exception = True)
+				continue
+
+			salary_slip_doc = frappe.new_doc("Casuals Salary Slip")
+			salary_slip_doc.update({
+				"casual_staff": data.casual_staff,
+				"full_name" : data.full_name,
+				"":""
+			})
