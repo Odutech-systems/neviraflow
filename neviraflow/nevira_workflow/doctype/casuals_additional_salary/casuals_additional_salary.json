@@ -1,6 +1,7 @@
 {
  "actions": [],
- "allow_rename": 1,
+ "allow_import": 1,
+ "autoname": "CAS-ADS-.YYYY.-.###",
  "creation": "2026-11-13 15:46:56.752914",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -31,7 +32,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Full Name",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "payroll_start_date",
@@ -98,13 +99,16 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-18 11:21:25.879227",
+ "modified": "2026-11-18 11:30:17.752770",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Casuals Additional Salary",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -113,8 +117,64 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
    "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR User",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "select": 1,
+   "share": 1,
    "write": 1
   }
  ],
@@ -122,5 +182,6 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }
