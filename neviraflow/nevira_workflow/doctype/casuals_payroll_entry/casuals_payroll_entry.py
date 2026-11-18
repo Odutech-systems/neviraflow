@@ -7,39 +7,32 @@ from frappe.model.document import Document
 
 
 class CasualsPayrollEntry(Document):
+	def validate(self):
+		pass
 	def get_casuals_working_days_and_rate(self):
 		query = """ 
 				WITH attendance_data AS (
 					SELECT 
-						att.name, 
-						att.casual_staff, 
-						cas.full_name,
-						cas.daily_rate,
-						att.attendance_date, 
-						att.attendance_status, 
+						att.name, att.casual_staff, cas.full_name,cas.daily_rate, att.attendance_date, att.attendance_status, 
 						CASE
 							WHEN att.attendance_status = 'Present' THEN 1 
 							WHEN att.attendance_status ='Half Day' THEN 0.5
-						END AS attendance_flag,
-						att.department  
+						END AS attendance_flag,att.department  
 					FROM `tabCasual Staff Attendance`  AS att
 					INNER JOIN `tabCasual Staff` AS cas ON att.casual_staff = cas.name 
 					WHERE att.docstatus = 1
 				)
 				SELECT 
-					casual_staff, 
-					full_name, 
-					daily_rate,
-					SUM(attendance_flag) AS days,
+					casual_staff, full_name, daily_rate, SUM(attendance_flag) AS days,
 					SUM(attendance_flag) * daily_rate AS gross_pay
 				FROM attendance_data
-				GROUP BY casual_staff
-				"""
+				GROUP BY casual_staff """
 		result_set = frappe.db.sql(query, as_dict=True)
-		if result_set:
+		try:
 			return result_set
-		else:
-			return
+		except Exception as e:
+			frappe.log_error("Could not find any casual employees for the selected period", (e))
+
 
 
 	def populate_payroll_entry_table(self):
