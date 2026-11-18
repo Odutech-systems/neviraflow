@@ -102,7 +102,8 @@
    "in_standard_filter": 1,
    "label": "Casual Staff",
    "options": "Casual Staff",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "attendance_date",
@@ -128,7 +129,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-17 19:25:14.342606",
+ "modified": "2026-11-18 11:16:23.787562",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Casual Staff Attendance",

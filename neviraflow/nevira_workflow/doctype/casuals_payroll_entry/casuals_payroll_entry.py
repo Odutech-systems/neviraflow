@@ -80,5 +80,6 @@ class CasualsPayrollEntry(Document):
 			salary_slip_doc.update({
 				"casual_staff": data.casual_staff,
 				"full_name" : data.full_name,
-				"":""
+				"posting_date":self.posting_date,
+				"payroll_date": self.from_date
 			})

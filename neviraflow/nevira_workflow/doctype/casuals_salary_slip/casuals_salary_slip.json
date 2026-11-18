@@ -1,14 +1,25 @@
 {
  "actions": [],
- "allow_rename": 1,
+ "autoname": "CAS-SLP-.YYYY.-.##",
  "creation": "2026-11-13 15:51:31.848990",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "company",
   "casual_staff",
   "full_name",
   "payroll_date",
-  "posting_date"
+  "posting_date",
+  "payment_details_section",
+  "salary_currency",
+  "daily_rate",
+  "worked_days",
+  "gross_pay",
+  "column_break_ugqg",
+  "earnings",
+  "deductions",
+  "net_pay",
+  "amended_from"
  ],
  "fields": [
   {
@@ -17,12 +28,14 @@
    "in_list_view": 1,
    "label": "Casual Staff",
    "options": "Casual Staff",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "full_name",
    "fieldtype": "Data",
-   "label": "Full Name"
+   "label": "Full Name",
+   "read_only": 1
   },
   {
    "fieldname": "payroll_date",
@@ -33,16 +46,79 @@
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "label": "Posting Date"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "payment_details_section",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "default": "KES",
+   "fieldname": "salary_currency",
+   "fieldtype": "Link",
+   "label": "Salary Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "daily_rate",
+   "fieldtype": "Currency",
+   "label": "Daily Rate"
+  },
+  {
+   "fieldname": "worked_days",
+   "fieldtype": "Float",
+   "label": "Worked Days"
+  },
+  {
+   "fieldname": "gross_pay",
+   "fieldtype": "Currency",
+   "label": "Gross Pay"
+  },
+  {
+   "fieldname": "column_break_ugqg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "earnings",
+   "fieldtype": "Currency",
+   "label": "Earnings"
+  },
+  {
+   "fieldname": "deductions",
+   "fieldtype": "Currency",
+   "label": "Deductions"
+  },
+  {
+   "fieldname": "net_pay",
+   "fieldtype": "Currency",
+   "label": "Net Pay"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Casuals Salary Slip",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-13 15:53:07.517119",
+ "modified": "2026-11-18 11:16:07.206856",
  "modified_by": "Administrator",
  "module": "Nevira Workflow",
  "name": "Casuals Salary Slip",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -63,5 +139,6 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }
