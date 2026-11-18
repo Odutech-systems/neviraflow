@@ -53,11 +53,15 @@ class CasualsPayrollEntry(Document):
 
 		for data in casuals_data:
 			self.append("casual_staff_details",{
-				
+				"casual_staff":data.casual_staff,
+				"full_name": data.full_name,
+				"daily_rate": data.daily_rate,
+				"days_worked": data.days_worked,
+				"gross_pay": data.gross_pay
 			})
 
-
-
+		frappe.msgprint(f"Added the casuals pay data for {len(data)} casuals staff")
+		return True
 
 def create_salary_slips():
 	pass
