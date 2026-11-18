@@ -1,9 +1,13 @@
-# Copyright (c) 2026, Victor Mandela, Billy Adwar & Moses Njue and contributors
+# Copyright (c) 2026 Billy Adwar & Moses Njue and contributors
 # For license information, please see license.txt
 
-# import frappe
+import frappe
 from frappe.model.document import Document
 
 
 class CasualsAdditionalSalary(Document):
-	pass
+	def validate(self):
+		self.set_full_name()
+
+	def set_full_name(self):
+		self.full_name = frappe.db.get_value("Casual Staff", self.casual_staff, "full_name")
