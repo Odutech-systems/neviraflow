@@ -44,7 +44,17 @@ class CasualsPayrollEntry(Document):
 
 
 	def populate_payroll_entry_table(self):
-		pass
+		""" This function will extract the casual employees and set them in the casuals table"""
+
+		## Clear the table first
+		self.casual_staff_details = []
+
+		casuals_data = self.get_casuals_working_days_and_rate()
+
+		for data in casuals_data:
+			self.append("casual_staff_details",{
+				
+			})
 
 
 
