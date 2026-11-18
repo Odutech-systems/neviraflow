@@ -63,6 +63,7 @@ class CasualsPayrollEntry(Document):
 		frappe.msgprint(f"Added the casuals pay data for {len(data)} casuals staff")
 		return True
 
+
 	def create_salary_slips(self):
 		salary_slips_created = []
 		for data in self.casual_staff_details:
@@ -77,7 +78,8 @@ class CasualsPayrollEntry(Document):
 				continue
 
 			salary_slip_doc = frappe.new_doc("Casuals Salary Slip")
-			
+
+			#frappe.db.get_value("Casuals Additional Salary", data.casual_staff, [])
 
 			salary_slip_doc.update({
 				"casual_staff": data.casual_staff,
