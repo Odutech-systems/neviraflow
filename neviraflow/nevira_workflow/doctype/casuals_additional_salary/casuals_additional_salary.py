@@ -11,3 +11,4 @@ class CasualsAdditionalSalary(Document):
 
 	def set_full_name(self):
 		self.full_name = frappe.db.get_value("Casual Staff", self.casual_staff, "full_name")
+		return self.full_name

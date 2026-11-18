@@ -77,6 +77,8 @@ class CasualsPayrollEntry(Document):
 				continue
 
 			salary_slip_doc = frappe.new_doc("Casuals Salary Slip")
+			
+
 			salary_slip_doc.update({
 				"casual_staff": data.casual_staff,
 				"full_name" : data.full_name,
