@@ -9,7 +9,7 @@ from frappe.utils import getdate, today
 class LoadingSchedule(Document):
 
 	def validate(self):
-		self.validate_date()
+		pass
 
 			
 	def before_submit(self):

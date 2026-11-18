@@ -31,7 +31,7 @@ class CasualsPayrollEntry(Document):
 					full_name, 
 					daily_rate,
 					SUM(attendance_flag) AS days,
-					SUM(attendance_flaf) * daily_rate AS gross_pay
+					SUM(attendance_flag) * daily_rate AS gross_pay
 				FROM attendance_data
 				GROUP BY casual_staff
 				"""
