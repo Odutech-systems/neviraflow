@@ -63,5 +63,7 @@ class CasualsPayrollEntry(Document):
 		frappe.msgprint(f"Added the casuals pay data for {len(data)} casuals staff")
 		return True
 
-def create_salary_slips():
-	pass
+	def create_salary_slips(self):
+		salary_slips_created = []
+		for data in self.casual_staff_details:
+			existing_casuals_slip = frappe.db.exists("")
